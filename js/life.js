@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$.getJSON(url, function(json){
 		var data = clean_google_sheet_json(json);
 
-		var events = _.filter(data, function(datum) {return datum.type === "event"} );
+		var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
 
 		console.log(events);
 		for (var i = 0; i < events.length; i++) {
