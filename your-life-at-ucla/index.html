@@ -10,7 +10,7 @@
         
         <!-- Open Graph -->
         <meta property="og:title" content="Your Life At UCLA | Daily Bruin" />
-        <meta property="og:site_name" content="Name of this website." />
+        <meta property="og:site_name" content="Daily Bruin Graduation Issue 2015" />
         <meta property="og:url" content="Canonical URL of this page, excluding session and user-identifying variables." />
         <meta property="og:image" content="URL to an image for this page. Should be at least 1200x630 pixels." />
         
@@ -32,10 +32,40 @@
               <p><%= data.description %></p>
           </div>
         </script>
+
+        <script id="single-number-template" type="text/template">
+          <div id="<%= data.id %>" class="card panel">
+            <h5><%= data.pretext %></h5>
+            <h1><%= data.singlestat %></h1>
+            <h5><%= data.posttext %></h5>
+          </div>
+        </script>
     </head>
     <body>
         <header></header>
         <main>
+            <form method="GET" action="#">
+              <div class="row">
+                <div class="small-4 large-2 columns">
+                  <label for="right-label" class="right inline">I entered UCLA in...</label>
+                </div>
+                <div class="small-4 large-2 columns"> 
+                    <select name="start">
+                      <option value="fall2009">Fall 2009</option>
+                      <option value="fall2010">Fall 2010</option>
+                      <option value="fall2011">Fall 2011</option>
+                      <option value="fall2012">Fall 2012</option>
+                      <option value="fall2013">Fall 2013</option>
+                      <option value="fall2014">Fall 2014</option>
+                    </select>
+                </div>
+                <div class="small-4 large-2 columns">
+                    <input id="submit-button" type="submit" class="button" value="Go"></input>
+                </div>
+
+              </div>
+            </form>
+
             <div class="row" id="ucla-events">
             <h1>Since you've been at UCLA...</h1>
                 <div class="large-4 columns" id="ucla-events-left"></div>
