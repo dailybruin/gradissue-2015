@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
+        <title>Page title</title>
+        <meta name="description" content="Page description, shows up in search results. Should be no longer than 150-160 characters." />
+        
+        <!-- Open Graph -->
+        <meta property="og:title" content="The title of this page, excluding any branding." />
+        <meta property="og:site_name" content="Name of this website." />
+        <meta property="og:url" content="Canonical URL of this page, excluding session and user-identifying variables." />
+        <meta property="og:image" content="URL to an image for this page. Should be at least 1200x630 pixels." />
+        
+        <!-- CSS -->
+        <link href="../css/foundation.min.css" rel="stylesheet" type="text/css" />
+        <link href="../css/life.css" rel="stylesheet" type="text/css" />
+        
+        <!-- JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script src="../js/vendor/jquery.js"></script>
+        <script src="../js/googlesheet.js"></script>
+        <script src="../js/life.js"></script>
+
+        <!-- Templates -->
+        <script id="event-card-template" type="text/template">
+          <div id="<%= data.id %>" class="card">
+              <h2><%= data.title %></h2>
+              <img src="<%= data.imageurl %>" />
+              <p><%= data.description %></p>
+          </div>
+        </script>
+    </head>
+    <body>
+        <header></header>
+        <main>
+            <div class="row" id="ucla-events">
+            <h1>Since you've been at UCLA...</h1>
+                <div class="large-4 columns" id="ucla-events-left"></div>
+                <div class="large-4 columns" id="ucla-events-mid"></div>
+                <div class="large-4 columns" id="ucla-events-right"></div>
+            </div>
+        </main>
+        <footer></footer>
+    </body>
+</html>
