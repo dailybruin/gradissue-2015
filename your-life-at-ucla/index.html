@@ -4,7 +4,6 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
-        <link href="favicon.ico" rel="icon" type="image/x-icon" />
         <title>Your Life At UCLA | Daily Bruin</title>
         <meta name="description" content="Page description, shows up in search results. Should be no longer than 150-160 characters." />
         
@@ -61,8 +60,9 @@
             <p class="long-number"><%= data.singlestat %></p>
             <h4 class="post-stat-text"><%= data.posttext %></h4>
             <div class="canvas-wrapper">
-            <canvas id="<%= data.id %>-chart"></canvas>
+              <canvas id="<%= data.id %>-chart"></canvas>
             </div>
+
           </div>
         </script>
     </head>

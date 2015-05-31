@@ -7,7 +7,6 @@ var selection_to_datestring = {
 	'fall2014': '9/1/2014',
 };
 
-var card_ids = [];
 
 $(document).ready(function(){
 
@@ -40,6 +39,7 @@ $(document).ready(function(){
 			add_ucla_event_cards(events);
 			// })
 			//console.log(card_ids);
+			var card_ids = get_card_ids_by_column("ucla-events");
 			add_cards(card_ids);
 		});
 	}
@@ -99,8 +99,8 @@ function add_construction_card(events) {
 	//console.log(chart_data);
 	//console.log(chart_labels);
 	//console.log(events_by_year);
-
-	card_ids.push("#construction");
+	$("#construction").hide();
+	//card_ids.push("#construction");
 }
 
 
@@ -115,14 +115,14 @@ function add_nobel_card(nobels) {
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
 	$("#ucla-events-left").append(card_html);
-	card_ids.push("#nobel");
+	//card_ids.push("#nobel");
 
 }
 
 function add_ucla_event_cards(events) {
 	for (var i = 0; i < events.length; i++) {
 		var card_html = compile_template_to_html("#event-card-template", events[i]);
-		card_ids.push("#" + events[i].id);
+		//card_ids.push("#" + events[i].id);
 		switch (i % 3) {
 			case 0: 		
 				$("#ucla-events-left").append(card_html);
@@ -166,10 +166,38 @@ function addCommas(nStr)
 }
 
 function add_cards(card_ids) {
+	console.log(card_ids);
+	$(card_ids.join(", ")).hide();
 	for (var i = 0; i < card_ids.length; i++) {
-		// setTimeout(function () {
-			$(card_ids[i]).fadeIn("slow");
-		// }, 1000);
+		$(card_ids[i]).delay(i*500).fadeIn(500);
 	}
+	// for (var i = 0; i < card_ids.length; i++) {
+	// 	// setTimeout(function () {
+	// 		$(card_ids[i]).hide();
+	// 		$(card_ids[i]).fadeIn(2000);
+	// 	// }, 1000);
+	// }
 }
 
+function get_card_ids_by_column(main_div_id) {
+	card_ids = []
+	var left_div_id = "#" + main_div_id + "-left";
+	var mid_div_id = "#" + main_div_id + "-mid";
+	var right_div_id = "#" + main_div_id + "-right";
+
+	var num_left_children = $(left_div_id).children().length;
+	var num_mid_children = $(mid_div_id).children().length;
+	var num_right_children = $(right_div_id).children().length;
+	
+	var max_children = _.max([num_left_children, num_right_children, num_mid_children]);
+	for (var i = 0; i < max_children; i++) {
+		console.log($(left_div_id).children()[i]);
+		if ($(left_div_id).children()[i])
+			card_ids.push("#" + $(left_div_id).children()[i].id);
+		if ($(mid_div_id).children()[i])
+			card_ids.push("#" + $(mid_div_id).children()[i].id);
+		if ($(right_div_id).children()[i])
+			card_ids.push("#" + $(right_div_id).children()[i].id);
+	}
+	return card_ids;
+}
