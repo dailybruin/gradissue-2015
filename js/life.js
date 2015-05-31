@@ -7,35 +7,47 @@ var selection_to_datestring = {
 	'fall2014': '9/1/2014',
 };
 
+var card_ids = [];
+
 $(document).ready(function(){
-    url = "https://spreadsheets.google.com/feeds/list/1JFFjBvaO_PAs3d0jFWYmgXnh3A00MSeg3G4G1qYC46w/od6/public/values?alt=json"
-	$.getJSON(url, function(json){
 
-		var selection = "fall2009";
-		var data = clean_google_sheet_json(json);
+	var selection = window.location.search;
+	if (selection) {
+		selection = selection.split('=')[1];
+		document.getElementsByName('start')[0].value = selection;
 
-		// filters out data points that are older than selected date
-		data = _.filter(data, function(datum) {
-			var timestamp = Date.parse(datum.date);
-			var now = new Date();
-			return timestamp >= Date.parse(selection_to_datestring[selection]) && timestamp <= Date.parse(now);
+	    url = "https://spreadsheets.google.com/feeds/list/1JFFjBvaO_PAs3d0jFWYmgXnh3A00MSeg3G4G1qYC46w/od6/public/values?alt=json"
+		$.getJSON(url, function(json){
+
+			//var selection = "fall2009";
+			var data = clean_google_sheet_json(json);
+
+			// filters out data points that are older than selected date
+			data = _.filter(data, function(datum) {
+				var timestamp = Date.parse(datum.date);
+				var now = new Date();
+				return timestamp >= Date.parse(selection_to_datestring[selection]) && timestamp <= Date.parse(now);
+			});
+			var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
+			var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
+			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
+			// $("#submit-button").click(function(){
+			// 	clear_page();
+			add_construction_card(construction_events);
+
+			if (nobels.length > 0)
+				add_nobel_card(nobels);
+			add_ucla_event_cards(events);
+			// })
+			//console.log(card_ids);
+			add_cards(card_ids);
 		});
-		var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
-		var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
-		var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
-		// $("#submit-button").click(function(){
-		// 	clear_page();
-		add_construction_card(construction_events);
-		if (nobels)
-			add_nobel_card(nobels);
-		add_ucla_event_cards(events);
-		// })
-	});
+	}
 });
 
 
 function add_construction_card(events) {
-	console.log(events);
+	//console.log(events);
 	var events_by_year = _.groupBy(events, function (event) {
 		var d = new Date(event.date);
 		return d.getFullYear();
@@ -68,44 +80,49 @@ function add_construction_card(events) {
 		labels: chart_labels,
 		datasets: [ {
 			data: chart_data,
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
 			}
 		]
 	};
 
 	var bar_options = {
 		responsive: true,
-		tooltipTemplate: "<%if (label){%>" + 
-							"<%=label%>: " + 
-						 "<%}%>" + 
-						 "$<%= addCommas(value) %>",
-
-		scaleLabel: "<%= (value / 1000000000) %> billion"
+		tooltipTemplate: "$<%= addCommas(value) %>",
+		scaleLabel: "<%= (value / 1000000000) %> billion",
 	}
 
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
-	console.log(template_data);
-	console.log(chart_data);
-	console.log(chart_labels);
-	console.log(events_by_year);
+	//console.log(template_data);
+	//console.log(chart_data);
+	//console.log(chart_labels);
+	//console.log(events_by_year);
+
+	card_ids.push("#construction");
 }
 
 
 function add_nobel_card(nobels) {
 	var data = {
+		'id': 'nobel',
 		'singlestat': nobels.length,
 		'pretext': 'UCLA Faculty and Alumni have won',
 		'imageurl' : 'http://dailybruin.com/images/2015/05/nobel.png',
 		'posttext': nobels.length === 1 ? 'Nobel Prize' : 'Nobel Prizes'
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
-	console.log(card_html);
+	//console.log(card_html);
 	$("#ucla-events-left").append(card_html);
+	card_ids.push("#nobel");
 
 }
 
 function add_ucla_event_cards(events) {
 	for (var i = 0; i < events.length; i++) {
 		var card_html = compile_template_to_html("#event-card-template", events[i]);
+		card_ids.push("#" + events[i].id);
 		switch (i % 3) {
 			case 0: 		
 				$("#ucla-events-left").append(card_html);
@@ -147,3 +164,12 @@ function addCommas(nStr)
 	}
 	return x1 + x2;
 }
+
+function add_cards(card_ids) {
+	for (var i = 0; i < card_ids.length; i++) {
+		// setTimeout(function () {
+			$(card_ids[i]).fadeIn("slow");
+		// }, 1000);
+	}
+}
+
