@@ -11,7 +11,7 @@ $(document).ready(function(){
     url = "https://spreadsheets.google.com/feeds/list/1JFFjBvaO_PAs3d0jFWYmgXnh3A00MSeg3G4G1qYC46w/od6/public/values?alt=json"
 	$.getJSON(url, function(json){
 
-		var selection = "fall2012";
+		var selection = "fall2009";
 		var data = clean_google_sheet_json(json);
 
 		// filters out data points that are older than selected date
@@ -56,7 +56,7 @@ function add_construction_card(events) {
 		'id' : 'construction',
 		'pretext' : 'UCLA has spent',
 		// http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
-		'singlestat' : "$" + (sum(chart_data)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'),
+		'singlestat' : "$" + addCommas(sum(chart_data)),
 		'posttext' : 'on finished construction and renovation projects.'
 	}
 
@@ -68,13 +68,16 @@ function add_construction_card(events) {
 		labels: chart_labels,
 		datasets: [ {
 			data: chart_data,
-			tooltipTemplate: "<%if (label){%><%=label%>: <%}%><% value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %>",
 			}
 		]
 	};
 
 	var bar_options = {
-		responsive: true
+		responsive: true,
+		tooltipTemplate: "<%if (label){%>" + 
+							"<%=label%>: " + 
+						 "<%}%>" + 
+						 "$<%= addCommas(value) %>"
 	}
 
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
@@ -128,4 +131,17 @@ function sum(iterable) {
 		total += iterable[i];
 	}
 	return total;
+}
+
+function addCommas(nStr)
+{
+	nStr += '';
+	x = nStr.split('.');
+	x1 = x[0];
+	x2 = x.length > 1 ? '.' + x[1] : '';
+	var rgx = /(\d+)(\d{3})/;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	}
+	return x1 + x2;
 }
