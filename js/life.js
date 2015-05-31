@@ -77,7 +77,9 @@ function add_construction_card(events) {
 		tooltipTemplate: "<%if (label){%>" + 
 							"<%=label%>: " + 
 						 "<%}%>" + 
-						 "$<%= addCommas(value) %>"
+						 "$<%= addCommas(value) %>",
+
+		scaleLabel: "<%= (value / 1000000000) %> billion"
 	}
 
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
