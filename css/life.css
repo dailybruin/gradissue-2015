@@ -7,6 +7,10 @@
 	margin: auto;
 }
 
+.category-header {
+	text-align: center;
+}
+
 .pre-stat-text, .post-stat-text {
 }
 
@@ -30,3 +34,6 @@
 	border-color: steelblue;
 }
 
+#page-title {
+	text-align: center;
+}
