@@ -56,12 +56,13 @@
 
         <!-- template for card with chart -->
         <script id="chart-template" type="text/template">
-          <div id="<%= data.id %>" class="card">
+          <div id="<%= data.id %>" class="card panel">
             <h4 class="pre-stat-text"><%= data.pretext %></h4>
             <p class="long-number"><%= data.singlestat %></p>
             <h4 class="post-stat-text"><%= data.posttext %></h4>
-
+            <div class="canvas-wrapper">
             <canvas id="<%= data.id %>-chart"></canvas>
+            </div>
           </div>
         </script>
     </head>

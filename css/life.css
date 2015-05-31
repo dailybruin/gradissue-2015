@@ -20,7 +20,6 @@ img {
 	font-size: 2em;
 }
 
-.card {
-/*	display: none;
-*/
+.card:hover {
+	background-color: aliceblue;
 }
