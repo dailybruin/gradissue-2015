@@ -1,0 +1,21 @@
+
+img {
+	display: block;
+	margin: auto;
+}
+
+.pre-stat-text, .post-stat-text {
+}
+
+.big-number {
+	font-size: 4em;
+	text-align: center;
+	font-family: Impact;
+}
+
+.big-number-container {
+}
+
+.long-number {
+	font-size: 2em;
+}
