@@ -59,6 +59,7 @@ $(document).ready(function(){
 
 
 
+
 function add_construction_card(events) {
 	//console.log(events);
 	var events_by_year = _.groupBy(events, function (event) {
@@ -179,20 +180,18 @@ function add_cost_card(costs) {
 		]
 	};
 
+
 	var bar_options = {
 		responsive: true,
 		tooltipTemplate: "$<%= addCommas(value) %>",
 		multiTooltipTemplate: "<%= datasetLabel %>: $<%= addCommas(value) %> ",
 		scaleOverride: true,
 		scaleSteps: 3,
-		scaleStepWidth: 20000
+		scaleStepWidth: 20000,
+		scaleLabel: "$<%= addCommas(value) %>"
 	}
 
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
-	//console.log(template_data);
-	//console.log(chart_data);
-	//console.log(chart_labels);
-	//console.log(events_by_year);
 	$("#costs").hide();
 	console.log(bar_chart);
 	card_ids.push("#costs");
