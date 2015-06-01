@@ -57,11 +57,21 @@
         <script id="chart-template" type="text/template">
           <div id="<%= data.id %>" class="card panel">
             <h4 class="pre-stat-text"><%= data.pretext %></h4>
-            <p class="long-number"><%= data.singlestat %></p>
+            <p class="chart-number"><%= data.singlestat %></p>
             <h4 class="post-stat-text"><%= data.posttext %></h4>
+            <% if (data.toggle) { %>
+                <form>
+                <div class="large-12 columns">
+                  <input type="radio" name="inout" value="in" id="radio-in-state" checked="checked"><label for="in-state">In state</label>
+                  <input type="radio" name="inout" value="out" id="radio-out-state"><label for="out-state">Out of state</label>
+                </div>
+                </form>
+            <% } %>
             <div class="canvas-wrapper">
-              <canvas id="<%= data.id %>-chart"></canvas>
+              <canvas <%= data.canvasheight %> id="<%= data.id %>-chart"></canvas>
             </div>
+
+
 
           </div>
         </script>

@@ -5,6 +5,7 @@
 .card > img {
 	display: block;
 	margin: auto;
+	width: 100%;
 }
 
 .category-header {
@@ -23,8 +24,9 @@
 .big-number-container {
 }
 
-.long-number {
+.chart-number {
 	font-size: 2em;
+	text-align: center;
 }
 
 .card {

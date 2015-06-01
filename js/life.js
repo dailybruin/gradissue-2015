@@ -36,7 +36,8 @@ $(document).ready(function(){
 			var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
 			var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
 			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
-			
+			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
+			add_cost_card(costs);
 			add_construction_card(construction_events);
 			if (nobels.length > 0)
 				add_nobel_card(nobels);
@@ -47,9 +48,15 @@ $(document).ready(function(){
 			if (!window.mobilecheck())
 				card_ids = get_card_ids_by_column("ucla-events");
 			fade_in_cards(card_ids);
+
+
+
 		});
 	}
+
+
 });
+
 
 
 function add_construction_card(events) {
@@ -59,6 +66,8 @@ function add_construction_card(events) {
 		return d.getFullYear();
 	});
 	var chart_labels = _.keys(events_by_year);
+
+	// populate chart data
 	var chart_data = [];
 	for (var i = 0; i < chart_labels.length; i++) {
 		var year_sum = 0;
@@ -73,7 +82,6 @@ function add_construction_card(events) {
 	var template_data = {
 		'id' : 'construction',
 		'pretext' : 'UCLA has spent',
-		// http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
 		'singlestat' : "$" + addCommas(sum(chart_data)),
 		'posttext' : 'on finished construction and renovation projects.'
 	}
@@ -101,6 +109,8 @@ function add_construction_card(events) {
 	}
 
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
+	
+
 	//console.log(template_data);
 	//console.log(chart_data);
 	//console.log(chart_labels);
@@ -109,6 +119,107 @@ function add_construction_card(events) {
 	card_ids.push("#construction");
 }
 
+function add_cost_card(costs) {
+	var costs_by_year = _.groupBy(costs, function (event) {
+		var d = new Date(event.date);
+		var num_year = parseInt(d.getFullYear());
+		var next_year = num_year + 1 - 2000;
+		return d.getFullYear() + "-" + next_year;
+	});
+	var chart_labels = _.keys(costs_by_year);
+	var chart_data = [];
+	console.log(costs_by_year);
+	var chart_labels = _.keys(costs_by_year);
+	var in_state_on = [];
+	var out_state_on = [];
+	var in_state_off = [];
+	var out_state_off = [];
+
+	for (var i = 0; i < chart_labels.length; i++) {
+		in_state_on.push(parseInt(costs_by_year[chart_labels[i]][0].data));
+		in_state_off.push(parseInt(costs_by_year[chart_labels[i]][0].data2));		
+		out_state_on.push(parseInt(costs_by_year[chart_labels[i]][1].data));
+		out_state_off.push(parseInt(costs_by_year[chart_labels[i]][1].data2));		
+	}
+
+
+	var in_state_diff = _.last(in_state_on) / _.first(in_state_on);
+	var out_state_diff = _.last(out_state_on) / _.first(out_state_on);
+	var template_data = {
+		'id' : 'costs',
+		'pretext' : 'Cost of tuition and living has gone up by',
+		'singlestat' :  (in_state_diff*100-100).toFixed(2) + "%",
+		'toggle': true,
+		'canvasheight': 'height="300px"'
+		//'posttext' : 'on finished construction and renovation projects.'
+	}
+
+	var card_html = compile_template_to_html("#chart-template", template_data);
+	$("#ucla-events-left").append(card_html);
+
+	var ctx = document.getElementById("costs-chart").getContext("2d");
+	var bar_data = {
+		labels: chart_labels,
+		datasets: [ {
+			data: in_state_on,
+			label: "On campus",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+			},
+			{
+			data: in_state_off,
+			label: "Off campus",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+			}
+		]
+	};
+
+	var bar_options = {
+		responsive: true,
+		tooltipTemplate: "$<%= addCommas(value) %>",
+		multiTooltipTemplate: "<%= datasetLabel %>: $<%= addCommas(value) %> ",
+		scaleOverride: true,
+		scaleSteps: 3,
+		scaleStepWidth: 20000
+	}
+
+	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
+	//console.log(template_data);
+	//console.log(chart_data);
+	//console.log(chart_labels);
+	//console.log(events_by_year);
+	$("#costs").hide();
+	console.log(bar_chart);
+	card_ids.push("#costs");
+
+	$("#radio-in-state, #radio-out-state").change(function () {
+		console.log(this.value);
+		switch(this.value) {
+			case "in": 
+				for (var i = 0; i < in_state_on.length; i++) {
+					bar_chart.datasets[0].bars[i].value = in_state_on[i];
+					bar_chart.datasets[1].bars[i].value = in_state_off[i];
+				}
+				$("#costs > .chart-number").html((in_state_diff*100-100).toFixed(2) + "%");
+				break;
+			case "out":
+				for (var i = 0; i < in_state_on.length; i++) {
+					bar_chart.datasets[0].bars[i].value = out_state_on[i];
+					bar_chart.datasets[1].bars[i].value = out_state_off[i];
+				}
+				$("#costs > .chart-number").html((out_state_diff*100-100).toFixed(2) + "%");
+				break;
+		}
+		bar_chart.update();
+		console.log(bar_chart.datasets[0].bars);
+	});
+
+}
 
 function add_nobel_card(nobels) {
 	var data = {
@@ -141,13 +252,6 @@ function add_ucla_event_cards(events) {
 				break;
 		}
 	}
-}
-
-function clear_page() {
-	$("#ucla-events-left").html("");
-	$("#ucla-events-mid").html("");
-	$("#ucla-events-right").html("");
-
 }
 
 function sum(iterable) {
