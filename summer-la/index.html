@@ -1,0 +1,69 @@
+<html prefix="og: http://ogp.me/ns#">
+<head>
+	<title>LA Summer Events Preview</title>
+
+
+	<meta property="og:image" content="http://graphics.dailybruin.com/ucla-unseen/share.JPG" />
+	<meta property="og:description" content="Daily Bruin Video introduces UCLA Unseen, a new weekly series exploring lesser-known places on campus." />
+	<meta property="og:url" content="http://graphics.dailybruin.com/ucla-unseen/" />
+	<meta property="og:title" content="UCLA Unseen" />
+
+	<meta name="viewport" content="user-scalable=no" />
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" type="image/png" href="favicon.png" />
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<script src="js/handlebars-v3.0.3.js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/dataloader.js"></script>
+
+</head>
+<body>
+
+	<div id="googlemaps"></div>
+	<div id="nav">
+		<a href="http://www.dailybruin.com">
+			<img src="http://dailybruin.com/images/2015/05/db_logo_B.png" id="dblogo">
+		</a>
+		<img src="img/unseen_logo.png" id="unseenlogo">
+		<!-- change potato to url -->
+		<ul class="share-buttons" id="social-buttons">
+			<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpotato&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL), '_blank', 'height=500,width=500,toolbar=0,location=0,menubar=0'); return false;"><img src="http://dailybruin.com/images/2015/05/Facebook.png"></a></li>
+			<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fpotato&text=:%20http%3A%2F%2Fpotato" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL), '_blank', 'height=500,width=500,toolbar=0,location=0,menubar=0'); return false;"><img src="http://dailybruin.com/images/2015/05/Twitter.png"></a></li>
+			<li><a href="http://www.tumblr.com/share?v=3&u=http%3A%2F%2Fpotato&t=&s=" target="_blank" title="Post to Tumblr" onclick="window.open('http://www.tumblr.com/share?v=3&u=' + encodeURIComponent(document.URL) + '&t=' +  encodeURIComponent(document.title), '_blank', 'height=500,width=500,toolbar=0,location=0,menubar=0'); return false;"><img src="http://dailybruin.com/images/2015/05/Tumblr.png"></a></li>
+			<li><a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fpotato&description=" target="_blank" title="Pin it" onclick="window.open('http://pinterest.com/pin/create/button/?url=' + encodeURIComponent(document.URL) + '&description=' +  encodeURIComponent(document.title), '_blank', 'height=500,width=500,toolbar=0,location=0,menubar=0'); return false;"><img src="http://dailybruin.com/images/2015/05/Pinterest.png"></a></li>
+		</ul>
+	</div>
+	<div id="content">
+		<div class="card" style="border-top: 6pt solid #c0392b">
+			<p id="intro">
+				Daily Bruin <i>Summer Events in LA</i>, a new weekly series exploring lesser-known places on campus.
+			</p>
+		</div>
+
+		<script id="card-template" type="text/x-handlebars-template">
+			{{#each apidata}}
+			<div class="card" id="card-{{@index}}" style="border-top: 6pt solid #c0392b">
+				<p class="card-title">{{title}}</p>
+				<div class="card-img">
+					<img class="card-img-embed" height="315" src="{{photolink}}">
+				</div>
+				<div class="card-description">{{description}}</div>
+			</div>
+			{{/each}}
+		</script>
+	</div>
+
+	<div id="content-credit">
+		<div class="card">
+			<p id="conclusion">
+			Page created by: <a href="mailto:vkashyap@media.ucla.edu">Vipul Kashyap</a>, <a href="mailto:icordero@media.ucla.edu">Ian Cordero</a>, <a href="mailto:ctruong@media.ucla.edu">Catherine Truong</a>, and <a href="mailto:kfchen@media.ucla.edu">Frank Chen</a>.<br>
+			&copy; 2015 The Daily Bruin
+			</p>
+		</div>
+	</div>
+
+</body>
+</html>
