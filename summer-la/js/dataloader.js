@@ -33,7 +33,7 @@ var autoMapScroll = 0;
 var mapMarkers = new Array();
 var infoWindows = new Array();
 var pinToChange = null;
-var currentPinIndex = 0;
+var currentPinIndex = -1;
 
 // Gets data from Google Spreadsheets
 $.getJSON(dataURL, function(json){
@@ -86,7 +86,7 @@ function clickPin(markerIndex)
 {
 	if(!mapMarkers[markerIndex])
 		return;
-	if(!autoMapScroll)
+	if(autoMapScroll != 0)
 	{
 		$('html, body').clearQueue();
 	}
@@ -96,13 +96,15 @@ function clickPin(markerIndex)
 	}, 200);
 	setTimeout(function (){
 		autoMapScroll--;
-	}, 200);
+	}, 230);
 
 	panMapTo(markerIndex);
 }
 
 function panMapTo(markerIndex)
 {
+	if(markerIndex == currentPinIndex)
+		return;
 	mapMarker = mapMarkers[markerIndex];
 	if(!mapMarker)
 		return;
@@ -114,7 +116,7 @@ function panMapTo(markerIndex)
 	map.panTo(mapMarker.position);
 	if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) )) {
 		var offset = $(".card").width()/2;
-		map.panBy(-offset-16, -30);
+			map.panBy(-offset-16, -30);
 	}
 }
 
