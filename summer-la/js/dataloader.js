@@ -1,6 +1,7 @@
-var dataURL = "https://spreadsheets.google.com/feeds/list/1wT_r1rdc1T6XfUm__ugzdSZhWwEyu1ibiLKjlwZzA1o/od6/public/values?alt=json";
-var normalPinURL = "http://dailybruin.com/images/2015/05/orange-pin.png";
-var highlightedPinURL = "http://dailybruin.com/images/2015/05/red-pin.png";
+// Here be dragons. Thou art forewarned.
+// This file makes everything work
+// To change basic settings, modify maps.js
+
 // takes in JSON object from google sheets and turns into a json formatted
 // this way based on the original google Doc
 // [
@@ -37,56 +38,58 @@ var pinToChange = null;
 var currentPinIndex = -1;
 
 // Gets data from Google Spreadsheets
-$.getJSON(dataURL, function(json){
-	var data = clean_google_sheet_json(json);
-	var source   = $("#card-template").html();
-	var cardTemp = Handlebars.compile(source);
+function addDataToMap(){
+	$.getJSON(dataURL, function(json){
+		var data = clean_google_sheet_json(json);
+		var source   = $("#card-template").html();
+		var cardTemp = Handlebars.compile(source);
 
-	$("#content").append(cardTemp({apidata: data}));
+		$("#content").append(cardTemp({apidata: data}));
 
-	$.each(data, function (index, value){
-		mapMarkers[mapMarkers.length] = new google.maps.Marker({
-			position: new google.maps.LatLng(value["lattitude"], value["longitude"]),
-			map: map,
-			draggable: false,
-			animation: google.maps.Animation.DROP,
-			title: value["title"],
-			icon: normalPinURL
-		});
+		$.each(data, function (index, value){
+			mapMarkers[mapMarkers.length] = new google.maps.Marker({
+				position: new google.maps.LatLng(value["lattitude"], value["longitude"]),
+				map: map,
+				draggable: false,
+				animation: google.maps.Animation.DROP,
+				title: value["title"],
+				icon: normalPinURL
+			});
 
-		var markerIndex = mapMarkers.length-1;
-		google.maps.event.addListener(mapMarkers[markerIndex], 'click', function() {
-			clickPin(markerIndex);
-		});
+			var markerIndex = mapMarkers.length-1;
+			google.maps.event.addListener(mapMarkers[markerIndex], 'click', function() {
+				clickPin(markerIndex);
+			});
 
-		var cardID = '#card-' + index;
-		$(window).bind('scroll', function() {
-			if($(window).scrollTop() < 10)
-			{
-				panMapTo(0);
-			}
+			var cardID = '#card-' + index;
+			$(window).bind('scroll', function() {
+				if($(window).scrollTop() < 10)
+				{
+					panMapTo(0);
+				}
 
-			if(currentCard > index || autoMapScroll != 0)
-				return;
+				if(currentCard > index || autoMapScroll != 0)
+					return;
 
-			var position = $(cardID).offset().top + $(cardID).outerHeight() - window.innerHeight;
-			if(currentCard == index && $(window).scrollTop() < position)
-			{
-				currentCard--;
-				panMapTo(markerIndex-1);
-			}
+				var position = $(cardID).offset().top + $(cardID).outerHeight() - window.innerHeight;
+				if(currentCard == index && $(window).scrollTop() < position)
+				{
+					currentCard--;
+					panMapTo(markerIndex-1);
+				}
 
-			if($(window).scrollTop() >= position && currentCard != index) {
-				currentCard = index;
-				panMapTo(markerIndex);
-			}
-		});
-	})
+				if($(window).scrollTop() >= position && currentCard != index) {
+					currentCard = index;
+					panMapTo(markerIndex);
+				}
+			});
+		})
 
-	// Pan to first item at start
-	panMapTo(0, true);
-	currentPinIndex = -1;
-});
+		// Pan to first item at start
+		panMapTo(0, true);
+		currentPinIndex = -1;
+	});
+}
 
 function clickPin(markerIndex)
 {
