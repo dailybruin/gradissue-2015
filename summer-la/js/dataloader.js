@@ -29,10 +29,11 @@ function clean_google_sheet_json(data){
 }
 
 var currentCard = -1;
-var autoMapScroll = true;
+var autoMapScroll = 0;
 var mapMarkers = new Array();
 var infoWindows = new Array();
 var pinToChange = null;
+var currentPinIndex = 0;
 
 // Gets data from Google Spreadsheets
 $.getJSON(dataURL, function(json){
@@ -54,43 +55,58 @@ $.getJSON(dataURL, function(json){
 
       var markerIndex = mapMarkers.length-1;
       google.maps.event.addListener(mapMarkers[markerIndex], 'click', function() {
-          autoMapScroll = false;
-          $('html, body').animate({
-              scrollTop: $("#card-" + (markerIndex)).offset().top-75
-          }, 1000);
-          setTimeout(function (){
-            autoMapScroll = true;
-          }, 1000);
-	  panMapTo(mapMarkers[markerIndex]);
+			clickPin(markerIndex);
         });
 
         var cardID = '#card-' + index;
         $(window).bind('scroll', function() {
 
-              if(currentCard > index || !autoMapScroll)
+              if(currentCard > index || autoMapScroll != 0)
                 return;
 
               var position = $(cardID).offset().top + $(cardID).outerHeight() - window.innerHeight;
               if(currentCard == index && $(window).scrollTop() < position)
               {
                 currentCard--;
-		panMapTo(mapMarkers[markerIndex-1]);
+				panMapTo(markerIndex-1);
               }
 
               if($(window).scrollTop() >= position && currentCard != index) {
                 currentCard = index;
-		panMapTo(mapMarkers[markerIndex]);
+				panMapTo(markerIndex);
               }
         });
     })
 
     // Pan to first item at start
-    panMapTo(mapMarkers[0]);
-
+    panMapTo(0);
 });
 
-function panMapTo(mapMarker)
+function clickPin(markerIndex)
 {
+	if(!mapMarkers[markerIndex])
+		return;
+	if(!autoMapScroll)
+	{
+		$('html, body').clearQueue();
+	}
+	autoMapScroll++;
+	$('html, body').animate({
+		scrollTop: $("#card-" + (markerIndex)).offset().top-75
+	}, 200);
+	setTimeout(function (){
+		autoMapScroll--;
+	}, 200);
+
+	panMapTo(markerIndex);
+}
+
+function panMapTo(markerIndex)
+{
+	mapMarker = mapMarkers[markerIndex];
+	if(!mapMarker)
+		return;
+	currentPinIndex = markerIndex;
 	if(pinToChange)
 		pinToChange.setIcon("http://dailybruin.com/images/2015/05/orange-pin.png");
 	mapMarker.setIcon("http://dailybruin.com/images/2015/05/red-pin.png");
@@ -101,3 +117,12 @@ function panMapTo(mapMarker)
 		map.panBy(-offset-16, -30);
 	}
 }
+
+$(document).keydown(function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 40) {
+			clickPin(currentPinIndex+1);
+        } else if (code == 38) {
+			clickPin(currentPinIndex-1);
+    	}
+});
