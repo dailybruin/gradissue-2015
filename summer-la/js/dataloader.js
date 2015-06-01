@@ -33,7 +33,7 @@ var autoMapScroll = 0;
 var mapMarkers = new Array();
 var infoWindows = new Array();
 var pinToChange = null;
-var currentPinIndex = 0;
+var currentPinIndex = -1;
 
 // Gets data from Google Spreadsheets
 $.getJSON(dataURL, function(json){
@@ -79,30 +79,55 @@ $.getJSON(dataURL, function(json){
     })
 
     // Pan to first item at start
-    panMapTo(0);
+    panMapTo(0, true);
+    currentPinIndex = -1;
 });
 
 function clickPin(markerIndex)
 {
+	if(markerIndex < 0)
+	{
+		autoMapScroll++;
+		$('html, body').animate({
+			scrollTop: 0
+		}, 500);
+		setTimeout(function (){
+			autoMapScroll--;
+		}, 530);
+
+		currentPinIndex = markerIndex;
+	}
 	if(!mapMarkers[markerIndex])
 		return;
-	if(!autoMapScroll)
+	if(autoMapScroll != 0)
 	{
 		$('html, body').clearQueue();
 	}
 	autoMapScroll++;
 	$('html, body').animate({
 		scrollTop: $("#card-" + (markerIndex)).offset().top-75
-	}, 200);
+	}, 500);
 	setTimeout(function (){
 		autoMapScroll--;
-	}, 200);
+	}, 530);
 
 	panMapTo(markerIndex);
 }
 
 function panMapTo(markerIndex)
 {
+	panMapTo(markerIndex, false);
+}
+
+function panMapTo(markerIndex, override)
+{
+	if(!override && (markerIndex == 0 && currentPinIndex == -1))
+	{
+		currentPinIndex = 0;
+		return;
+	}
+	if(!override &&(markerIndex == currentPinIndex)) 
+		return;
 	mapMarker = mapMarkers[markerIndex];
 	if(!mapMarker)
 		return;
@@ -114,15 +139,18 @@ function panMapTo(markerIndex)
 	map.panTo(mapMarker.position);
 	if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) )) {
 		var offset = $(".card").width()/2;
-		map.panBy(-offset-16, -30);
+			map.panBy(-offset-16, -30);
 	}
 }
+
 
 $(document).keydown(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code == 40) {
+        	e.preventDefault();
 			clickPin(currentPinIndex+1);
         } else if (code == 38) {
+        	e.preventDefault();
 			clickPin(currentPinIndex-1);
     	}
 });

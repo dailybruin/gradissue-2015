@@ -10,6 +10,7 @@ function showGoogleMaps() {
       zoom: 13, // initialize zoom level - the max value is 21
       streetViewControl: false, // hide the yellow Street View pegman
       scaleControl: false, // allow users to zoom the Google Map
+      panControl: false,
       navigationControl: false,
       mapTypeControl: false,
       scrollwheel: false,
