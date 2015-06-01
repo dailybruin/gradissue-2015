@@ -1,5 +1,6 @@
 var dataURL = "https://spreadsheets.google.com/feeds/list/1wT_r1rdc1T6XfUm__ugzdSZhWwEyu1ibiLKjlwZzA1o/od6/public/values?alt=json";
-
+var normalPinURL = "http://dailybruin.com/images/2015/05/orange-pin.png";
+var highlightedPinURL = "http://dailybruin.com/images/2015/05/red-pin.png";
 // takes in JSON object from google sheets and turns into a json formatted
 // this way based on the original google Doc
 // [
@@ -37,50 +38,54 @@ var currentPinIndex = -1;
 
 // Gets data from Google Spreadsheets
 $.getJSON(dataURL, function(json){
-		var data = clean_google_sheet_json(json);
-    var source   = $("#card-template").html();
-    var cardTemp = Handlebars.compile(source);
+	var data = clean_google_sheet_json(json);
+	var source   = $("#card-template").html();
+	var cardTemp = Handlebars.compile(source);
 
-    $("#content").append(cardTemp({apidata: data}));
+	$("#content").append(cardTemp({apidata: data}));
 
-    $.each(data, function (index, value){
-      mapMarkers[mapMarkers.length] = new google.maps.Marker({
-          position: new google.maps.LatLng(value["lattitude"], value["longitude"]),
-          map: map,
-          draggable: false,
-          animation: google.maps.Animation.DROP,
-          title: value["title"],
-          icon: "http://dailybruin.com/images/2015/05/orange-pin.png"
-      });
+	$.each(data, function (index, value){
+		mapMarkers[mapMarkers.length] = new google.maps.Marker({
+			position: new google.maps.LatLng(value["lattitude"], value["longitude"]),
+			map: map,
+			draggable: false,
+			animation: google.maps.Animation.DROP,
+			title: value["title"],
+			icon: normalPinURL
+		});
 
-      var markerIndex = mapMarkers.length-1;
-      google.maps.event.addListener(mapMarkers[markerIndex], 'click', function() {
+		var markerIndex = mapMarkers.length-1;
+		google.maps.event.addListener(mapMarkers[markerIndex], 'click', function() {
 			clickPin(markerIndex);
-        });
+		});
 
-        var cardID = '#card-' + index;
-        $(window).bind('scroll', function() {
+		var cardID = '#card-' + index;
+		$(window).bind('scroll', function() {
+			if($(window).scrollTop() < 10)
+			{
+				panMapTo(0);
+			}
 
-              if(currentCard > index || autoMapScroll != 0)
-                return;
+			if(currentCard > index || autoMapScroll != 0)
+				return;
 
-              var position = $(cardID).offset().top + $(cardID).outerHeight() - window.innerHeight;
-              if(currentCard == index && $(window).scrollTop() < position)
-              {
-                currentCard--;
+			var position = $(cardID).offset().top + $(cardID).outerHeight() - window.innerHeight;
+			if(currentCard == index && $(window).scrollTop() < position)
+			{
+				currentCard--;
 				panMapTo(markerIndex-1);
-              }
+			}
 
-              if($(window).scrollTop() >= position && currentCard != index) {
-                currentCard = index;
+			if($(window).scrollTop() >= position && currentCard != index) {
+				currentCard = index;
 				panMapTo(markerIndex);
-              }
-        });
-    })
+			}
+		});
+	})
 
-    // Pan to first item at start
-    panMapTo(0, true);
-    currentPinIndex = -1;
+	// Pan to first item at start
+	panMapTo(0, true);
+	currentPinIndex = -1;
 });
 
 function clickPin(markerIndex)
@@ -95,7 +100,8 @@ function clickPin(markerIndex)
 			autoMapScroll--;
 		}, 530);
 
-		currentPinIndex = markerIndex;
+		currentPinIndex = -1;
+		return;
 	}
 	if(!mapMarkers[markerIndex])
 		return;
@@ -126,31 +132,35 @@ function panMapTo(markerIndex, override)
 		currentPinIndex = 0;
 		return;
 	}
-	if(!override &&(markerIndex == currentPinIndex)) 
+	if(!override &&(markerIndex == currentPinIndex))
 		return;
 	mapMarker = mapMarkers[markerIndex];
 	if(!mapMarker)
 		return;
 	currentPinIndex = markerIndex;
 	if(pinToChange)
-		pinToChange.setIcon("http://dailybruin.com/images/2015/05/orange-pin.png");
-	mapMarker.setIcon("http://dailybruin.com/images/2015/05/red-pin.png");
+		pinToChange.setIcon(normalPinURL);
+	mapMarker.setIcon(highlightedPinURL);
 	pinToChange = mapMarker;
 	map.panTo(mapMarker.position);
 	if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) )) {
 		var offset = $(".card").width()/2;
-			map.panBy(-offset-16, -30);
+		map.panBy(-offset-16, -30);
 	}
 }
 
 
 $(document).keydown(function(e) {
-        var code = (e.keyCode ? e.keyCode : e.which);
-        if (code == 40) {
-        	e.preventDefault();
-			clickPin(currentPinIndex+1);
-        } else if (code == 38) {
-        	e.preventDefault();
-			clickPin(currentPinIndex-1);
-    	}
+	var code = (e.keyCode ? e.keyCode : e.which);
+	if (code == 40) {
+		e.preventDefault();
+		if($(window).scrollTop() < 30)
+		{
+			currentPinIndex = -1;
+		}
+		clickPin(currentPinIndex+1);
+	} else if (code == 38) {
+		e.preventDefault();
+		clickPin(currentPinIndex-1);
+	}
 });
