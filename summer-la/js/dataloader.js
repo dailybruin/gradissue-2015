@@ -79,11 +79,24 @@ $.getJSON(dataURL, function(json){
     })
 
     // Pan to first item at start
-    panMapTo(0);
+    panMapTo(0, true);
+    currentPinIndex = -1;
 });
 
 function clickPin(markerIndex)
 {
+	if(markerIndex < 0)
+	{
+		autoMapScroll++;
+		$('html, body').animate({
+			scrollTop: 0
+		}, 500);
+		setTimeout(function (){
+			autoMapScroll--;
+		}, 530);
+
+		currentPinIndex = markerIndex;
+	}
 	if(!mapMarkers[markerIndex])
 		return;
 	if(autoMapScroll != 0)
@@ -103,7 +116,17 @@ function clickPin(markerIndex)
 
 function panMapTo(markerIndex)
 {
-	if(markerIndex == currentPinIndex)
+	panMapTo(markerIndex, false);
+}
+
+function panMapTo(markerIndex, override)
+{
+	if(!override && (markerIndex == 0 && currentPinIndex == -1))
+	{
+		currentPinIndex = 0;
+		return;
+	}
+	if(!override &&(markerIndex == currentPinIndex)) 
 		return;
 	mapMarker = mapMarkers[markerIndex];
 	if(!mapMarker)
@@ -120,11 +143,14 @@ function panMapTo(markerIndex)
 	}
 }
 
+
 $(document).keydown(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code == 40) {
+        	e.preventDefault();
 			clickPin(currentPinIndex+1);
         } else if (code == 38) {
+        	e.preventDefault();
 			clickPin(currentPinIndex-1);
     	}
 });
