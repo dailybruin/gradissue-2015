@@ -1,6 +1,11 @@
 
-// The latitude and longitude of your business / place
+// Inital location for map
 var position = [34.0708189, -118.4531212];
+// URL for spreadsheet with data
+var dataURL = "https://spreadsheets.google.com/feeds/list/1wT_r1rdc1T6XfUm__ugzdSZhWwEyu1ibiLKjlwZzA1o/od6/public/values?alt=json";
+// Pin images for map
+var normalPinURL = "http://dailybruin.com/images/2015/05/orange-pin.png";
+var highlightedPinURL = "http://dailybruin.com/images/2015/05/red-pin.png";
 
 function showGoogleMaps() {
 
@@ -25,6 +30,7 @@ function showGoogleMaps() {
     map = new google.maps.Map(document.getElementById('googlemaps'),
         mapOptions);
 
+    addDataToMap();
 }
 
 google.maps.event.addDomListener(window, 'load', showGoogleMaps);
