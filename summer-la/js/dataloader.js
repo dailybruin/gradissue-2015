@@ -1,4 +1,4 @@
-var dataURL = "https://spreadsheets.google.com/feeds/list/11bSWs8Lf_MvvvbE19rgKXyWmQ4OjM5bWwhm16-fpEYM/od6/public/values?alt=json";
+var dataURL = "https://spreadsheets.google.com/feeds/list/1wT_r1rdc1T6XfUm__ugzdSZhWwEyu1ibiLKjlwZzA1o/od6/public/values?alt=json";
 
 // takes in JSON object from google sheets and turns into a json formatted
 // this way based on the original google Doc
@@ -32,6 +32,7 @@ var currentCard = -1;
 var autoMapScroll = true;
 var mapMarkers = new Array();
 var infoWindows = new Array();
+var pinToChange = null;
 
 // Gets data from Google Spreadsheets
 $.getJSON(dataURL, function(json){
@@ -48,7 +49,7 @@ $.getJSON(dataURL, function(json){
           draggable: false,
           animation: google.maps.Animation.DROP,
           title: value["title"],
-          icon: "https://raw.githubusercontent.com/daily-bruin/ucla-unseen/master/img/pin.png"
+          icon: "http://dailybruin.com/images/2015/05/orange-pin.png"
       });
 
       var markerIndex = mapMarkers.length-1;
@@ -90,10 +91,10 @@ $.getJSON(dataURL, function(json){
 
 function panMapTo(mapMarker)
 {
-	$.each(mapMarkers, function (index, value){
-		value.setIcon("https://raw.githubusercontent.com/daily-bruin/ucla-unseen/master/img/pin.png");
-	});
-	mapMarker.setIcon("https://raw.githubusercontent.com/daily-bruin/ucla-unseen/master/img/highlighted-pin.png");
+	if(pinToChange)
+		pinToChange.setIcon("http://dailybruin.com/images/2015/05/orange-pin.png");
+	mapMarker.setIcon("http://dailybruin.com/images/2015/05/red-pin.png");
+	pinToChange = mapMarker;
 	map.panTo(mapMarker.position);
 	if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) )) {
 		var offset = $(".card").width()/2;

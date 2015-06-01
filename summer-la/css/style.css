@@ -80,7 +80,7 @@ ul.share-buttons li{
 	margin-bottom: 15px;
 }
 
-.card-video {
+.card-img {
     position: relative;
     margin-left: -15px;
     padding-right: 30px;
@@ -88,7 +88,7 @@ ul.share-buttons li{
     height: 0;
     padding-bottom: 60%;
 }
-.card-video-embed {
+.card-img-embed {
     position: absolute;
     top: 0;
     left: 0;
@@ -123,7 +123,7 @@ ul.share-buttons li{
     #googlemaps {
         z-index: 2;
         height: 33%;
-        border-bottom: 6pt solid rgb(1, 136, 210)
+        border-bottom: 6pt solid #c0392b;
     }
     #content {
         margin: 0px;
@@ -174,5 +174,5 @@ ul.share-buttons li{
 
 a {
 	text-decoration: none;
-	color: #3381B5;
+	color: #c0392b;
 }

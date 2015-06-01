@@ -7,7 +7,7 @@ function showGoogleMaps() {
     var latLng = new google.maps.LatLng(position[0], position[1]);
 
     var mapOptions = {
-      zoom: 17, // initialize zoom level - the max value is 21
+      zoom: 13, // initialize zoom level - the max value is 21
       streetViewControl: false, // hide the yellow Street View pegman
       scaleControl: false, // allow users to zoom the Google Map
       navigationControl: false,
