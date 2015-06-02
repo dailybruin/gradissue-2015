@@ -63,13 +63,13 @@ function addDataToMap(){
 
 			var cardID = '#card-' + index;
 			$(window).bind('scroll', function() {
+				if(currentCard > index || autoMapScroll != 0)
+					return;
+
 				if($(window).scrollTop() < 10)
 				{
 					panMapTo(0);
 				}
-
-				if(currentCard > index || autoMapScroll != 0)
-					return;
 
 				var position = $(cardID).offset().top + $(cardID).outerHeight() - window.innerHeight;
 				if(currentCard == index && $(window).scrollTop() < position)
