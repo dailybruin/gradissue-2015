@@ -7,6 +7,8 @@ var selection_to_datestring = {
 	'fall2014': '9/1/2014',
 };
 
+var cards_in_divs = {};
+
 card_ids = []
 
 $(document).ready(function(){
@@ -61,6 +63,27 @@ $(document).ready(function(){
 });
 
 
+function add_card(div_id, card_html) {
+	if (div_id in cards_in_divs) {
+		cards_in_divs[div_id]++;
+	}
+	else {
+		cards_in_divs[div_id] = 1;
+	}
+	console.log(card_html);
+	console.log("#" + div_id + "-left");
+	switch (cards_in_divs[div_id] % 3) {
+		case 0: 		
+			$("#" + div_id + "-left").append(card_html);
+			break;
+		case 1: 
+			$("#" + div_id + "-mid").append(card_html);
+			break;
+		case 2:
+			$("#" + div_id + "-right").append(card_html);
+			break;
+	}
+}
 
 
 function add_construction_card(events) {
@@ -91,7 +114,8 @@ function add_construction_card(events) {
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
-	$("#ucla-events-left").append(card_html);
+	add_card("ucla-events", card_html);
+	//$("#ucla-events-left").append(card_html);
 
 	var ctx = document.getElementById("construction-chart").getContext("2d");
 	var bar_data = {
@@ -159,7 +183,8 @@ function add_cost_card(costs) {
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
-	$("#ucla-events-left").append(card_html);
+	add_card("ucla-events", card_html);
+	//$("#ucla-events-left").append(card_html);
 
 	var ctx = document.getElementById("costs-chart").getContext("2d");
 	var bar_data = {
@@ -233,7 +258,9 @@ function add_nobel_card(nobels) {
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
-	$("#ucla-events-left").append(card_html);
+	add_card("ucla-events", card_html);
+
+	// $("#ucla-events-left").append(card_html);
 	card_ids.push("#nobel");
 
 }
@@ -242,13 +269,14 @@ function add_championships_card(championships) {
 	var data = {
 		'id': 'championships',
 		'singlestat': championships.length,
-		'pretext': 'UCLA has won won',
+		'pretext': 'UCLA has won',
 		'imageurl' : 'http://dailybruin.com/images/2014/10/trophy-376x640.png',
 		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships'
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
-	$("#ucla-events-left").append(card_html);
-	card_ids.push("#nobel");
+	//$("#ucla-events-left").append(card_html);
+	add_card("ucla-events", card_html);
+	card_ids.push("#championships");
 
 }
 
@@ -256,17 +284,7 @@ function add_ucla_event_cards(events) {
 	for (var i = 0; i < events.length; i++) {
 		var card_html = compile_template_to_html("#event-card-template", events[i]);
 		card_ids.push("#" + events[i].id);
-		switch (i % 3) {
-			case 0: 		
-				$("#ucla-events-left").append(card_html);
-				break;
-			case 1: 
-				$("#ucla-events-mid").append(card_html);
-				break;
-			case 2:
-				$("#ucla-events-right").append(card_html);
-				break;
-		}
+		add_card("ucla-events", card_html);
 	}
 }
 
