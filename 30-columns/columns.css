@@ -1,0 +1,84 @@
+.mugbar {
+    float: left;
+    width: 285px;
+    text-align: center;
+}
+
+.article {
+    float: left;
+    width: 580px;
+}
+
+.article h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    line-height: 1em;
+    margin: 10px 0 0 0;
+}
+
+p {
+    line-height: 1.4em;
+}
+
+.thumb {
+    margin: 0 11px 22px 11px;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+.thumb:hover {
+    -webkit-filter: contrast(140%);
+}
+
+.author {
+    padding: 10px 0 0 0;
+    border-bottom: 1px solid rgba(0,0,0, 0.1);
+    font-weight: bold;
+}
+
+.bio {
+    border-top: 1px solid rgba(0,0,0, 0.1);
+    padding-top: 5px;
+    font-style: italic;
+    color: rgba(0,0,0, 0.7);
+    font-size: 0.8em;
+    margin: 5px 0 15px 0;
+}
+
+#content {
+    padding-top: 20px;
+}
+
+#descriptor {
+    float: left;
+    width: 580px;
+}
+
+/* TOOLTIP */
+span.tooltip {
+      position: absolute;
+      width: 115px;
+      height: 14px;
+      line-height: 14px;
+      padding: 0px;
+      font-size: 13px;
+      text-align: center;
+      color: rgb(255, 255, 255);
+      background: rgba(0, 0, 0, 0.701961);
+      border: 4px solid rgba(0, 0, 0, 0);
+      border-radius: 4px;
+      text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px;
+      box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 0px;
+}
+
+span.tooltip:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent rgba(0,0,0, 0.7) transparent;
+      top: -14px;
+      left: 52px;
+}
