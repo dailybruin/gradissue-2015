@@ -242,7 +242,7 @@ function add_championships_card(championships) {
 	var data = {
 		'id': 'championships',
 		'singlestat': championships.length,
-		'pretext': 'UCLA has won won',
+		'pretext': 'UCLA has won',
 		'imageurl' : 'http://dailybruin.com/images/2014/10/trophy-376x640.png',
 		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships'
 	}
