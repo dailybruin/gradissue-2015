@@ -70,10 +70,31 @@
             <div class="canvas-wrapper">
               <canvas <%= data.canvasheight %> id="<%= data.id %>-chart"></canvas>
             </div>
-
-
-
           </div>
+        </script>
+        
+        <!-- template for card with chart -->
+        <script id="movie-template" type="text/template">
+         <div id="<%= data.id %>" class="card panel">
+          <h2 class="movie-card-title"><%= data.title %></h2>
+          <img src="<%= data.imgurl %>" />
+          <p class="movie-card-description"><%= data.description %></p>
+          <h3>Top grossing movies of <%=data.schoolyear %></h3>
+          <table>
+            <th>
+              <td>Rank</td>
+              <td>Title</td>
+              <td>Domestic Gross</td>
+            </th>
+            <% _.each(movies, function(movie, i) { %>
+              <tr>
+                <td><% i %></td>
+                <td><%= movie.title %></td>
+                <td><%= movie.gross %></td>
+              </tr>
+            <% }); %>
+          </table>
+         </div>
         </script>
     </head>
     <body>

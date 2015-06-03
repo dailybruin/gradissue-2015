@@ -35,12 +35,15 @@ $(document).ready(function(){
 
 			var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
 			var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
+			var championships = _.filter(data, function(datum) {return datum.id === "championships"; });            
 			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
 			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
 			add_cost_card(costs);
 			add_construction_card(construction_events);
 			if (nobels.length > 0)
 				add_nobel_card(nobels);
+			if (championships.length > 0)
+				add_championships_card(championships);                
 			add_ucla_event_cards(events);
 			
 			// if mobile, cards need to fade in a different order (vertical first)
@@ -58,6 +61,11 @@ $(document).ready(function(){
 });
 
 
+function add_movie_card(movies) {
+	var template_data = {
+		
+	}
+}
 
 
 function add_construction_card(events) {
@@ -230,6 +238,20 @@ function add_nobel_card(nobels) {
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
+	$("#ucla-events-left").append(card_html);
+	card_ids.push("#nobel");
+
+}
+
+function add_championships_card(championships) {
+	var data = {
+		'id': 'championships',
+		'singlestat': championships.length,
+		'pretext': 'UCLA has won won',
+		'imageurl' : 'http://dailybruin.com/images/2014/10/trophy-376x640.png',
+		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships'
+	}
+	var card_html = compile_template_to_html("#single-number-template", data);
 	$("#ucla-events-left").append(card_html);
 	card_ids.push("#nobel");
 
