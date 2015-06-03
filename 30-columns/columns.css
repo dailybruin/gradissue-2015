@@ -1,15 +1,43 @@
+header{
+  background-image: url(image/bunny2.jpg);
+
+}
+#profile-wrap{
+  width:85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#tagline{
+  text-align: center;
+  padding: 5%;
+}
+.blurb{
+  padding: 2%;
+}
+.blurb p{
+  color:white;
+}
+.row{
+  max-width: 100%;
+  padding:1%;
+}
 .mugbar {
     float: left;
     width: 285px;
     text-align: center;
 }
 
-.article {
-    float: left;
-    width: 580px;
+#descriptor{
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.article h1 {
+.article {
+  padding-left:7%;
+  padding-right: 7%;
+}
+
+#descriptor h1 .article h1 {
     font-family: 'Roboto Condensed', sans-serif;
     line-height: 1em;
     margin: 10px 0 0 0;
@@ -20,7 +48,6 @@ p {
 }
 
 .thumb {
-    margin: 0 11px 22px 11px;
     padding: 0;
     border: 0;
     cursor: pointer;
@@ -49,9 +76,9 @@ p {
     padding-top: 20px;
 }
 
-#descriptor {
-    float: left;
-    width: 580px;
+.columns{
+    padding-left: 0;
+  padding-right: 0;
 }
 
 /* TOOLTIP */
