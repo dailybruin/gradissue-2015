@@ -61,11 +61,6 @@ $(document).ready(function(){
 });
 
 
-function add_movie_card(movies) {
-	var template_data = {
-		
-	}
-}
 
 
 function add_construction_card(events) {
