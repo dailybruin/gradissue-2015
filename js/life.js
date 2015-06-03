@@ -1,3 +1,9 @@
+DEBUG = true;
+
+if (!DEBUG) {
+	console.log = function () {};
+}
+
 var selection_to_datestring = {
 	'fall2009': '9/1/2009',
 	'fall2010': '9/1/2010',
@@ -9,7 +15,7 @@ var selection_to_datestring = {
 
 var cards_in_divs = {};
 
-card_ids = []
+card_ids = [];
 
 $(document).ready(function(){
 
@@ -40,8 +46,8 @@ $(document).ready(function(){
 			var championships = _.filter(data, function(datum) {return datum.id === "championships"; });            
 			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
 			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
-			add_cost_card(costs);
 			add_construction_card(construction_events);
+			add_cost_card(costs);
 			if (nobels.length > 0)
 				add_nobel_card(nobels);
 			if (championships.length > 0)
@@ -50,9 +56,11 @@ $(document).ready(function(){
 			
 			// if mobile, cards need to fade in a different order (vertical first)
 			// if on desktop, cards need to fade in horizontally
-			if (!window.mobilecheck())
-				card_ids = get_card_ids_by_column("ucla-events");
+			console.log(card_ids);
+			if (window.mobilecheck())
+				card_ids = horizontal_to_vertical_order(card_ids);
 			fade_in_cards(card_ids);
+			console.log(card_ids);
 
 
 
@@ -63,24 +71,27 @@ $(document).ready(function(){
 });
 
 
-function add_card(div_id, card_html) {
-	if (div_id in cards_in_divs) {
-		cards_in_divs[div_id]++;
+function add_card(section_div_id, card_html, card_div_id) {
+	if (section_div_id in cards_in_divs) {
+		cards_in_divs[section_div_id]++;
 	}
 	else {
-		cards_in_divs[div_id] = 1;
+		cards_in_divs[section_div_id] = 0;
 	}
 	console.log(card_html);
-	console.log("#" + div_id + "-left");
-	switch (cards_in_divs[div_id] % 3) {
+	console.log("#" + section_div_id + "-left");
+	switch (cards_in_divs[section_div_id] % 3) {
 		case 0: 		
-			$("#" + div_id + "-left").append(card_html);
+			$("#" + section_div_id + "-left").append(card_html);
+			card_ids.push(card_div_id);
 			break;
 		case 1: 
-			$("#" + div_id + "-mid").append(card_html);
+			$("#" + section_div_id + "-mid").append(card_html);
+			card_ids.push(card_div_id);
 			break;
 		case 2:
-			$("#" + div_id + "-right").append(card_html);
+			$("#" + section_div_id + "-right").append(card_html);
+			card_ids.push(card_div_id);
 			break;
 	}
 }
@@ -114,7 +125,7 @@ function add_construction_card(events) {
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
-	add_card("ucla-events", card_html);
+	add_card("ucla-events", card_html, "#construction");
 	//$("#ucla-events-left").append(card_html);
 
 	var ctx = document.getElementById("construction-chart").getContext("2d");
@@ -144,7 +155,7 @@ function add_construction_card(events) {
 	//console.log(chart_labels);
 	//console.log(events_by_year);
 	$("#construction").hide();
-	card_ids.push("#construction");
+	//card_ids.push("#construction");
 }
 
 function add_cost_card(costs) {
@@ -183,7 +194,7 @@ function add_cost_card(costs) {
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
-	add_card("ucla-events", card_html);
+	add_card("ucla-events", card_html, "#costs");
 	//$("#ucla-events-left").append(card_html);
 
 	var ctx = document.getElementById("costs-chart").getContext("2d");
@@ -222,7 +233,7 @@ function add_cost_card(costs) {
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
 	$("#costs").hide();
 	console.log(bar_chart);
-	card_ids.push("#costs");
+	//card_ids.push("#costs");
 
 	$("#radio-in-state, #radio-out-state").change(function () {
 		console.log(this.value);
@@ -258,10 +269,10 @@ function add_nobel_card(nobels) {
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
-	add_card("ucla-events", card_html);
+	add_card("ucla-events", card_html, "#nobel");
 
 	// $("#ucla-events-left").append(card_html);
-	card_ids.push("#nobel");
+	//card_ids.push("#nobel");
 
 }
 
@@ -275,16 +286,16 @@ function add_championships_card(championships) {
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//$("#ucla-events-left").append(card_html);
-	add_card("ucla-events", card_html);
-	card_ids.push("#championships");
+	add_card("ucla-events", card_html, "#championships");
+	//card_ids.push("#championships");
 
 }
 
 function add_ucla_event_cards(events) {
 	for (var i = 0; i < events.length; i++) {
 		var card_html = compile_template_to_html("#event-card-template", events[i]);
-		card_ids.push("#" + events[i].id);
-		add_card("ucla-events", card_html);
+		//card_ids.push("#" + events[i].id);
+		add_card("ucla-events", card_html, "#" + events[i].id);
 	}
 }
 
@@ -318,7 +329,8 @@ function fade_in_cards(card_ids) {
 }
 
 function get_card_ids_by_column(main_div_id) {
-	card_ids = []
+
+	card_ids = [];
 	var left_div_id = "#" + main_div_id + "-left";
 	var mid_div_id = "#" + main_div_id + "-mid";
 	var right_div_id = "#" + main_div_id + "-right";
@@ -328,6 +340,8 @@ function get_card_ids_by_column(main_div_id) {
 	var num_right_children = $(right_div_id).children().length;
 	
 	var max_children = _.max([num_left_children, num_right_children, num_mid_children]);
+	
+
 	for (var i = 0; i < max_children; i++) {
 		console.log($(left_div_id).children()[i]);
 		if ($(left_div_id).children()[i])
@@ -344,4 +358,14 @@ window.mobilecheck = function() {
   var check = false;
   (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
   return check;
+}
+
+function horizontal_to_vertical_order(card_ids) {
+	new_card_ids = [];
+	for (var i = 0; i < 3; i++) {
+		for (var j = i; j < card_ids.length; j += 3) {
+			new_card_ids.push(card_ids[j]);
+		}
+	}
+	return new_card_ids;
 }
