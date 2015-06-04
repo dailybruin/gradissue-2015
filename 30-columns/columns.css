@@ -7,8 +7,13 @@ ul a {
   display: inline-block;
 }
 
+li{
+  overflow: hidden;
+}
 ul a img{
   z-index:-1;
+  width: auto;
+height: auto;
 }
 
  a:hover .teaser {
@@ -136,20 +141,12 @@ p {
     line-height: 1.4em;
 }
 
-.thumb {
+.thumb img {
     padding: 0;
     border: 0;
     cursor: pointer;
 }
 
-.thumb:hover {
-    -webkit-filter: contrast(140%);
-}
-
-.thumb-overlay{
-    visibility: none;
-    background-color: red;
-}
 .author {
     padding: 10px 0 0 0;
     font-weight: bold;
@@ -169,7 +166,7 @@ p {
 }
 
 .columns{
-    padding-left: 0;
+  padding-left: 0;
   padding-right: 0;
 }
 
