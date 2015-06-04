@@ -2,6 +2,30 @@ header{
   background-image: url(image/bunny2.jpg);
 
 }
+footer {
+  color: rgba(0,0,0, 0.7);
+  padding: 8px 0 8px 0;
+  font-size: 0.7em;
+  clear: both;
+  border-top: 1px solid rgba(0,0,0, 0.1);
+  text-align: center;
+}
+
+.article p::first-letter{
+ font-size: 300%;
+ float: left; 
+ color: #D4D4C7;
+ line-height: 35px;
+ padding-top: 3px; 
+ padding-right: 3px;
+ font-family: Times, serif, Georgia;
+
+}
+
+.mug{
+  margin-right:10%;
+
+}
 #profile-wrap{
   width:85%;
   margin-left: auto;
@@ -59,7 +83,6 @@ p {
 
 .author {
     padding: 10px 0 0 0;
-    border-bottom: 1px solid rgba(0,0,0, 0.1);
     font-weight: bold;
 }
 
