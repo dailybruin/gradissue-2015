@@ -1,6 +1,11 @@
 header{
   background-image: url(image/bunny2.jpg);
+}
 
+.flex-video{
+  margin-left:1%;
+  margin-right:1%;
+  margin-bottom: 5%; 
 }
 #banner{
   padding:0;
@@ -9,9 +14,6 @@ header{
   padding: 1%;
 }
 
-p{
-  font-family: 'Raleway', sans-serif;
-}
 footer {
   color: rgba(0,0,0, 0.7);
   padding: 8px 0 8px 0;
@@ -32,7 +34,6 @@ footer {
  padding-top: 3px; 
  padding-right: 3px;
  font-family: Times, serif, Georgia;
-
 }
 
 .mug{
