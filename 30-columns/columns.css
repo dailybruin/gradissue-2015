@@ -8,6 +8,10 @@ header{
 #plate{
   padding: 1%;
 }
+
+p{
+  font-family: 'Raleway', sans-serif;
+}
 footer {
   color: rgba(0,0,0, 0.7);
   padding: 8px 0 8px 0;
