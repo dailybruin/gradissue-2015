@@ -10,6 +10,9 @@ footer {
   border-top: 1px solid rgba(0,0,0, 0.1);
   text-align: center;
 }
+#overlay{
+  position: relative;
+}
 
 .article p::first-letter{
  font-size: 300%;
