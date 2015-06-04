@@ -2,6 +2,12 @@ header{
   background-image: url(image/bunny2.jpg);
 
 }
+#banner{
+  padding:0;
+}
+#plate{
+  padding: 1%;
+}
 footer {
   color: rgba(0,0,0, 0.7);
   padding: 8px 0 8px 0;
