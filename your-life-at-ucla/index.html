@@ -54,6 +54,26 @@
           </div>
         </script>
 
+                <!-- template for highlighting single large number. Icons wrap around on overflow -->
+        <script id="single-number-template-wrap" type="text/template">
+          <div id="<%= data.id %>" class="card panel">
+            <h4 class="pre-stat-text"><%= data.pretext %></h4>
+            <div class="big-number-container">
+              <h2 class="big-number"><%= data.singlestat %></h2>
+            </div>
+            <h4 class="post-stat-text"><%= data.posttext %></h4>
+            <table>
+              <tr>
+                <td>
+                <% _.each(data.rows, function(row, i) { %>
+                   <a  class="hint--bottom" data-hint="<%= row.title %>"><img src="<%= row.imageurl %>"/></a>
+                <% }); %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </script>
+
         <!-- template for card with chart -->
         <script id="chart-template" type="text/template">
           <div id="<%= data.id %>" class="card panel">

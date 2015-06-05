@@ -38,6 +38,7 @@ $(document).ready(function(){
 			var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
 			var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
 			var championships = _.filter(data, function(datum) {return datum.id === "championships"; });            
+			var pro_athletes = _.filter(data, function(datum) {return datum.id === "pro-athlete"; });
 			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
 			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
 			add_cost_card(costs);
@@ -45,7 +46,9 @@ $(document).ready(function(){
 			if (nobels.length > 0)
 				add_nobel_card(nobels);
 			if (championships.length > 0)
-				add_championships_card(championships);                
+				add_championships_card(championships);
+			if (pro_athletes.length > 0)
+				add_pro_atheletes_card(pro_athletes);
 			add_ucla_event_cards(events);
 			
 			// if mobile, cards need to fade in a different order (vertical first)
@@ -70,8 +73,8 @@ function add_card(div_id, card_html) {
 	else {
 		cards_in_divs[div_id] = 1;
 	}
-	console.log(card_html);
-	console.log("#" + div_id + "-left");
+	//console.log(card_html);
+	//console.log("#" + div_id + "-left");
 	switch (cards_in_divs[div_id] % 3) {
 		case 0: 		
 			$("#" + div_id + "-left").append(card_html);
@@ -276,9 +279,23 @@ function add_championships_card(championships) {
 		'rows': championships
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
-	//$("#ucla-events-left").append(card_html);
 	add_card("ucla-events", card_html);
 	card_ids.push("#championships");
+
+}
+
+function add_pro_atheletes_card(pro_athletes) {
+	console.log("HEREEEEE");
+	var data = {
+		'id': 'pro_athletes',
+		'singlestat': pro_athletes.length,
+		'pretext': 'There have been',
+		'posttext': 'UCLA athletes who have gone pro.',
+		'rows': pro_athletes
+	}
+	var card_html = compile_template_to_html("#single-number-template-wrap", data);
+	add_card("ucla-events", card_html);
+	card_ids.push("#pro_athletes");
 
 }
 
