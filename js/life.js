@@ -62,6 +62,8 @@ $(document).ready(function(){
 
 			// if mobile, cards need to fade in a different order (vertical first)
 			// if on desktop, cards need to fade in horizontally
+			card_ids = _.filter(card_ids, function(card_id) {return card_id;});
+
 			console.log(card_ids);
 			if (window.mobilecheck())
 				card_ids = horizontal_to_vertical_order(card_ids);
@@ -397,6 +399,7 @@ window.mobilecheck = function() {
 }
 
 function horizontal_to_vertical_order(card_ids) {
+	card_ids = _.filter(card_ids, function(card_id) {return card_id;});
 	new_card_ids = [];
 	for (var i = 0; i < 3; i++) {
 		for (var j = i; j < card_ids.length; j += 3) {
