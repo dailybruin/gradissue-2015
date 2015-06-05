@@ -344,24 +344,23 @@ function add_basketball_records_card(basketball_records) {
 		return d.getFullYear() + "-" + next_year;
 	});
 	var chart_labels = _.keys(records_by_year);
-
-	// populate chart data
 	var chart_data = [];
+	var wins = [];
+	var losses = [];
+
 	for (var i = 0; i < chart_labels.length; i++) {
-		var year_sum = 0;
-		var year = chart_labels[i];
-		var year_data = records_by_year[year];
-		for (var j = 0; j < year_data.length; j++) {
-			year_sum += parseInt(year_data[j].data);
-		}
-		chart_data.push(year_sum);
+		wins.push(parseInt(records_by_year[chart_labels[i]][0].data));
+		losses.push(parseInt(records_by_year[chart_labels[i]][0].data2));
 	}
 
+	var total_wins_num =  _.reduce(wins, function(a, b){ return a + b; }, 0);
+	var total_losses_num =  _.reduce(losses, function(a, b){ return a + b; }, 0);
 	var template_data = {
 		'id' : 'basketball_records',
-		'pretext' : 'UCLA has won',
-		'singlestat' : addCommas(sum(chart_data)),
-		'posttext' : "men's basketball games."
+		'pretext' : "UCLA had a record of",
+		'singlestat' :  total_wins_num + "-" + total_losses_num,
+		'posttext': "in men's basketball.",
+		'canvasheight': 'height="300px"'
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -371,7 +370,16 @@ function add_basketball_records_card(basketball_records) {
 	var bar_data = {
 		labels: chart_labels,
 		datasets: [ {
-			data: chart_data,
+			data: wins,
+			label: "Wins",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+			},
+			{
+			data: losses,
+			label: "Losses",
             fillColor: "rgba(151,187,205,0.5)",
             strokeColor: "rgba(151,187,205,0.8)",
             highlightFill: "rgba(151,187,205,0.75)",
@@ -383,12 +391,11 @@ function add_basketball_records_card(basketball_records) {
 	var bar_options = {
 		responsive: true,
 		tooltipTemplate: "<%= addCommas(value) %>",
-		scaleLabel: "<%= value %>",
+		multiTooltipTemplate: "<%= datasetLabel %>: <%= addCommas(value) %> ",
+		scaleLabel: "<%= addCommas(value) %>"
 	}
 
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
-
-	$("#basketball_records").hide();
 }
 
 function add_football_records_card(football_records) {
@@ -399,24 +406,23 @@ function add_football_records_card(football_records) {
 		return d.getFullYear() + "-" + next_year;
 	});
 	var chart_labels = _.keys(records_by_year);
-
-	// populate chart data
 	var chart_data = [];
+	var wins = [];
+	var losses = [];
+
 	for (var i = 0; i < chart_labels.length; i++) {
-		var year_sum = 0;
-		var year = chart_labels[i];
-		var year_data = records_by_year[year];
-		for (var j = 0; j < year_data.length; j++) {
-			year_sum += parseInt(year_data[j].data);
-		}
-		chart_data.push(year_sum);
+		wins.push(parseInt(records_by_year[chart_labels[i]][0].data));
+		losses.push(parseInt(records_by_year[chart_labels[i]][0].data2));
 	}
 
+	var total_wins_num =  _.reduce(wins, function(a, b){ return a + b; }, 0);
+	var total_losses_num =  _.reduce(losses, function(a, b){ return a + b; }, 0);
 	var template_data = {
 		'id' : 'football_records',
-		'pretext' : 'UCLA has won',
-		'singlestat' : addCommas(sum(chart_data)),
-		'posttext' : "men's football games."
+		'pretext' : "UCLA had a record of",
+		'singlestat' :  total_wins_num + "-" + total_losses_num,
+		'posttext': "in men's football_records.",
+		'canvasheight': 'height="300px"'
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -426,7 +432,16 @@ function add_football_records_card(football_records) {
 	var bar_data = {
 		labels: chart_labels,
 		datasets: [ {
-			data: chart_data,
+			data: wins,
+			label: "Wins",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+			},
+			{
+			data: losses,
+			label: "Losses",
             fillColor: "rgba(151,187,205,0.5)",
             strokeColor: "rgba(151,187,205,0.8)",
             highlightFill: "rgba(151,187,205,0.75)",
@@ -438,12 +453,11 @@ function add_football_records_card(football_records) {
 	var bar_options = {
 		responsive: true,
 		tooltipTemplate: "<%= addCommas(value) %>",
-		scaleLabel: "<%= value %>",
+		multiTooltipTemplate: "<%= datasetLabel %>: <%= addCommas(value) %> ",
+		scaleLabel: "<%= addCommas(value) %>"
 	}
 
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
-
-	$("#football_records").hide();
 }
 
 function add_ucla_event_cards(events) {
