@@ -43,7 +43,9 @@ $(document).ready(function(){
 
 			var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
 			var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
-			var championships = _.filter(data, function(datum) {return datum.id === "championships"; });            
+			var championships = _.filter(data, function(datum) {return datum.id === "championships"; });
+			var pro_athletes = _.filter(data, function(datum) {return datum.id === "pro-athlete"; });
+			var usc_football_games = _.filter(data, function(datum) {return datum.id === "usc-football"; });
 			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
 			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
 			add_construction_card(construction_events);
@@ -51,9 +53,13 @@ $(document).ready(function(){
 			if (nobels.length > 0)
 				add_nobel_card(nobels);
 			if (championships.length > 0)
-				add_championships_card(championships);                
+				add_championships_card(championships);
+			if (pro_athletes.length > 0)
+				add_pro_atheletes_card(pro_athletes);
+			if (usc_football_games.length > 0)
+				add_usc_football_games_card(usc_football_games);
 			add_ucla_event_cards(events);
-			
+
 			// if mobile, cards need to fade in a different order (vertical first)
 			// if on desktop, cards need to fade in horizontally
 			console.log(card_ids);
@@ -265,7 +271,8 @@ function add_nobel_card(nobels) {
 		'singlestat': nobels.length,
 		'pretext': 'UCLA Faculty and Alumni have won',
 		'imageurl' : 'http://dailybruin.com/images/2015/05/nobel.png',
-		'posttext': nobels.length === 1 ? 'Nobel Prize' : 'Nobel Prizes'
+		'posttext': nobels.length === 1 ? 'Nobel Prize' : 'Nobel Prizes',
+		'rows': nobels
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
@@ -282,13 +289,42 @@ function add_championships_card(championships) {
 		'singlestat': championships.length,
 		'pretext': 'UCLA has won',
 		'imageurl' : 'http://dailybruin.com/images/2014/10/trophy-376x640.png',
-		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships'
+		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships',
+		'rows': championships
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//$("#ucla-events-left").append(card_html);
 	add_card("ucla-events", card_html, "#championships");
 	//card_ids.push("#championships");
 
+}
+
+function add_pro_atheletes_card(pro_athletes) {
+	var data = {
+		'id': 'pro_athletes',
+		'singlestat': pro_athletes.length,
+		'pretext': 'There have been',
+		'posttext': 'UCLA athletes who have gone pro.',
+		'rows': pro_athletes
+	}
+	var card_html = compile_template_to_html("#single-number-template-wrap", data);
+	add_card("ucla-events", card_html);
+	card_ids.push("#pro_athletes");
+
+}
+
+function add_usc_football_games_card(usc_football_games) {
+	var data = {
+		'id': 'usc_football_games',
+		'pretext': "UCLA beat USC",
+		'singlestat': usc_football_games.length,
+		'posttext': 'times in football.',
+		'rows': usc_football_games,
+		'imageurl' : 'http://dailybruin.com/images/2013/11/80851f22-b618-4a8c-affc-2944b29dfd531-640x427.jpg'
+	}
+	var card_html = compile_template_to_html("#single-number-template", data);
+	add_card("ucla-events", card_html);
+	card_ids.push("#usc_football_games");
 }
 
 function add_ucla_event_cards(events) {
