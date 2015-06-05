@@ -421,7 +421,7 @@ function add_football_records_card(football_records) {
 		'id' : 'football_records',
 		'pretext' : "UCLA had a record of",
 		'singlestat' :  total_wins_num + "-" + total_losses_num,
-		'posttext': "in men's football_records.",
+		'posttext': "in men's football.",
 		'canvasheight': 'height="300px"'
 	}
 
