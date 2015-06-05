@@ -16,6 +16,7 @@
         <!-- CSS -->
 
         <link href="../css/foundation.min.css" rel="stylesheet" type="text/css" />
+        <link href="../css/hint.min.css" rel="stylesheet" type="text/css" />
         <link href="../css/life.css" rel="stylesheet" type="text/css" />
         
         <!-- JavaScript -->
@@ -45,9 +46,9 @@
             <h4 class="post-stat-text"><%= data.posttext %></h4>
             <table>
               <tr>
-                <% for (var i = 0; i < data.singlestat; i++) { %>
-                  <td><img src="<%= data.imageurl %>" /></td>
-                <% } %>
+                <% _.each(data.rows, function(row, i) { %>
+                   <td><a  class="hint--bottom" data-hint="<%= row.title %>"><img src="<%= data.imageurl %>"/></a></td>
+                <% }); %>
               </tr>
             </table>
           </div>

@@ -254,7 +254,8 @@ function add_nobel_card(nobels) {
 		'singlestat': nobels.length,
 		'pretext': 'UCLA Faculty and Alumni have won',
 		'imageurl' : 'http://dailybruin.com/images/2015/05/nobel.png',
-		'posttext': nobels.length === 1 ? 'Nobel Prize' : 'Nobel Prizes'
+		'posttext': nobels.length === 1 ? 'Nobel Prize' : 'Nobel Prizes',
+		'rows': nobels
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
@@ -271,7 +272,8 @@ function add_championships_card(championships) {
 		'singlestat': championships.length,
 		'pretext': 'UCLA has won',
 		'imageurl' : 'http://dailybruin.com/images/2014/10/trophy-376x640.png',
-		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships'
+		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships',
+		'rows': championships
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//$("#ucla-events-left").append(card_html);
