@@ -48,6 +48,7 @@ $(document).ready(function(){
 			var usc_football_games = _.filter(data, function(datum) {return datum.id === "usc-football"; });
 			var basketball_records = _.filter(data, function(datum) {return datum.id === "basketball"; });
 			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
+			var football_records = _.filter(data, function(datum) {return datum.id === "football"; });
 			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
 			add_construction_card(construction_events);
 			add_cost_card(costs);
@@ -60,6 +61,7 @@ $(document).ready(function(){
 			if (usc_football_games.length > 0)
 				add_usc_football_games_card(usc_football_games);
 			add_basketball_records_card(basketball_records);
+			add_football_records_card(football_records);
 			add_ucla_event_cards(events);
 
 			// if mobile, cards need to fade in a different order (vertical first)
@@ -387,6 +389,61 @@ function add_basketball_records_card(basketball_records) {
 	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
 
 	$("#basketball_records").hide();
+}
+
+function add_football_records_card(football_records) {
+	var records_by_year = _.groupBy(football_records, function (record) {
+		var d = new Date(record.date);
+		var num_year = parseInt(d.getFullYear());
+		var next_year = num_year + 1 - 2000;
+		return d.getFullYear() + "-" + next_year;
+	});
+	var chart_labels = _.keys(records_by_year);
+
+	// populate chart data
+	var chart_data = [];
+	for (var i = 0; i < chart_labels.length; i++) {
+		var year_sum = 0;
+		var year = chart_labels[i];
+		var year_data = records_by_year[year];
+		for (var j = 0; j < year_data.length; j++) {
+			year_sum += parseInt(year_data[j].data);
+		}
+		chart_data.push(year_sum);
+	}
+
+	var template_data = {
+		'id' : 'football_records',
+		'pretext' : 'UCLA has won',
+		'singlestat' : addCommas(sum(chart_data)),
+		'posttext' : "men's football games."
+	}
+
+	var card_html = compile_template_to_html("#chart-template", template_data);
+	add_card("ucla-events", card_html, "#football_records");
+
+	var ctx = document.getElementById("football_records-chart").getContext("2d");
+	var bar_data = {
+		labels: chart_labels,
+		datasets: [ {
+			data: chart_data,
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+			}
+		]
+	};
+
+	var bar_options = {
+		responsive: true,
+		tooltipTemplate: "<%= addCommas(value) %>",
+		scaleLabel: "<%= value %>",
+	}
+
+	var bar_chart = new Chart(ctx).Bar(bar_data, bar_options);
+
+	$("#football_records").hide();
 }
 
 function add_ucla_event_cards(events) {
