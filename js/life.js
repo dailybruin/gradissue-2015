@@ -279,7 +279,7 @@ function add_nobel_card(nobels) {
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
 	add_card("ucla-events", card_html, "#nobel");
-
+	$('.tooltip-' + data.id).tooltipster();
 	// $("#ucla-events-left").append(card_html);
 	//card_ids.push("#nobel");
 
@@ -297,6 +297,8 @@ function add_championships_card(championships) {
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//$("#ucla-events-left").append(card_html);
 	add_card("ucla-events", card_html, "#championships");
+	$('.tooltip-' + data.id).tooltipster();
+
 	//card_ids.push("#championships");
 
 }
@@ -312,7 +314,7 @@ function add_pro_atheletes_card(pro_athletes) {
 	var card_html = compile_template_to_html("#single-number-template-wrap", data);
 	add_card("ucla-events", card_html);
 	card_ids.push("#pro_athletes");
-
+	$('.tooltip-' + data.id).tooltipster();
 }
 
 function add_usc_football_games_card(usc_football_games) {
@@ -327,6 +329,7 @@ function add_usc_football_games_card(usc_football_games) {
 	var card_html = compile_template_to_html("#single-number-template", data);
 	add_card("ucla-events", card_html);
 	card_ids.push("#usc_football_games");
+	$('.tooltip-' + data.id).tooltipster();
 }
 
 function add_ucla_event_cards(events) {

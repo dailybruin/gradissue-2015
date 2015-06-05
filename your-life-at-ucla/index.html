@@ -16,7 +16,7 @@
         <!-- CSS -->
 
         <link href="../css/foundation.min.css" rel="stylesheet" type="text/css" />
-        <link href="../css/hint.min.css" rel="stylesheet" type="text/css" />
+        <link href="../css/tooltipster.css" rel="stylesheet" type="text/css" />
         <link href="../css/life.css" rel="stylesheet" type="text/css" />
         
         <!-- JavaScript -->
@@ -24,6 +24,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
         <script src="../js/vendor/jquery.js"></script>
         <script src="../js/googlesheet.js"></script>
+        <script src="../js/jquery.tooltipster.min.js"></script>
         <script src="../js/life.js"></script>
 
         <!-- Templates -->
@@ -47,7 +48,7 @@
             <table>
               <tr>
                 <% _.each(data.rows, function(row, i) { %>
-                   <td><a  class="hint--bottom" data-hint="<%= row.title %>"><img src="<%= data.imageurl %>"/></a></td>
+                   <td><a  class="tooltip-<%= data.id %>" title="<%= row.title %> | <% var d = new Date(row.date); print(d.getFullYear()); %>"><img src="<%= data.imageurl %>"/></a></td>
                 <% }); %>
               </tr>
             </table>
@@ -66,7 +67,7 @@
               <tr>
                 <td>
                 <% _.each(data.rows, function(row, i) { %>
-                   <a  class="hint--bottom" data-hint="<%= row.title %>"><img src="<%= row.imageurl %>"/></a>
+                   <a class="tooltip-<%= data.id %>" title="<%= row.title %> | <% var d = new Date(row.date); print(d.getFullYear()); %>"><img src="<%= row.imageurl %>"/></a>
                 <% }); %>
                 </td>
               </tr>
