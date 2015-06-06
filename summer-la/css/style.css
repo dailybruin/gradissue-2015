@@ -130,6 +130,15 @@ ul.share-buttons li{
 	margin-top: 15px;
 	text-align: justify;
 }
+.card-author {
+    font-family: Roboto;
+    font-size: 12pt;
+    margin: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: justify;
+    font-style: italic;
+}
 
 #intro {
     font-family: Roboto;
@@ -160,6 +169,15 @@ ul.share-buttons li{
     }
     #intro {
         font-size: 2em;
+    }
+    .card-author {
+    font-family: Roboto;
+    font-size: 12pt;
+    margin: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: justify;
+    font-style: italic;
     }
     .card-location{
     font-family: Roboto;
