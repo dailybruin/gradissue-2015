@@ -1,8 +1,14 @@
 @import "compass";
 @import "mixins";
 
-// .top-bar {
-// 	z-index: 4; 
+// .slick {
+// 	width: 100%;
+// 	height: 100%;
+
+// 	div {
+// 		width: 200px;
+// 		height: 50%;
+// 	}
 // }
 
 .dashboard-item {
@@ -13,6 +19,7 @@
 	h1 {
 		font-size: 1em;
 	}
+	overflow: hidden; 
 }
 
 .dashboard-container {
@@ -40,7 +47,7 @@
   div.dot {
     background: url(../img/dot2.png);
     @include vendorize(filter, grayscale(100%)); 
-    opacity: 0.4;
+    opacity: 0.2;
   }
 
  //  div.star {
@@ -103,8 +110,10 @@ section {
 
 
 .item-overlay {
+	top: -50%;
+	position: relative;
 	width: 100%;
-	height: 100%;
+	height: 300px;
 
 	@include vendorize(transform, skew(-25deg));
 	&:hover .item-description {
@@ -167,72 +176,72 @@ section {
 /* maybe delete this shit */
 
 
-#highlights-row {
-	height: 90%;
-	padding-top: 10%;
-	padding-left: 3%;
-	padding-right: 3%;
+// #highlights-row {
+// 	height: 90%;
+// 	padding-top: 10%;
+// 	padding-left: 3%;
+// 	padding-right: 3%;
 
-	ul {
-		height: 90%;
+// 	ul {
+// 		height: 90%;
 
-	}
+// 	}
 
-	li {
-		height: 30%;
-		margin-bottom: 5%;
-	}
-}
+// 	li {
+// 		height: 30%;
+// 		margin-bottom: 5%;
+// 	}
+// }
 
-#highlights-page h2 {
-	margin-left: 10%;
-	color: white;
-}
+// #highlights-page h2 {
+// 	margin-left: 10%;
+// 	color: white;
+// }
 
-#highlights-0 {
-	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+// #highlights-0 {
+// 	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// }
 
-#highlights-1 {
-	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+// #highlights-1 {
+// 	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// }
 
-#highlights-2 {
-	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+// #highlights-2 {
+// 	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// }
 
-#highlights-3 {
-	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+// #highlights-3 {
+// 	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// }
 
-#highlights-4 {
-	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+// #highlights-4 {
+// 	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// }
 
-#highlights-5 {
-	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+// #highlights-5 {
+// 	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// }
 
-#highlights-6 {
-	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+// #highlights-6 {
+// 	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// }
 
-#highlights-7 {
-	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+// #highlights-7 {
+// 	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// }
