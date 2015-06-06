@@ -292,8 +292,9 @@ function add_cost_card(costs) {
 		'pretext' : 'Cost of tuition and living has gone up by',
 		'singlestat' :  (in_state_diff*100-100).toFixed(2) + "%",
 		'toggle': true,
-		'canvasheight': 'height="300px"'
-		//'posttext' : 'on finished construction and renovation projects.'
+		'canvasheight': 'height="300px"',
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
+		'share_text': "Cost of tution increased by " + "$" + (in_state_diff*100-100).toFixed(2) + "%" + " at UCLA since I've been here"
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -455,7 +456,9 @@ function add_basketball_records_card(basketball_records) {
 		'pretext' : "UCLA had a record of",
 		'singlestat' :  total_wins_num + "-" + total_losses_num,
 		'posttext': "in men's basketball.",
-		'canvasheight': 'height="300px"'
+		'canvasheight': 'height="300px"',
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
+		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in men's basketball at UCLA since I've been here"
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -517,7 +520,9 @@ function add_football_records_card(football_records) {
 		'pretext' : "UCLA had a record of",
 		'singlestat' :  total_wins_num + "-" + total_losses_num,
 		'posttext': "in men's football.",
-		'canvasheight': 'height="300px"'
+		'canvasheight': 'height="300px"',
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
+		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in football at UCLA since I've been here"
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
