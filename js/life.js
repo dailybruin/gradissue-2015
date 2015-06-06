@@ -63,6 +63,7 @@ $(document).ready(function(){
 			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
 			var movies = _.filter(data, function (datum) { return datum.type === "movie"; });
 			var songs = _.filter(data, function(datum) { return datum.type === "song"; });
+			add_study_card(selection);
 			add_construction_card(construction_events);
 			add_cost_card(costs);
 			if (nobels.length > 0)
@@ -79,7 +80,6 @@ $(document).ready(function(){
 			add_football_records_card(football_records);
 			add_ucla_event_cards(events);
 			add_movie_card(movies);
-			add_study_card(selection);
 
 
 
@@ -114,10 +114,15 @@ function add_study_card(selection) {
 
 	$("#study").click(function() {
 		var num = Number.parseFloat($("#study-input").val());
-		var text = document.createElement("p");
-		var hours_studied = selection_to_quarters_attended[selection] * num * 10;
-		$(text).html("You've studied for about " + Math.floor(hours_studied) + " hours");
-		$("#study-content").html(text);
+		if (num) {
+			num = num < 0 ? 0 : num;
+			var text = document.createElement("p");
+			var hours_studied = Math.floor(selection_to_quarters_attended[selection] * num * 10);
+			var content = "You've studied for about " + hours_studied + " hours at UCLA or " + 
+			(hours_studied / 24).toFixed(2) + " days."
+			$(text).html(content);
+			$("#study-content").html(text);
+		}
 	});
 
 }

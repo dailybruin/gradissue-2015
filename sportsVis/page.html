@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>UCLA NCAA Title Data</title>
+        <script src='Chart.min.js'></script>
+        <script src="stacked.js"></script>
+        <link rel="stylesheet" type="text/css" href="foundation-5.5.2/css/foundation.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="jquery.fullPage.css">
+        <!--<script type="text/javascript" src="fullPage.js-master/jquery.fullPage.css"></script>-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="vendors/jquery.easings.min.js"></script>
+        <script type="text/javascript" src="vendors/jquery.slimscroll.min.js"></script>
+        <script type="text/javascript" src="fullPage.js-master/jquery.fullPage.js"></script>
+    </head>
+
+    <body>
+        <div id="fullpage">
+        <!--
+            <div class="section" id="section1"</div>
+        -->
+            <div class = "section" id = "section2">
+                <h1>UCLA NCAA Titles Per Year</h1>
+                <center><canvas id="years" width="1200" height="500"></canvas></center>
+            </div>
+
+            <div class="section" id="section3">
+                <h1>UCLA NCAA Titles Per Sport</h1>
+                <center><canvas id="sports" width="1200" height="500"></canvas></center>
+            </div>
+
+            <div class="section">
+                <h1>UCLA NCAA Titles Per Coach</h1>
+                <center><canvas id="coaches" width="1200" height="500"></canvas></center>
+            </div>
+
+            <div class = "section">
+                <h1>Most NCAA Titles Per School</h1>
+                <center><canvas id="schools" width="1200" height="500"></canvas></center>
+            </div>
+        </div>
+
+        <script>
+
+            $(document).ready(function() {
+                $('#fullpage').fullpage({
+                    responsive: 900
+                });
+            });
+
+            Chart.defaults.global.responsive = true;
+            //Chart.defaults.global.scaleShowVerticalLines = false;
+
+            // bar chart data
+            var yearData = {
+
+                labels: ['1950 - 1952', '1953 - 1955', '1956 - 1958', '1959 - 1961', '1962 - 1964', '1965 - 1967', '1968 - 1970', '1971 - 1973', '1974 - 1976', '1977 - 1979', '1980 - 1982', '1983 - 1985', '1986 - 1988', '1989 - 1991', '1992 - 1994', '1995 - 1997', '1998 - 2000', '2001 - 2003', '2004 - 2006', '2007 - 2009', '2010 - 2012', '2013 - 2015'],
+
+                datasets: [
+                    {
+                            label: 'UCLA NCAA Titles Per Year',
+                            fillColor: '#FFFF00',
+                            data: [2, 2, 2, 2, 1, 4, 5, 11, 6, 3, 6, 9, 6, 7, 2, 7, 7, 7, 9, 5, 4, 4]
+                    }
+
+                ]
+            };
+            // get bar chart canvas
+            var years = document.getElementById("years").getContext("2d");
+            // draw bar chart
+            new Chart(years).Bar(yearData);
+
+            var sportData = {
+
+                labels: ["Men's Baseball", "Men's Basketball", "Men's Golf", "Men's Gymnastics", "Men's Soccer", "Men's Swim and Golf", "Men's Tennis", "Men's Track and Field", "Men's Volleyball", "Men's Water Polo", "Women's Golf", "Women's Gymnastics", "Women's Soccer", "Women's Softball", "Women's Tennis", "Women's Track and Field", "Women's Volleyball", "Women's Water Polo"],
+
+                datasets: [
+                    {
+                            label: 'UCLA NCAA Titles Per Year',
+                            fillColor: '#00CCFF',
+                            data: [1, 11, 2, 2, 4, 1, 16, 8, 19, 9, 3, 6, 1, 11, 2, 5, 4, 7]
+                    }
+                ]
+            }
+            // get bar chart canvas
+            var sports = document.getElementById("sports").getContext("2d");
+            // draw bar chart
+            new Chart(sports).Bar(sportData);
+
+            var coachData = {
+
+                labels: ["Al Scates", "Adam Krikorian", "John Wooden", "J.D. Morgan", "Glenn Bassett", "Sharron Backus", "Valerie Kondos Field", "Sue Enquist", "Jim Bush", "Guy Baker"],
+
+                datasets: [
+                    {
+                            label: 'UCLA NCAA Titles Per Coach',
+                            fillColor: '#FFFF00',
+                            data: [19, 10, 10, 8, 7, 7, 6, 6, 5, 4]
+                    }
+                ]
+            }
+            // get bar chart canvas
+            var coaches = document.getElementById("coaches").getContext("2d");
+            // draw bar chart
+            new Chart(coaches).Bar(coachData);
+
+            
+
+            var schoolData = {
+
+                labels: ["UCLA", "Stanford", "USC", "OSU", "Penn State", "Arkansas", "Texas", "LSU", "UNC", "Michigan"],
+
+                datasets: [
+                    {
+                            label: "Women's Titles",
+                            fillColor: '#FF0099',
+                            data: [39, 45, 16, 0, 10, 1, 23, 25, 29, 2]
+                    },
+
+                    {
+                        label: "Co-Ed Titles",
+                        fillColor: '#909090',
+                        data: [0, 0, 0, 0, 13, 0, 0, 0, 0, 0]
+
+                    },
+
+                    {
+                            label: "Men's Titles",
+                            fillColor: '#0099FF',
+                            data: [73, 61, 84, 51, 23, 42, 20, 17, 11, 34]
+                    }
+                ]
+                
+            };
+            // get bar chart canvas
+            var schools = document.getElementById("schools").getContext("2d");
+            // draw bar chart
+            new Chart(schools).StackedBar(schoolData, {
+                multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"          
+            });
+        </script>
+    </body>
+</html>

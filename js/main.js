@@ -1,6 +1,35 @@
 $(document).foundation();
 
+
 $(document).ready(function() {
+	$('.slick').slick({
+	  centerMode: true,
+	  centerPadding: '60px',
+	  slidesToShow: 3,
+	  responsive: [
+	    {
+	      breakpoint: 768,
+	      settings: {
+	        arrows: false,
+	        centerMode: true,
+	        centerPadding: '40px',
+	        slidesToShow: 3
+	      }
+	    },
+	    {
+	      breakpoint: 480,
+	      settings: {
+	        arrows: false,
+	        centerMode: true,
+	        centerPadding: '40px',
+	        slidesToShow: 1
+	      }
+	    }
+	  ]
+	});
+
+
+
 	$("#simple3D").simple3D({
 		moveX:3, // 1 - 5
 		moveY:3, // 1 - 5
@@ -10,13 +39,36 @@ $(document).ready(function() {
 		reverseY: true
 	});
 
+	$('#dashboard-container').slimScroll({
+      height: '700px',
+      allowPageScroll: false,
+      distance: '10px', 
+      railOpacity: '0.1',
+      color: 'lightgrey'
+  });
+
+
+
+	var masterurl = "https://spreadsheets.google.com/feeds/list/1i5ecrrYy3IYiiabc8Hq_rEfxar2dJlKbox2qgpldcWI/default/public/values?alt=json";
+	var entrysource = $("#entry-template").html();
+	var entrytemplate = Handlebars.compile(entrysource);
+
+	$.getJSON(masterurl, function(data) {
+		data = clean_google_sheet_json(data);
+		console.log(data);
+		var html = entrytemplate({stories: data});
+		console.log(html);
+		$("#dash-append").append(html);
+	});	
+	
+
 
   $('#fullpage').fullpage({
   	anchors: ['first', 'second', 'third', 'fourth'],
     // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
     navigation: true,
     navigationPosition: 'right',
-    navigationTooltips: ['First', 'Second', 'Third', 'Fourth'],
+    // navigationTooltips: ['First', 'Second', 'Third', 'Fourth'],
     onLeave: function(index, nextIndex, direction){
 
       //after leaving section 2
@@ -33,3 +85,29 @@ $(document).ready(function() {
     }
   });
 });
+
+
+
+
+
+
+
+function clean_google_sheet_json(data){
+	var formatted_json = [];
+	var elem = {};
+	var real_keyname = '';
+	$.each(data.feed.entry, function(i, entry) {
+		elem = {};
+		$.each(entry, function(key, value){
+			// fields that were in the spreadsheet start with gsx$
+			if (key.indexOf("gsx$") == 0) 
+			{
+				// get everything after gsx$
+				real_keyname = key.substring(4); 
+				elem[real_keyname] = value['$t'];
+			}
+		});
+		formatted_json.push(elem);
+	});
+	return formatted_json;
+}
