@@ -1,56 +1,75 @@
-/* line 3, ../scss/main.scss */
-#container {
-  min-height: 900px;
-  width: 80%;
+/* line 8, ../scss/main.scss */
+.dashboard-item {
+  background-color: whitesmoke;
+  height: 100px;
+  padding: 0px 15px;
+  border-bottom: 1px solid gray;
+}
+/* line 13, ../scss/main.scss */
+.dashboard-item h1 {
+  font-size: 1em;
 }
 
-/* line 8, ../scss/main.scss */
+/* line 18, ../scss/main.scss */
+.dashboard-container {
+  overflow: scroll;
+  width: 100%;
+}
+
+/* line 24, ../scss/main.scss */
+#container {
+  min-height: 900px;
+  width: 100%;
+  position: absolute;
+}
+
+/* line 30, ../scss/main.scss */
 #simple3D {
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 900px;
 }
-/* line 14, ../scss/main.scss */
+/* line 36, ../scss/main.scss */
 #simple3D div {
-  min-height: 1100px;
+  min-height: 110%;
   width: 120%;
 }
-/* line 18, ../scss/main.scss */
+/* line 40, ../scss/main.scss */
 #simple3D div.dot {
   background: url(../img/dot2.png);
-}
-/* line 22, ../scss/main.scss */
-#simple3D div.kinoco {
-  background: url(../img/kinoco.png);
-}
-/* line 26, ../scss/main.scss */
-#simple3D div.star {
-  background: url(../img/star.png);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.4;
 }
 
-/* line 32, ../scss/main.scss */
+/* line 54, ../scss/main.scss */
 section {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
-/* line 39, ../scss/main.scss */
+/* line 61, ../scss/main.scss */
 #banner {
-  background: url("http://i.imgur.com/6Gh8Za9.jpg");
+  background: url(../img/banner.jpg);
+  background-size: cover;
   height: 80%;
   width: 80%;
   position: relative;
   top: 20%;
 }
-/* line 49, ../scss/main.scss */
+/* line 73, ../scss/main.scss */
 #banner h1 {
+  z-index: 2;
   font-family: 'Helvetica', serif;
   font-weight: 900;
   font-size: 4rem;
   color: black;
-  line-height: 60px;
+  line-height: 75px;
   bottom: 10%;
   position: absolute;
   left: -8%;
@@ -58,79 +77,159 @@ section {
   background: white;
 }
 
-/* line 67, ../scss/main.scss */
+/* line 91, ../scss/main.scss */
+.item {
+  overflow: hidden;
+  margin-bottom: 10px;
+  margin-bottom: 0px;
+  height: 175px;
+}
+/* line 96, ../scss/main.scss */
+.item h6 {
+  margin-top: 0;
+}
+
+/* line 105, ../scss/main.scss */
+.item-overlay {
+  width: 100%;
+  height: 100%;
+  -webkit-transform: skew(-25deg);
+  -moz-transform: skew(-25deg);
+  -ms-transform: skew(-25deg);
+  -o-transform: skew(-25deg);
+  transform: skew(-25deg);
+}
+/* line 110, ../scss/main.scss */
+.item-overlay:hover .item-description {
+  -webkit-transform: translateX(65%);
+  -moz-transform: translateX(65%);
+  -ms-transform: translateX(65%);
+  -o-transform: translateX(65%);
+  transform: translateX(65%);
+}
+/* line 114, ../scss/main.scss */
+.item-overlay:hover {
+  cursor: pointer;
+}
+
+/* line 122, ../scss/main.scss */
+.item-description {
+  padding: 10px;
+  background-color: white;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translateX(140%);
+  -moz-transform: translateX(140%);
+  -ms-transform: translateX(140%);
+  -o-transform: translateX(140%);
+  transform: translateX(140%);
+  -webkit-transition: transform 350ms ease-in-out;
+  -moz-transition: transform 350ms ease-in-out;
+  -ms-transition: transform 350ms ease-in-out;
+  -o-transition: transform 350ms ease-in-out;
+  transition: transform 350ms ease-in-out;
+}
+/* line 138, ../scss/main.scss */
+.item-description h6 {
+  color: black;
+  font-family: 'Lora', serif;
+}
+
+/* line 145, ../scss/main.scss */
+.item-name {
+  position: absolute;
+  pointer-events: none;
+  top: 60%;
+  left: 0;
+  right: 30%;
+  background-color: white;
+}
+/* line 155, ../scss/main.scss */
+.item-name h3 {
+  padding: 5px 10px;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+}
+
+/* maybe delete this shit */
+/* line 170, ../scss/main.scss */
 #highlights-row {
   height: 90%;
   padding-top: 10%;
   padding-left: 3%;
   padding-right: 3%;
 }
-/* line 73, ../scss/main.scss */
+/* line 176, ../scss/main.scss */
 #highlights-row ul {
   height: 90%;
 }
-/* line 78, ../scss/main.scss */
+/* line 181, ../scss/main.scss */
 #highlights-row li {
   height: 30%;
   margin-bottom: 5%;
 }
 
-/* line 84, ../scss/main.scss */
+/* line 187, ../scss/main.scss */
 #highlights-page h2 {
   margin-left: 10%;
   color: white;
 }
 
-/* line 89, ../scss/main.scss */
+/* line 192, ../scss/main.scss */
 #highlights-0 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 95, ../scss/main.scss */
+/* line 198, ../scss/main.scss */
 #highlights-1 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 101, ../scss/main.scss */
+/* line 204, ../scss/main.scss */
 #highlights-2 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 107, ../scss/main.scss */
+/* line 210, ../scss/main.scss */
 #highlights-3 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 113, ../scss/main.scss */
+/* line 216, ../scss/main.scss */
 #highlights-4 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 119, ../scss/main.scss */
+/* line 222, ../scss/main.scss */
 #highlights-5 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 125, ../scss/main.scss */
+/* line 228, ../scss/main.scss */
 #highlights-6 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 131, ../scss/main.scss */
+/* line 234, ../scss/main.scss */
 #highlights-7 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
