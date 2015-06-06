@@ -1,4 +1,92 @@
+/* line 1, ../scss/main.scss */
 section#homepage-hero {
-	background:url("http://i.imgur.com/6Gh8Za9.jpg");
-	height: 100%;
+  background: url("http://i.imgur.com/6Gh8Za9.jpg");
+  height: 100%;
+}
+
+/* line 7, ../scss/main.scss */
+#title-page h1 {
+  font-size: 4rem;
+  color: white;
+  margin-top: 32%;
+  margin-left: 10%;
+}
+
+/* line 15, ../scss/main.scss */
+#highlights-row {
+  height: 90%;
+  padding-top: 10%;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+/* line 21, ../scss/main.scss */
+#highlights-row ul {
+  height: 90%;
+}
+/* line 26, ../scss/main.scss */
+#highlights-row li {
+  height: 30%;
+  margin-bottom: 5%;
+}
+
+/* line 32, ../scss/main.scss */
+#highlights-page h2 {
+  margin-left: 10%;
+  color: white;
+}
+
+/* line 37, ../scss/main.scss */
+#highlights-0 {
+  background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* line 43, ../scss/main.scss */
+#highlights-1 {
+  background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* line 49, ../scss/main.scss */
+#highlights-2 {
+  background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* line 55, ../scss/main.scss */
+#highlights-3 {
+  background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* line 61, ../scss/main.scss */
+#highlights-4 {
+  background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* line 67, ../scss/main.scss */
+#highlights-5 {
+  background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* line 73, ../scss/main.scss */
+#highlights-6 {
+  background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* line 79, ../scss/main.scss */
+#highlights-7 {
+  background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
