@@ -1,5 +1,6 @@
 $(document).foundation();
 
+
 $(document).ready(function() {
 	$("#simple3D").simple3D({
 		moveX:3, // 1 - 5
@@ -9,6 +10,21 @@ $(document).ready(function() {
 		reverseX: true,
 		reverseY: true
 	});
+
+
+
+	var masterurl = "https://spreadsheets.google.com/feeds/list/1i5ecrrYy3IYiiabc8Hq_rEfxar2dJlKbox2qgpldcWI/default/public/values?alt=json";
+	var entrysource = $("#entry-template").html();
+	var entrytemplate = Handlebars.compile(entrysource);
+
+	$.getJSON(masterurl, function(data) {
+		data = clean_google_sheet_json(data);
+		console.log(data);
+		var html = entrytemplate({stories: data});
+		console.log(html);
+		$("#dash-append").append(html);
+	});	
+	
 
 
   $('#fullpage').fullpage({
@@ -33,3 +49,29 @@ $(document).ready(function() {
     }
   });
 });
+
+
+
+
+
+
+
+function clean_google_sheet_json(data){
+	var formatted_json = [];
+	var elem = {};
+	var real_keyname = '';
+	$.each(data.feed.entry, function(i, entry) {
+		elem = {};
+		$.each(entry, function(key, value){
+			// fields that were in the spreadsheet start with gsx$
+			if (key.indexOf("gsx$") == 0) 
+			{
+				// get everything after gsx$
+				real_keyname = key.substring(4); 
+				elem[real_keyname] = value['$t'];
+			}
+		});
+		formatted_json.push(elem);
+	});
+	return formatted_json;
+}
