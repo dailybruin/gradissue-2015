@@ -1,13 +1,32 @@
 @import "compass";
 
-.ticker {
-	font-family: Helvetica; 
-	font-size: 4rem; 
-	z-index: 100;
-	position: absolute;
-	bottom: 10%;
-	font-weight: 900;
-	left: 5%;
+#container {
+  min-height: 900px;
+  width: 80%;
+}
+
+#simple3D {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 900px;
+
+  div {
+    min-height: 1100px;
+    width: 120%;
+	}
+  div.dot {
+    background: url(../img/dot2.png);
+  }
+
+  div.kinoco {
+    background: url(../img/kinoco.png);
+  }
+
+  div.star {
+	  background: url(../img/star.png);
+	}
+  
 }
 
 section {
@@ -22,7 +41,7 @@ section {
 	height: 80%;
 	width: 80%; 
 
-	@include background-image(linear-gradient(to bottom right, white, #dddddd));
+	// @include background-image(linear-gradient(to bottom right, white, #dddddd));
 
 	position: relative;
 	top: 20%;
@@ -35,7 +54,9 @@ section {
 		line-height: 60px;
 		bottom: 10%;
 		position: absolute;
-		left: -5%;
+		left: -8%;
+		padding: 20px;
+		background: white;
 
 
 	}
