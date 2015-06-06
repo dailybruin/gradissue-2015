@@ -142,6 +142,34 @@
           </div>
         </div>
         </script>
+
+        <!-- template for custom -->
+        <script id="custom-calculator" type="text/template">
+        <div id="<%= data.id %>" class="card panel">
+          <div>
+          <form>
+            <caption><%= data.question %></caption>
+            <div class="row collapse">
+              <div class="large-12 columns">
+                <div class="row">
+                  <div class="small-8 columns">
+                    <input id="<%= data.id %>-input" type="text" placeholder="Value">
+                  </div>
+                  <div class="small-4 columns">
+                    <a class="button postfix">Go</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <p id="<%=data.id%>-content"></p>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+        </script>
     </head>
     <body>
         <header>
