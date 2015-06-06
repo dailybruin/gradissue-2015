@@ -1,6 +1,26 @@
 @import "compass";
 @import "mixins";
 
+// .top-bar {
+// 	z-index: 4; 
+// }
+
+.dashboard-item {
+	background-color: whitesmoke;
+	height: 100px; 
+	padding: 0px 15px;
+	border-bottom: 1px solid gray;
+	h1 {
+		font-size: 1em;
+	}
+}
+
+.dashboard-container {
+
+	overflow: scroll;
+	width: 100%;
+}
+
 #container {
   min-height: 900px;
   width: 100%;
@@ -19,15 +39,15 @@
 	}
   div.dot {
     background: url(../img/dot2.png);
+    @include vendorize(filter, grayscale(100%)); 
+    opacity: 0.4;
   }
 
-  div.kinoco {
-    background: url(../img/kinoco.png);
-  }
+ //  div.star {
+	//   background: url(../img/star.png);
+ //    @include vendorize(filter, grayscale(100%)); 
 
-  div.star {
-	  background: url(../img/star.png);
-	}
+	// }
   
 }
 
@@ -39,7 +59,9 @@ section {
 
 
 #banner {
-	background:url("http://i.imgur.com/6Gh8Za9.jpg");
+	// background:url("http://i.imgur.com/6Gh8Za9.jpg");
+	background:url(../img/banner.jpg);
+	background-size: cover;
 	height: 80%;
 	width: 80%; 
 
@@ -49,11 +71,12 @@ section {
 	top: 20%;
 
 	h1 {
+		z-index: 2;
 		font-family: 'Helvetica', serif; 
 		font-weight: 900;
 		font-size: 4rem;
 		color: black;
-		line-height: 60px;
+		line-height: 75px;
 		bottom: 10%;
 		position: absolute;
 		left: -8%;
@@ -68,7 +91,8 @@ section {
 .item {
 	overflow:hidden;
 	margin-bottom: 10px;
-	// padding: 0;
+	margin-bottom: 0px;
+
 	h6 {
 		margin-top: 0;
 	}

@@ -147,15 +147,15 @@
         <script id="custom-calculator" type="text/template">
         <div id="<%= data.id %>" class="card panel">
           <div>
-          <form>
-            <caption><%= data.question %></caption>
-            <div class="row collapse">
-              <div class="large-12 columns">
-                <div class="row">
-                  <div class="small-8 columns">
-                    <input id="<%= data.id %>-input" type="text" placeholder="Value">
-                  </div>
+          <form action="javascript:void(0);">
+            <h5><%= data.question %></h5>
+            <div class="row">
+              <div class="large-12 small-centered columns">
+                <div class="row collapse">
                   <div class="small-4 columns">
+                    <input id="<%= data.id %>-input" type="text" placeholder="15">
+                  </div>
+                  <div class="small-4 left columns">
                     <a class="button postfix">Go</a>
                   </div>
                 </div>
