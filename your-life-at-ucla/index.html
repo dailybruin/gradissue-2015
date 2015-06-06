@@ -83,6 +83,17 @@
         <!-- template for card with chart -->
         <script id="chart-template" type="text/template">
           <div id="<%= data.id %>" class="card panel">
+            <header>
+              <a class="share-button share-button-<%= data.id %>" href="#"><div title="Share"></div></a>
+              <div class="module_share module_share-<%= data.id %> large-4 medium-6 columns">
+                <div class="share_this_on">Share this on:</div>
+                  <ul>
+                    <li><a class="share-icon share-icon-fb share-icon-<%= data.id %>" data-platform="facebook" data-image="<%= data.share_image %>" data-text="<%= data.share_text %>"><img src="../img/life/facebook_icon.png" title="Share on Facebook" /></a></a></li>
+                    <li><a class="share-icon share-icon-twitter share-icon-<%= data.id %>" data-platform="twitter" data-image="<%= data.share_image %>" data-text="<%= data.share_text %>"><img src="../img/life/twitter_icon.png" title="Share on Twitter" /></a></li>
+                    <li><a class="share-icon share-icon-gplus share-icon-<%= data.id %>" data-platform="gplus" data-image="<%= data.share_image %>" data-text="<%= data.share_text %>"><img src="../img/life/gplus_icon.png" title="Share on Google+" /></a></li>
+                  </ul>
+              </div>
+            </header>
             <h4 class="pre-stat-text"><%= data.pretext %></h4>
             <p class="chart-number"><%= data.singlestat %></p>
             <h4 class="post-stat-text"><%= data.posttext %></h4>
@@ -172,6 +183,24 @@
         </script>
     </head>
     <body>
+        <!-- Facebook SDK -->
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '463141407187600',
+              xfbml      : true,
+              version    : 'v2.3'
+            });
+          };
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));                
+        </script>
+
         <header>
           
         </header>

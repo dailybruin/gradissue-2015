@@ -30,6 +30,7 @@
 }
 
 .card {
+	position: relative;
 }
 
 .card:hover {
@@ -43,4 +44,96 @@
 #pro_athletes img {
 	width:  20px;
 	height: 20px;
+}
+
+/* This selects the header (share icon) of each card. */
+.panel>:first-child {
+       margin-top: -20px;
+       margin-left: -20px;
+       margin-right: -20px;
+       min-height: 40px;
+}
+
+.card header {
+	height: 40px;
+}
+
+.share-button div {
+	height: 40px;
+	width: 40px;
+	float: right;
+	padding-top: 8px;
+	padding-right: 8px;
+	background: url("../img/life/share_icon.png") no-repeat center;
+}
+
+.share_button_active div {
+	background: url("../img/life/exit_icon.png") no-repeat center;
+}
+
+.share-icon {
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 52px;
+	height: 52px;
+	background-color: #666;
+	transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+}
+
+.share-icon img {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.share-icon-fb:hover {
+	background: #3c5a98;
+}
+
+.share-icon-twitter:hover {
+	background: #00bbf2;
+}
+
+.share-icon-gplus:hover {
+	background: #f90101;
+}
+
+.module_share {
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	display: block;
+	width: 100%;
+	background:#f2f2f2;
+	padding:16px;
+	color:#666;
+	z-index:3;
+	height:140px;
+	text-align: center;
+	display: none;
+    border-bottom: solid 1px #111;
+}
+
+.module_share ul {
+	list-style: none;
+	padding: 16px 0;
+}
+
+.module_share ul li {
+	display: inline-block;
+	padding: 16px 0;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.share_this_on {
+	margin-top: -5px;
+	margin-bottom: 10px;
+	text-align: justify;
 }

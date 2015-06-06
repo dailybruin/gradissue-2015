@@ -145,6 +145,39 @@ function add_card(section_div_id, card_html, card_div_id) {
 			card_ids.push(card_div_id);
 			break;
 	}
+
+	// Share buttons for social media
+	$('.share-button-' + card_div_id.slice(1)).click(function(e) {
+		e.preventDefault();
+
+	    // Close all other modules than open the clicked one.
+        $('.module_share:not(.module_share-' + card_div_id.slice(1) + ')').each(function() {
+            if ($(this).hasClass('module_share_active')) {
+                $(this).slideToggle(200).toggleClass('module_share_active');
+                $(this).prev('.share_button').toggleClass('share_button_active');
+            }
+        });
+
+		$('.module_share-' + card_div_id.slice(1)).slideToggle(200).toggleClass('module_share_active');
+
+        $(this).toggleClass('share_button_active');
+
+	});
+    $('.share-icon-' + card_div_id.slice(1)).click(function(e) {
+   		e.preventDefault();
+	    var el = $(this),
+	        platform = el.attr('data-platform');
+
+	    if(platform === 'facebook') {
+	        FB.ui({
+	            method: 'feed',
+	            name: 'Your Life At UCLA | Daily Bruin',
+	            link: window.location.href,
+	            picture: el.attr('data-image'),
+	            description: el.attr('data-text')
+	        }, function( response ) { } );
+	    }
+	});
 }
 
 
@@ -179,11 +212,14 @@ function add_construction_card(events) {
 		chart_data.push(year_sum);
 	}
 
+ 
 	var template_data = {
 		'id' : 'construction',
 		'pretext' : 'UCLA has spent',
 		'singlestat' : "$" + addCommas(sum(chart_data)),
-		'posttext' : 'on finished construction and renovation projects.'
+		'posttext' : 'on finished construction and renovation projects.',
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
+		'share_text': "UCLA spent " + "$" + addCommas(sum(chart_data)) + " on finished construction and renovation projects since I've been here."
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -328,7 +364,9 @@ function add_nobel_card(nobels) {
 		'pretext': 'UCLA Faculty and Alumni have won',
 		'imageurl' : 'http://dailybruin.com/images/2015/05/nobel.png',
 		'posttext': nobels.length === 1 ? 'Nobel Prize' : 'Nobel Prizes',
-		'rows': nobels
+		'rows': nobels,
+		'share_image': 'http://dailybruin.com/images/2015/05/nobel.png',
+		'share_text': 'UCLA Faculty and Alumni have won ' +  nobels.length + (nobels.length === 1 ? ' Nobel Prize' : ' Nobel Prizes') + " since I've been here."
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
@@ -346,7 +384,9 @@ function add_championships_card(championships) {
 		'pretext': 'UCLA has won',
 		'imageurl' : 'http://dailybruin.com/images/2014/10/trophy-376x640.png',
 		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships',
-		'rows': championships
+		'rows': championships,
+		'share_image': 'http://dailybruin.com/images/2014/10/trophy-376x640.png',
+		'share_text': 'UCLA has won ' +  championships.length + (championships.length === 1 ? ' NCAA Championship' : ' NCAA Championships') + " since I've been here."
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//$("#ucla-events-left").append(card_html);
