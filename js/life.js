@@ -50,6 +50,7 @@ $(document).ready(function(){
 			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
 			var football_records = _.filter(data, function(datum) {return datum.id === "football"; });
 			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
+			var movies = _.filter(data, function (datum) { return datum.type === "movie"; });
 			add_construction_card(construction_events);
 			add_cost_card(costs);
 			if (nobels.length > 0)
@@ -63,6 +64,7 @@ $(document).ready(function(){
 			add_basketball_records_card(basketball_records);
 			add_football_records_card(football_records);
 			add_ucla_event_cards(events);
+			add_movie_cards(movies);
 
 			// if mobile, cards need to fade in a different order (vertical first)
 			// if on desktop, cards need to fade in horizontally
@@ -73,13 +75,8 @@ $(document).ready(function(){
 				card_ids = horizontal_to_vertical_order(card_ids);
 			fade_in_cards(card_ids);
 			console.log(card_ids);
-
-
-
 		});
 	}
-
-
 });
 
 
@@ -90,7 +87,7 @@ function add_card(section_div_id, card_html, card_div_id) {
 	else {
 		cards_in_divs[section_div_id] = 0;
 	}
-	console.log(card_html);
+	//console.log(card_html);
 	console.log("#" + section_div_id + "-left");
 	switch (cards_in_divs[section_div_id] % 3) {
 		case 0: 		
@@ -311,13 +308,13 @@ function add_pro_atheletes_card(pro_athletes) {
 	var data = {
 		'id': 'pro_athletes',
 		'singlestat': pro_athletes.length,
-		'pretext': 'There have been',
+		'pretext': 'There have been at least',
 		'posttext': 'UCLA athletes who have gone pro.',
 		'rows': pro_athletes
 	}
 	var card_html = compile_template_to_html("#single-number-template-wrap", data);
-	add_card("ucla-events", card_html);
-	card_ids.push("#pro_athletes");
+	add_card("ucla-events", card_html, "#pro_athletes");
+	//card_ids.push("#pro_athletes");
 	$('.tooltip-' + data.id).tooltipster();
 }
 
@@ -331,8 +328,8 @@ function add_usc_football_games_card(usc_football_games) {
 		'imageurl' : 'http://dailybruin.com/images/2013/11/80851f22-b618-4a8c-affc-2944b29dfd531-640x427.jpg'
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
-	add_card("ucla-events", card_html);
-	card_ids.push("#usc_football_games");
+	add_card("ucla-events", card_html, "#usc_football_games");
+	//card_ids.push("#usc_football_games");
 	$('.tooltip-' + data.id).tooltipster();
 }
 
@@ -467,6 +464,27 @@ function add_ucla_event_cards(events) {
 		add_card("ucla-events", card_html, "#" + events[i].id);
 	}
 }
+
+function add_movie_cards(movies) {
+	movies = _.groupBy(movies, function (movie) { return movie.category; });
+	// console.log(movies);
+	for (year in movies) {
+		movies[year] = _.sortBy(movies[year], function (movie) {return -movie.data; });
+		var template_data = {
+			'id': 'movies-' + year,
+			'title' : "<em>" + movies[year][0]['title'].replace(/^"(.*)"$/, '$1') + "</em>" + " was the top grossing movie of " + year,
+			'imgurl': movies[year][0].imageurl,
+			'schoolyear' : year,
+			'rows' : movies[year]
+		}
+		var card_html = compile_template_to_html("#movie-template", template_data);
+		add_card("ucla-events", card_html, "#movies-" + year);
+		//card_ids.push("#movie" + year);
+
+	}
+}
+
+
 
 function sum(iterable) {
 	var total = 0;

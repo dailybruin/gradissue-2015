@@ -83,7 +83,7 @@
             <h4 class="post-stat-text"><%= data.posttext %></h4>
             <% if (data.toggle) { %>
                 <form>
-                <div class="large-12 columns">
+                <div class="large-12 large-centered columns">
                   <input type="radio" name="inout" value="in" id="radio-in-state" checked="checked"><label for="in-state">Resident</label>
                   <input type="radio" name="inout" value="out" id="radio-out-state"><label for="out-state">Nonresident</label>
                 </div>
@@ -102,22 +102,25 @@
           <img src="<%= data.imgurl %>" />
           <p class="movie-card-description"><%= data.description %></p>
           <h3>Top grossing movies of <%=data.schoolyear %></h3>
+          <div>
           <table>
-            <th>
-              <td>Rank</td>
-              <td>Title</td>
-              <td>Domestic Gross</td>
-            </th>
-            <% _.each(movies, function(movie, i) { %>
+            <tr>
+              <!--<th>Rank</th>-->
+              <th>Title</th>
+              <th>Domestic Gross</th>
+            </tr>
+            <% _.each(data.rows, function(movie, i) { %>
               <tr>
-                <td><% i %></td>
-                <td><%= movie.title %></td>
-                <td><%= movie.gross %></td>
+                <!--<td><%= i+1 %></td>-->
+                <td><em><%= movie.title.replace(/^"(.*)"$/, '$1') %></em></td>
+                <td><%= movie.data %></td>
               </tr>
             <% }); %>
           </table>
+          </div>
          </div>
         </script>
+
     </head>
     <body>
         <header>
