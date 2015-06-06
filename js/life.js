@@ -13,6 +13,15 @@ var selection_to_datestring = {
 	'fall2014': '9/1/2014',
 };
 
+var selection_to_quarters_attended = {
+	'fall2009': 18,
+	'fall2010': 15,
+	'fall2011': 12,
+	'fall2012': 9,
+	'fall2013': 6,
+	'fall2014': 3,
+};
+
 var cards_in_divs = {};
 
 card_ids = [];
@@ -41,6 +50,7 @@ $(document).ready(function(){
 				return timestamp >= Date.parse(selection_to_datestring[selection]) && timestamp <= Date.parse(now);
 			});
 
+
 			var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
 			var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
 			var championships = _.filter(data, function(datum) {return datum.id === "championships"; });
@@ -62,11 +72,15 @@ $(document).ready(function(){
 				add_pro_atheletes_card(pro_athletes);
 			if (usc_football_games.length > 0)
 				add_usc_football_games_card(usc_football_games);
-			add_song_card(songs);
+			if (songs.length > 0)
+				add_song_card(songs);
 			add_basketball_records_card(basketball_records);
 			add_football_records_card(football_records);
 			add_ucla_event_cards(events);
 			add_movie_card(movies);
+			add_study_card(selection);
+
+
 
 			// if mobile, cards need to fade in a different order (vertical first)
 			// if on desktop, cards need to fade in horizontally
@@ -81,10 +95,31 @@ $(document).ready(function(){
 			fade_in_cards(card_ids);
 			//console.log(card_ids);
 
+
+
 		});
 	}
 });
 
+
+
+function add_study_card(selection) {
+	var template_data = {
+		id: 'study',
+		question: "How many hours a week do you study?"
+	}
+	var card_html = compile_template_to_html("#custom-calculator", template_data);
+	add_card("ucla-events", card_html, "#study");
+
+	$("#study").click(function() {
+		var num = Number.parseFloat($("#study-input").val());
+		var text = document.createElement("p");
+		var hours_studied = selection_to_quarters_attended[selection] * num * 10;
+		$(text).html("You've studied for about " + Math.floor(hours_studied) + " hours");
+		$("#study-content").html(text);
+	});
+
+}
 
 function add_card(section_div_id, card_html, card_div_id) {
 	if (section_div_id in cards_in_divs) {
@@ -340,7 +375,7 @@ function add_usc_football_games_card(usc_football_games) {
 		'id': 'usc_football_games',
 		'pretext': "UCLA beat USC",
 		'singlestat': usc_football_games.length,
-		'posttext': 'times in football.',
+		'posttext': usc_football_games.length === 1 ? 'time in football.' : "times in football.",
 		'rows': usc_football_games,
 		'imageurl' : 'http://dailybruin.com/images/2013/11/80851f22-b618-4a8c-affc-2944b29dfd531-640x427.jpg'
 	}
