@@ -18,16 +18,34 @@
 		<script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
         <script type="text/javascript" src="js/vendor/jquery.simple3D.min.js"></script>
         <script type="text/javascript" src="js/vendor/jquery.slimscroll.min.js"></script>
-
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
 		
         <!-- custom JS -->
         <script type="text/javascript" src="js/main.js"></script>
 
 		<!-- unsure if needed -->
 		<script src="js/vendor/modernizr.js"></script>
+
+        <!-- HANDLEBARS SCRIPTS -->
+
+        <script id="entry-template" type="text/x-handlebars-template">
+            // {{#each stories}}
+            // <div class="row">
+            //     <h1>{{headline}}</h1>
+            //     <div class="small-3 columns">
+            //         <h3>{{byline-name}}</h3>
+            //     </div>
+            //     <div class="small-9 columns">
+            //         <p>{{body-html}}</p>
+            //     </div>
+            // </div>
+            // {{/each}}
+        </script>
+
 	</head>
 	
 	<body>
+
 
         <div id="fullpage">
 
@@ -136,6 +154,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="section">
 
                   <nav class="top-bar" data-topbar role="navigation">
@@ -167,20 +186,56 @@
                     </section>
                   </nav>
 
-                <div class="row" style="height: 95%;">
-                    <div class="small-2 large-4 columns">
-                        <div class="row">
-                            <h1>yoyoyo</h1>
+                <div class="row" style="height: 95%; margin:0;">
+                    <div class="small-2 large-4 columns" style="padding: 0px; margin: 0px;"> 
+                        <div id="dashboard-container">
+                            <div style="width: 100%;">
+
+                                <div class="dashboard-item">
+                                    <div class="item-overlay">
+                                        <h1>yoyoyo</h1>
+                                        <div class="item-description"></div>
+                                    </div>
+
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>yoyoyo</h1>
+                                </div>
+                                <div class="dashboard-item">
+                                    <h1>asdfasdf</h1>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <h1>yoyoyo</h1>
-                        </div>
-                        <div class="row">
-                            <h1>yoyoyo</h1>
-                        </div>
-                        <div class="row">
-                            <h1>yoyoyo</h1>
-                        </div>
+                            
+
+                        
                     </div>
                     
                     <div class="small-10 medium-8 large-8 columns">
@@ -192,6 +247,14 @@
                 
 
                 
+
+            
+            <!-- <div class="section" id="dashboard">
+                <div id="dash-append">
+
+                </div>
+            </div> -->
+
             </div>
             
         </div>

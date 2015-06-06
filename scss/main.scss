@@ -5,29 +5,21 @@
 // 	z-index: 4; 
 // }
 
-// .panel, .panel.callout {
-// 	margin: 0px;
-// }
+.dashboard-item {
+	background-color: whitesmoke;
+	height: 100px; 
+	padding: 0px 15px;
+	border-bottom: 1px solid gray;
+	h1 {
+		font-size: 1em;
+	}
+}
 
-// .dashboard-container {
-// 	margin: 0;
-// }
+.dashboard-container {
 
-// #sidescroll {
-// 	width; 100%;
-// }
-
-// .side-nav {
-// 	position: absolute;
-// 	left: 0;
-// 	width: 100%;
-
-// 	a {
-// 		height: 75px; 
-// 	}
-// 	padding: 0px;
-
-// }
+	overflow: scroll;
+	width: 100%;
+}
 
 #container {
   min-height: 900px;
