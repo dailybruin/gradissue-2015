@@ -1,43 +1,43 @@
-/* line 3, ../scss/main.scss */
+/* line 4, ../scss/main.scss */
 #container {
   min-height: 900px;
   width: 100%;
   position: absolute;
 }
 
-/* line 9, ../scss/main.scss */
+/* line 10, ../scss/main.scss */
 #simple3D {
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 900px;
 }
-/* line 15, ../scss/main.scss */
+/* line 16, ../scss/main.scss */
 #simple3D div {
   min-height: 110%;
   width: 120%;
 }
-/* line 19, ../scss/main.scss */
+/* line 20, ../scss/main.scss */
 #simple3D div.dot {
   background: url(../img/dot2.png);
 }
-/* line 23, ../scss/main.scss */
+/* line 24, ../scss/main.scss */
 #simple3D div.kinoco {
   background: url(../img/kinoco.png);
 }
-/* line 27, ../scss/main.scss */
+/* line 28, ../scss/main.scss */
 #simple3D div.star {
   background: url(../img/star.png);
 }
 
-/* line 33, ../scss/main.scss */
+/* line 34, ../scss/main.scss */
 section {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
-/* line 40, ../scss/main.scss */
+/* line 41, ../scss/main.scss */
 #banner {
   background: url("http://i.imgur.com/6Gh8Za9.jpg");
   height: 80%;
@@ -45,7 +45,7 @@ section {
   position: relative;
   top: 20%;
 }
-/* line 50, ../scss/main.scss */
+/* line 51, ../scss/main.scss */
 #banner h1 {
   font-family: 'Helvetica', serif;
   font-weight: 900;
@@ -60,78 +60,157 @@ section {
 }
 
 /* line 68, ../scss/main.scss */
+.item {
+  overflow: hidden;
+  margin-bottom: 10px;
+  height: 175px;
+}
+/* line 72, ../scss/main.scss */
+.item h6 {
+  margin-top: 0;
+}
+
+/* line 81, ../scss/main.scss */
+.item-overlay {
+  width: 100%;
+  height: 100%;
+}
+/* line 84, ../scss/main.scss */
+.item-overlay:hover .item-description {
+  -webkit-transform: translateX(25%);
+  -moz-transform: translateX(25%);
+  -ms-transform: translateX(25%);
+  -o-transform: translateX(25%);
+  transform: translateX(25%);
+}
+/* line 88, ../scss/main.scss */
+.item-overlay:hover {
+  cursor: pointer;
+}
+
+/* line 95, ../scss/main.scss */
+.item-description {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+  position: absolute;
+  border-bottom: 250px solid #efefef;
+  border-left: 0 solid transparent;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-transition: transform 350ms ease-in-out;
+  -moz-transition: transform 350ms ease-in-out;
+  -ms-transition: transform 350ms ease-in-out;
+  -o-transition: transform 350ms ease-in-out;
+  transition: transform 350ms ease-in-out;
+}
+/* line 113, ../scss/main.scss */
+.item-description li {
+  font-family: 'Lora', serif;
+}
+/* line 116, ../scss/main.scss */
+.item-description h6 {
+  font-family: 'Lora', serif;
+}
+
+/* line 122, ../scss/main.scss */
+.item-name {
+  position: absolute;
+  pointer-events: none;
+  text-align: center;
+  top: 30%;
+  left: 0;
+  right: 0;
+  background-color: rgba(117, 234, 204, 0.46);
+}
+/* line 131, ../scss/main.scss */
+.item-name h1 {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+}
+
+/* maybe delete this shit */
+/* line 146, ../scss/main.scss */
 #highlights-row {
   height: 90%;
   padding-top: 10%;
   padding-left: 3%;
   padding-right: 3%;
 }
-/* line 74, ../scss/main.scss */
+/* line 152, ../scss/main.scss */
 #highlights-row ul {
   height: 90%;
 }
-/* line 79, ../scss/main.scss */
+/* line 157, ../scss/main.scss */
 #highlights-row li {
   height: 30%;
   margin-bottom: 5%;
 }
 
-/* line 85, ../scss/main.scss */
+/* line 163, ../scss/main.scss */
 #highlights-page h2 {
   margin-left: 10%;
   color: white;
 }
 
-/* line 90, ../scss/main.scss */
+/* line 168, ../scss/main.scss */
 #highlights-0 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 96, ../scss/main.scss */
+/* line 174, ../scss/main.scss */
 #highlights-1 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 102, ../scss/main.scss */
+/* line 180, ../scss/main.scss */
 #highlights-2 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 108, ../scss/main.scss */
+/* line 186, ../scss/main.scss */
 #highlights-3 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 114, ../scss/main.scss */
+/* line 192, ../scss/main.scss */
 #highlights-4 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 120, ../scss/main.scss */
+/* line 198, ../scss/main.scss */
 #highlights-5 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 126, ../scss/main.scss */
+/* line 204, ../scss/main.scss */
 #highlights-6 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 132, ../scss/main.scss */
+/* line 210, ../scss/main.scss */
 #highlights-7 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
