@@ -17,12 +17,14 @@
 
         <link href="../css/foundation.min.css" rel="stylesheet" type="text/css" />
         <link href="../css/tooltipster.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.5.0/flexslider.min.css">
         <link href="../css/life.css" rel="stylesheet" type="text/css" />
         
         <!-- JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
         <script src="../js/vendor/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.5.0/jquery.flexslider-min.js"></script>
         <script src="../js/googlesheet.js"></script>
         <script src="../js/jquery.tooltipster.min.js"></script>
         <script src="../js/life.js"></script>
@@ -58,7 +60,7 @@
           </div>
         </script>
 
-                <!-- template for highlighting single large number. Icons wrap around on overflow -->
+        <!-- template for highlighting single large number. Icons wrap around on overflow -->
         <script id="single-number-template-wrap" type="text/template">
           <div id="<%= data.id %>" class="card panel">
             <h4 class="pre-stat-text"><%= data.pretext %></h4>
@@ -124,6 +126,22 @@
          </div>
         </script>
 
+        <!-- Template for slideshow -->
+        <script id="slideshow-template" type="text/template">
+        <div id="<%= data.id %>" class="card panel">
+          <h2><%= data.title %></h2>
+          <div class="flexslider">
+            <ul class="slides">
+            <% _.each(data.rows, function(song) { %>
+              <li>
+              <img src="<%= song.imageurl %>" />
+              <span><%= song.credits %> (<%= song.category %>)</span>
+              </li>
+            <% }); %>
+            </ul>
+          </div>
+        </div>
+        </script>
     </head>
     <body>
         <header>
