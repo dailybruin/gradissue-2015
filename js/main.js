@@ -16,7 +16,7 @@ $(document).ready(function() {
     // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
     navigation: true,
     navigationPosition: 'right',
-    navigationTooltips: ['First', 'Second', 'Third', 'Fourth'],
+    // navigationTooltips: ['First', 'Second', 'Third', 'Fourth'],
     onLeave: function(index, nextIndex, direction){
 
       //after leaving section 2
