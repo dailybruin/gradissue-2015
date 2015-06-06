@@ -1,16 +1,47 @@
-section#homepage-hero {
-	background:url("http://i.imgur.com/6Gh8Za9.jpg");
-	height: 100%;
+@import "compass";
+
+.ticker {
+	font-family: Helvetica; 
+	font-size: 4rem; 
+	z-index: 100;
+	position: absolute;
+	bottom: 10%;
+	font-weight: 900;
+	left: 5%;
 }
 
-#title-page	{
-	h1 {
-		font-size: 4rem;
-		color: white;
-		margin-top: 32%;
-		margin-left: 10%;
-	}
+section {
+	height: 100%;
+	width: 100%;
+	position: relative;
 }
+
+
+#banner {
+	background:url("http://i.imgur.com/6Gh8Za9.jpg");
+	height: 80%;
+	width: 80%; 
+
+	@include background-image(linear-gradient(to bottom right, white, #dddddd));
+
+	position: relative;
+	top: 20%;
+
+	h1 {
+		font-family: 'Helvetica', serif; 
+		font-weight: 900;
+		font-size: 4rem;
+		color: black;
+		line-height: 60px;
+		bottom: 10%;
+		position: absolute;
+		left: -5%;
+
+
+	}
+
+}
+
 
 #highlights-row {
 	height: 90%;
