@@ -1,16 +1,68 @@
-section#homepage-hero {
-	background:url("http://i.imgur.com/6Gh8Za9.jpg");
-	height: 100%;
+@import "compass";
+
+#container {
+  min-height: 900px;
+  width: 80%;
 }
 
-#title-page	{
-	h1 {
-		font-size: 4rem;
-		color: white;
-		margin-top: 32%;
-		margin-left: 10%;
+#simple3D {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 900px;
+
+  div {
+    min-height: 1100px;
+    width: 120%;
 	}
+  div.dot {
+    background: url(../img/dot2.png);
+  }
+
+  div.kinoco {
+    background: url(../img/kinoco.png);
+  }
+
+  div.star {
+	  background: url(../img/star.png);
+	}
+  
 }
+
+section {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+
+#banner {
+	background:url("http://i.imgur.com/6Gh8Za9.jpg");
+	height: 80%;
+	width: 80%; 
+
+	// @include background-image(linear-gradient(to bottom right, white, #dddddd));
+
+	position: relative;
+	top: 20%;
+
+	h1 {
+		font-family: 'Helvetica', serif; 
+		font-weight: 900;
+		font-size: 4rem;
+		color: black;
+		line-height: 60px;
+		bottom: 10%;
+		position: absolute;
+		left: -8%;
+		padding: 20px;
+		background: white;
+
+
+	}
+
+}
+
 
 #highlights-row {
 	height: 90%;
