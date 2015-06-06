@@ -10,6 +10,11 @@ $(document).ready(function() {
 		reverseY: true
 	});
 
+	$('#slimscroll').slimScroll({
+      height: '700px',
+      allowPageScroll: false
+  });
+
 
   $('#fullpage').fullpage({
   	anchors: ['first', 'second', 'third', 'fourth'],
