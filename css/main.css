@@ -2,3 +2,79 @@ section#homepage-hero {
 	background:url("http://i.imgur.com/6Gh8Za9.jpg");
 	height: 100%;
 }
+
+#title-page	h1 {
+	font-size: 4rem;
+	color: white;
+	margin-top: 32%;
+	margin-left: 10%;
+}
+
+#highlights-row {
+	height: 90%;
+	padding-top: 10%;
+	padding-left: 3%;
+	padding-right: 3%;
+}
+
+#highlights-row ul {
+	height: 90%;
+}
+
+#highlights-page li {
+	height: 30%;
+	margin-bottom: 5%;
+}
+
+#highlights-page h2 {
+	margin-left: 10%;
+	color: white;
+}
+
+#highlights-0 {
+	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#highlights-1 {
+	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#highlights-2 {
+	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#highlights-3 {
+	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#highlights-4 {
+	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#highlights-5 {
+	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#highlights-6 {
+	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#highlights-7 {
+	background:url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
