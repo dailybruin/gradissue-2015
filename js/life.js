@@ -107,7 +107,9 @@ $(document).ready(function(){
 function add_study_card(selection) {
 	var template_data = {
 		id: 'study',
-		question: "How many hours a week do you study?"
+		question: "How many hours a week do you study?",
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
+		'share_text': "Calculate how many hours you've studied since you've been to UCLA"  // Default share text before they inputted a number
 	}
 	var card_html = compile_template_to_html("#custom-calculator", template_data);
 	add_card("ucla-events", card_html, "#study");
@@ -122,6 +124,7 @@ function add_study_card(selection) {
 			(hours_studied / 24).toFixed(2) + " days."
 			$(text).html(content);
 			$("#study-content").html(text);
+			$(".share-icon-study.share-icon-fb").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.")
 		}
 	});
 
