@@ -51,6 +51,7 @@ $(document).ready(function(){
 			var football_records = _.filter(data, function(datum) {return datum.id === "football"; });
 			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
 			var movies = _.filter(data, function (datum) { return datum.type === "movie"; });
+			var songs = _.filter(data, function(datum) { return datum.type === "song"; });
 			add_construction_card(construction_events);
 			add_cost_card(costs);
 			if (nobels.length > 0)
@@ -61,6 +62,7 @@ $(document).ready(function(){
 				add_pro_atheletes_card(pro_athletes);
 			if (usc_football_games.length > 0)
 				add_usc_football_games_card(usc_football_games);
+			add_song_card(songs);
 			add_basketball_records_card(basketball_records);
 			add_football_records_card(football_records);
 			add_ucla_event_cards(events);
@@ -69,12 +71,16 @@ $(document).ready(function(){
 			// if mobile, cards need to fade in a different order (vertical first)
 			// if on desktop, cards need to fade in horizontally
 			card_ids = _.filter(card_ids, function(card_id) {return card_id;});
-
-			console.log(card_ids);
+		
+			//console.log(card_ids);
 			if (window.mobilecheck())
 				card_ids = horizontal_to_vertical_order(card_ids);
+			$('.flexslider').flexslider({
+				controlNav: false
+			});			
 			fade_in_cards(card_ids);
-			console.log(card_ids);
+			//console.log(card_ids);
+
 		});
 	}
 });
@@ -88,7 +94,7 @@ function add_card(section_div_id, card_html, card_div_id) {
 		cards_in_divs[section_div_id] = 0;
 	}
 	//console.log(card_html);
-	console.log("#" + section_div_id + "-left");
+	//console.log("#" + section_div_id + "-left");
 	switch (cards_in_divs[section_div_id] % 3) {
 		case 0: 		
 			$("#" + section_div_id + "-left").append(card_html);
@@ -105,6 +111,17 @@ function add_card(section_div_id, card_html, card_div_id) {
 	}
 }
 
+
+function add_song_card(songs) {
+	var template_data = {
+		'id': 'songs',
+		'title': 'These were the songs of the summer',
+		'rows': _.sortBy(songs, function(song) {return song.category; }),
+	};
+
+	var card_html = compile_template_to_html("#slideshow-template", template_data);
+	add_card("ucla-events", card_html, "#songs");
+}
 
 function add_construction_card(events) {
 	//console.log(events);
