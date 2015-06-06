@@ -29,7 +29,8 @@ card_ids = [];
 $(document).ready(function(){
 
 	// if url has ?start=fall2009, selection will equal fall2009
-	var selection = window.location.search.split('=')[1];
+	// igonre everything after fall2009 (trailing slashes, extraneous query strings, etc)
+	var selection = window.location.search.split('=')[1].slice(0, 8);
 	$(".category-header").hide();
 	// check to see that we have a valid selection
 	if (selection in selection_to_datestring) {
