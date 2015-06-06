@@ -33,7 +33,10 @@
           <div id="<%= data.id %>" class="card panel">
               <h2 class="event-card-title"><%= data.title %></h2>
               <img src="<%= data.imageurl %>" />
-              <p class="event-card-description"><%= data.description %></p>
+              <p class="event-card-description">
+                <span class="event-card-credits">(<%= data.credits %> / </span>
+                <span class="event-card-date"><%= data.description %>)</span>
+              </p>
           </div>
         </script>
 
@@ -100,7 +103,7 @@
          <div id="<%= data.id %>" class="card panel">
           <h2 class="movie-card-title"><%= data.title %></h2>
           <img src="<%= data.imgurl %>" />
-          <p class="movie-card-description"><%= data.description %></p>
+          <span class="movie-card-description left"><%= data.credits %></span>
           <h3>Top grossing movies of <%=data.schoolyear %></h3>
           <div>
           <table>
@@ -150,11 +153,12 @@
             </form>
 
             <div class="row" id="ucla-events">
-            <h2 class="category-header">Since you've been at UCLA...</h2>
+                <h2 class="category-header">Since you've been at UCLA...</h2>
                 <div class="large-4 medium-6 columns" id="ucla-events-left"></div>
                 <div class="large-4 medium-6 columns" id="ucla-events-mid"></div>
                 <div class="large-4 medium-6 columns" id="ucla-events-right"></div>
             </div>
+
         </main>
         <footer></footer>
     </body>
