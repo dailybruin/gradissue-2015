@@ -1,42 +1,43 @@
 /* line 3, ../scss/main.scss */
 #container {
   min-height: 900px;
-  width: 80%;
+  width: 100%;
+  position: absolute;
 }
 
-/* line 8, ../scss/main.scss */
+/* line 9, ../scss/main.scss */
 #simple3D {
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 900px;
 }
-/* line 14, ../scss/main.scss */
+/* line 15, ../scss/main.scss */
 #simple3D div {
-  min-height: 1100px;
+  min-height: 110%;
   width: 120%;
 }
-/* line 18, ../scss/main.scss */
+/* line 19, ../scss/main.scss */
 #simple3D div.dot {
   background: url(../img/dot2.png);
 }
-/* line 22, ../scss/main.scss */
+/* line 23, ../scss/main.scss */
 #simple3D div.kinoco {
   background: url(../img/kinoco.png);
 }
-/* line 26, ../scss/main.scss */
+/* line 27, ../scss/main.scss */
 #simple3D div.star {
   background: url(../img/star.png);
 }
 
-/* line 32, ../scss/main.scss */
+/* line 33, ../scss/main.scss */
 section {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
-/* line 39, ../scss/main.scss */
+/* line 40, ../scss/main.scss */
 #banner {
   background: url("http://i.imgur.com/6Gh8Za9.jpg");
   height: 80%;
@@ -44,7 +45,7 @@ section {
   position: relative;
   top: 20%;
 }
-/* line 49, ../scss/main.scss */
+/* line 50, ../scss/main.scss */
 #banner h1 {
   font-family: 'Helvetica', serif;
   font-weight: 900;
@@ -58,79 +59,79 @@ section {
   background: white;
 }
 
-/* line 67, ../scss/main.scss */
+/* line 68, ../scss/main.scss */
 #highlights-row {
   height: 90%;
   padding-top: 10%;
   padding-left: 3%;
   padding-right: 3%;
 }
-/* line 73, ../scss/main.scss */
+/* line 74, ../scss/main.scss */
 #highlights-row ul {
   height: 90%;
 }
-/* line 78, ../scss/main.scss */
+/* line 79, ../scss/main.scss */
 #highlights-row li {
   height: 30%;
   margin-bottom: 5%;
 }
 
-/* line 84, ../scss/main.scss */
+/* line 85, ../scss/main.scss */
 #highlights-page h2 {
   margin-left: 10%;
   color: white;
 }
 
-/* line 89, ../scss/main.scss */
+/* line 90, ../scss/main.scss */
 #highlights-0 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 95, ../scss/main.scss */
+/* line 96, ../scss/main.scss */
 #highlights-1 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 101, ../scss/main.scss */
+/* line 102, ../scss/main.scss */
 #highlights-2 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 107, ../scss/main.scss */
+/* line 108, ../scss/main.scss */
 #highlights-3 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 113, ../scss/main.scss */
+/* line 114, ../scss/main.scss */
 #highlights-4 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 119, ../scss/main.scss */
+/* line 120, ../scss/main.scss */
 #highlights-5 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 125, ../scss/main.scss */
+/* line 126, ../scss/main.scss */
 #highlights-6 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* line 131, ../scss/main.scss */
+/* line 132, ../scss/main.scss */
 #highlights-7 {
   background: url("http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg");
   background-size: contain;

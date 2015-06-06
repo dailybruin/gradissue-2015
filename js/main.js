@@ -22,10 +22,12 @@ $(document).ready(function() {
       //after leaving section 2
       if(index == 1 && direction =='down'){
       	$('#banner > h1').velocity({ opacity: 0 }, { display: "none" });
+      	$("#simple3D").velocity({ opacity: 0 });
       }
 
       if(index == 2 && direction =='up'){
       	$('#banner > h1').velocity({ opacity: 1 }, { display: "block" });
+      	$('#simple3D').velocity({ opacity: 1 });
       }
 
     }
