@@ -64,7 +64,7 @@ $(document).ready(function(){
 			add_basketball_records_card(basketball_records);
 			add_football_records_card(football_records);
 			add_ucla_event_cards(events);
-			add_movie_cards(movies);
+			add_movie_card(movies);
 
 			// if mobile, cards need to fade in a different order (vertical first)
 			// if on desktop, cards need to fade in horizontally
@@ -465,23 +465,24 @@ function add_ucla_event_cards(events) {
 	}
 }
 
-function add_movie_cards(movies) {
-	movies = _.groupBy(movies, function (movie) { return movie.category; });
+function add_movie_card(movies) {
+	// movies = _.groupBy(movies, function (movie) { return movie.category; });
 	// console.log(movies);
-	for (year in movies) {
-		movies[year] = _.sortBy(movies[year], function (movie) {return -movie.data; });
-		var template_data = {
-			'id': 'movies-' + year,
-			'title' : "<em>" + movies[year][0]['title'].replace(/^"(.*)"$/, '$1') + "</em>" + " was the top grossing movie of " + year,
-			'imgurl': movies[year][0].imageurl,
-			'schoolyear' : year,
-			'rows' : movies[year]
-		}
-		var card_html = compile_template_to_html("#movie-template", template_data);
-		add_card("ucla-events", card_html, "#movies-" + year);
+
+	movies = _.sortBy(movies, function (movie) { return -movie.data; });
+
+
+	var template_data = {
+		'id': 'movies',
+		'title' : "<em>" + movies[0]['title'].replace(/^"(.*)"$/, '$1') + "</em>" + " was the top grossing movie",
+		'imgurl': movies[0].imageurl,
+		'rows' : movies.slice(0,5),
+		'credits' : movies[0]['credits']
+	}
+	var card_html = compile_template_to_html("#movie-template", template_data);
+	add_card("ucla-events", card_html, "#movies");
 		//card_ids.push("#movie" + year);
 
-	}
 }
 
 
