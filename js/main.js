@@ -35,6 +35,7 @@ function getSection(name) {
 function switchSection(name) {
 	sectionName = name;
 	section = getSection(name);
+	$("#dashboard-container").html(dashsidebartemplate({stories: section}));
 };
 
 /*
@@ -120,6 +121,7 @@ $(document).ready(function() {
 		console.log(section);
 
 		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+		$("#dashboard-content").html(dashbodytemplate(section[0]));
 
 		var item = $('.dashboard-item')[0]; 
 		$(item).addClass('dashboard-active');
@@ -128,7 +130,13 @@ $(document).ready(function() {
 			changeStory(this);
 		});
 
-		$("#dashboard-content").html(dashbodytemplate(section[0]));
+		$('.item').on('click', function() {
+			secname = $(this).find("h3").html().toLowerCase();
+			console.log(secname);
+			switchSection(secname);
+		});
+
+		
 	});	
 
 
