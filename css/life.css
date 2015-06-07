@@ -38,15 +38,6 @@
 	border-color: steelblue;
 }
 
-#page-title {
-	font-family: "Century Gothic";
-	text-transform: uppercase;
-	text-align: center;
-	font-size: 4em;
-	letter-spacing: 4px;
-  	word-spacing: 5px;
-}
-
 #pro_athletes img {
 	width:  20px;
 	height: 20px;
@@ -209,4 +200,17 @@ table {
 
 #construction .big-number {
 	font-size: 2.5em;
+}
+
+#page-title, .category-header {
+	font-family: "Century Gothic";
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 4em;
+	letter-spacing: 4px;
+  	word-spacing: 5px;
+}
+
+.category-header {
+	font-size: 2.3em;
 }
