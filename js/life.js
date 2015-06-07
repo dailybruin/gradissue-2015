@@ -143,7 +143,7 @@ function display_cards(original_data, selection) {
 function add_study_card(selection) {
 	var template_data = {
 		id: 'study',
-		question: "How many hours a week do you study?",
+		question: "About many hours a week do you study?",
 		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
 		'share_text': "Calculate how many hours you've studied since you've been to UCLA"  // Default share text before they inputted a number
 	}
@@ -154,12 +154,19 @@ function add_study_card(selection) {
 		var num = Number.parseFloat($("#study-input").val());
 		if (num) {
 			num = num < 0 ? 0 : num;
-			var text = document.createElement("p");
+			var div = document.createElement("div");
+			var pretext = document.createElement("h4");
 			var hours_studied = Math.floor(selection_to_quarters_attended[selection] * num * 10);
-			var content = "You've studied for about " + hours_studied + " hours at UCLA or " + 
-			(hours_studied / 24).toFixed(2) + " days."
-			$(text).html(content);
-			$("#study-content").html(text);
+			pretext.innerHTML = "You've studied for about " + hours_studied + " hours or ";
+			var bignumber = document.createElement("h2");
+			$(bignumber).addClass("big-number");
+			bignumber.innerHTML = (hours_studied / 24).toFixed(2);
+			var posttext = document.createElement("h4");
+			posttext.innerHTML = " days at UCLA";
+			$(div).append(pretext);
+			$(div).append(bignumber);
+			$(div).append(posttext);
+			$("#study-content").html(div);
 			$(".share-icon-study.share-icon-fb").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.");
 			$(".share-icon-study.share-icon-twitter").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.")
 		}
