@@ -130,10 +130,18 @@ $(document).ready(function() {
 			changeStory(this);
 		});
 
+
 		$('.item').on('click', function() {
 			secname = $(this).find("h3").html().toLowerCase();
 			console.log(secname);
 			switchSection(secname);
+			$("#dashboard-content").html(dashbodytemplate(section[0]));
+			var item = $('.dashboard-item')[0]; 
+			$(item).addClass('dashboard-active');
+
+			$('.dashboard-item').on('click', function() {
+				changeStory(this);
+			});
 		});
 
 		
