@@ -124,7 +124,8 @@ function add_study_card(selection) {
 			(hours_studied / 24).toFixed(2) + " days."
 			$(text).html(content);
 			$("#study-content").html(text);
-			$(".share-icon-study.share-icon-fb").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.")
+			$(".share-icon-study.share-icon-fb").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.");
+			$(".share-icon-study.share-icon-twitter").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.")
 		}
 	});
 
@@ -190,6 +191,19 @@ function add_card(section_div_id, card_html, card_div_id) {
 	            picture: el.attr('data-image'),
 	            description: el.attr('data-text')
 	        }, function( response ) { } );
+	    }
+	    else if (platform === 'twitter') {
+			var TWEET_LENGTH = 140;
+			var URL_LENGHTH = 22;  // Twitter 'shortens' all links with their url shortening service
+
+			var url = "http://dailybruin.com"
+			var twitter_intent = "https://www.twitter.com/intent/tweet?url=";
+			var window_settings = 'width=500,height=320,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=200,top=200';
+			if (el.attr('data-text').length + URL_LENGHTH + " @dailybruin".length < TWEET_LENGTH)
+				var tweet = el.attr('data-text') + " @dailybruin";
+			else
+				var tweet = el.attr('data-text');
+			window.open(twitter_intent + encodeURIComponent(url) + '&text=' + encodeURIComponent(tweet), "_blank", window_settings);
 	    }
 	});
 }
