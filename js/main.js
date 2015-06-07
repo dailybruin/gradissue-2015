@@ -65,7 +65,7 @@ $(document).ready(function() {
 		console.log(data);
 		var html = dashsidebartemplate({stories: data});
 		var html2 = dashbodytemplate(data[0]);
-		$("#dash-sidebar-container").html(html);
+		$("#dashboard-container").html(html);
 		$("#dash-content").html(html2);
 	});	
 	
