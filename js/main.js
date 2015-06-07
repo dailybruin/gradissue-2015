@@ -13,7 +13,7 @@ Handlebars.registerHelper("formatBodyText", function(t) {
 });
 
 function changeStory(item) {
-	$('.dashboard-item').removeClass('dashboard-active')
+	$('.dashboard-item').removeClass('dashboard-active');
 	$(item).addClass('dashboard-active');
 }
 
@@ -74,10 +74,6 @@ $(document).ready(function() {
 	  ]
 	});
 
-
-
-
-
 	$("#simple3D").simple3D({
 		moveX:3, // 1 - 5
 		moveY:3, // 1 - 5
@@ -118,14 +114,6 @@ $(document).ready(function() {
 		switchSection("news");
 		console.log(section);
 		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
-		$("#dash-content").html(dashbodytemplate(section[0]));
-	});
-
-		console.log(data);
-		var html = dashsidebartemplate({stories: data});
-		var html2 = dashbodytemplate(data[0]);
-		$("#dashboard-container").html(html);
-		$("#dashboard-content").html(html2);
 
 		var item = $('.dashboard-item')[0]; 
 		changeStory(item);
@@ -133,6 +121,8 @@ $(document).ready(function() {
 		$('.dashboard-item').on('click', function() {
 			changeStory(this);
 		});
+
+		$("#dashboard-content").html(dashbodytemplate(section[0]));
 	});	
 
 
