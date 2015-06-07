@@ -8,3 +8,10 @@ body
 {
 	background-color: black;
 }
+
+@media only screen and (max-height: 666) !important {
+	canvas {
+		height: 800px;
+
+	}
+}
