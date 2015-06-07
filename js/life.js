@@ -409,10 +409,12 @@ function add_championships_card(championships) {
 function add_pro_atheletes_card(pro_athletes) {
 	var data = {
 		'id': 'pro_athletes',
-		'singlestat': pro_athletes.length,
 		'pretext': 'There have been at least',
+		'singlestat': pro_athletes.length,
 		'posttext': 'UCLA athletes who have gone pro.',
-		'rows': pro_athletes
+		'rows': pro_athletes,
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
+		'share_text': "There have been at least " + pro_athletes.length + " UCLA athletes who have gone pro since I've been here."
 	}
 	var card_html = compile_template_to_html("#single-number-template-wrap", data);
 	add_card("ucla-events", card_html, "#pro_athletes");
@@ -427,7 +429,9 @@ function add_usc_football_games_card(usc_football_games) {
 		'singlestat': usc_football_games.length,
 		'posttext': usc_football_games.length === 1 ? 'time in football.' : "times in football.",
 		'rows': usc_football_games,
-		'imageurl' : 'http://dailybruin.com/images/2013/11/80851f22-b618-4a8c-affc-2944b29dfd531-640x427.jpg'
+		'imageurl' : 'http://dailybruin.com/images/2013/11/80851f22-b618-4a8c-affc-2944b29dfd531-640x427.jpg',
+		'share_image': 'http://dailybruin.com/images/2013/11/80851f22-b618-4a8c-affc-2944b29dfd531-640x427.jpg',
+		'share_text': 'UCLA beat USC ' + usc_football_games.length + (usc_football_games.length === 1 ? ' time in football.' : " times in football") + " since I've been here."
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	add_card("ucla-events", card_html, "#usc_football_games");
