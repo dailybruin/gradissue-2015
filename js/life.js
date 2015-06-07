@@ -27,13 +27,6 @@ cards_in_divs = {};
 card_ids = [];
 
 $("#submit-button").click(function(){
-	$("#main-content").addClass("section");
-	$('#fullpage').fullpage({
-		scrollOverflow: true,
-		scrollBar: true,
-		autoScrolling: false,
-		verticalCentered: false
-	});
 	var selection = $("#select-quarter").val();
 	process_data(selection);
 	//window.location.search = "start=" + $("#select-quarter").val();
@@ -56,6 +49,14 @@ function clear_divs() {
 
 //$(document).ready(function(){
 function process_data(selection) {
+	$("#main-content").addClass("section");
+	$('#fullpage').fullpage({
+		scrollOverflow: true,
+		scrollBar: true,
+		autoScrolling: false,
+		verticalCentered: false,
+		fitToSection: false
+	});
 	cards_in_divs = {};
 	card_ids = [];
 	clear_divs();
