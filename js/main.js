@@ -1,10 +1,27 @@
+var sectionName; var section = []; var masterarray = [];
+
 $(document).foundation();
 
+var dsthtml;
+var dashsidebartemplate;
+var dbthtml;
+var dashbodytemplate;
 
 Handlebars.registerHelper("formatBodyText", function(t) {
 	t = t.trim();
     return (t.length>0?'<p>'+t.replace(/[\r\n]+/,'</p><p>')+'</p>':null);
 });
+
+function getSection(name, arr) {
+	var buffer = [];
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i].section == name) {
+			buffer.push(arr[i]);
+		};
+	};
+	return buffer;
+};
+
 
 $(document).ready(function() {
 	$('.slick').slick({
@@ -52,22 +69,24 @@ $(document).ready(function() {
       color: 'lightgrey'
   });
 
-
+	dsthtml = $("#dash-sidebar-template").html();
+	dashsidebartemplate = Handlebars.compile(dsthtml);
+	dbthtml = $("#dash-body-template").html();
+	dashbodytemplate = Handlebars.compile(dbthtml);
 
 	var masterurl = "https://spreadsheets.google.com/feeds/list/1i5ecrrYy3IYiiabc8Hq_rEfxar2dJlKbox2qgpldcWI/default/public/values?alt=json";
-	var dsthtml = $("#dash-sidebar-template").html();
-	var dashsidebartemplate = Handlebars.compile(dsthtml);
-	var dbthtml = $("#dash-body-template").html();
-	var dashbodytemplate = Handlebars.compile(dbthtml);
-
 	$.getJSON(masterurl, function(data) {
 		data = clean_google_sheet_json(data);
-		console.log(data);
-		var html = dashsidebartemplate({stories: data});
-		var html2 = dashbodytemplate(data[0]);
-		$("#dashboard-container").html(html);
-		$("#dash-content").html(html2);
-	});	
+		masterarray = data;
+		section = getSection("news", masterarray);
+		console.log(section);
+		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+		$("#dash-content").html(dashbodytemplate(section[0]));
+	});
+
+//	console.log(masterarray);
+//	section = getSection("news", masterarray);
+
 	
 
 
