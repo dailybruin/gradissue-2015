@@ -12,16 +12,35 @@ Handlebars.registerHelper("formatBodyText", function(t) {
     return (t.length>0?'<p>'+t.replace(/[\r\n]+/,'</p><p>')+'</p>':null);
 });
 
-function getSection(name, arr) {
+function getSection(name) {
 	var buffer = [];
-	for (var i = 0; i < arr.length; i++) {
-		if (arr[i].section == name) {
-			buffer.push(arr[i]);
+	for (var i = 0; i < masterarray.length; i++) {
+		if (masterarray[i].section == name) {
+			buffer.push(masterarray[i]);
 		};
 	};
 	return buffer;
 };
 
+function switchSection(name) {
+	sectionName = name;
+	section = getSection(name);
+};
+
+/*
+$(document).keydown(function(event) {
+	if (event.which == 78) {
+		switchSection("video");
+		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+		$("#dash-content").html(dashbodytemplate(section[0]));
+	};
+	if (event.which == 80) {
+		switchSection("news");
+		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+		$("#dash-content").html(dashbodytemplate(section[0]));
+	};
+});
+*/
 
 $(document).ready(function() {
 	$('.slick').slick({
@@ -78,7 +97,7 @@ $(document).ready(function() {
 	$.getJSON(masterurl, function(data) {
 		data = clean_google_sheet_json(data);
 		masterarray = data;
-		section = getSection("news", masterarray);
+		switchSection("news");
 		console.log(section);
 		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
 		$("#dash-content").html(dashbodytemplate(section[0]));
