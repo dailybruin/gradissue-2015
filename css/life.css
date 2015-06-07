@@ -137,3 +137,38 @@
 	margin-bottom: 10px;
 	text-align: justify;
 }
+
+/* CSS from https://github.com/alvarotrigo/fullPage.js/blob/master/examples/backgroundVideo.html */
+#header-video{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	top:0;
+	right:0;
+	width: 100%;
+	height: 100%;
+	background-size: 100% 100%;
+	background-color: black; /* in case the video doesn't fit the whole page*/
+	background-image: url('http://dailybruin.com/images/2015/06/life.mov');/* our video */;
+	background-position: center center;
+	background-size: contain;
+	object-fit: cover; /*cover video background */
+	z-index:3;
+}
+/* Layer with position absolute in order to have it over the video
+* --------------------------------------- */
+#video-header .layer{
+	position: absolute;
+	z-index: 4;
+	width: 100%;
+	left: 0;
+	top: 43%;
+}
+/*solves problem with overflowing video in Mac with Chrome */
+#video-header{
+	overflow: hidden;
+}
+
+#form-selection{
+	background-color: rgba(255,255,255,0.5);
+}

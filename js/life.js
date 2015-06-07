@@ -30,6 +30,7 @@ $("#submit-button").click(function(){
 	var selection = $("#select-quarter").val();
 	process_data(selection);
 	//window.location.search = "start=" + $("#select-quarter").val();
+	$("html, body").animate({scrollTop: $('#ucla-events').offset().top }, 1500);
 })
 
 $(document).ready(function(){
@@ -56,7 +57,6 @@ function process_data(selection) {
 	//var selection = window.location.search.split('=')[1].slice(0, 8);
 	// check to see that we have a valid selection
 	if (selection in selection_to_datestring) {
-		$(".category-header").fadeIn(200);
 		
 		// fix selection in dropdown
 		document.getElementsByName('start')[0].value = selection;
@@ -662,12 +662,15 @@ function addCommas(nStr)
 }
 
 function fade_in_cards(card_ids) {
+	$(".category-header").fadeIn(200);
 	$(".card").hide();
+	setTimeout(function(){
+		for (var i = 0; i < card_ids.length; i++) {
+			$(card_ids[i]).delay(i*500).fadeIn(500);
+		}
+	}, 1500);
 	//console.log(card_ids);
 	//$(card_ids.join(", ")).hide();
-	for (var i = 0; i < card_ids.length; i++) {
-		$(card_ids[i]).delay(i*500).fadeIn(500);
-	}
 }
 
 function get_card_ids_by_column(main_div_id) {
