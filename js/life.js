@@ -166,6 +166,12 @@ function add_card(section_div_id, card_html, card_div_id) {
             }
         });
 
+        $('.share-button:not(.share-button-' + card_div_id.slice(1) + ')').each(function() {
+            if ($(this).hasClass('share_button_active')) {
+                $(this).toggleClass('share_button_active');
+            }
+        });
+
 		$('.module_share-' + card_div_id.slice(1)).slideToggle(200).toggleClass('module_share_active');
 
         $(this).toggleClass('share_button_active');
