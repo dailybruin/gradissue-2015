@@ -26,10 +26,12 @@ cards_in_divs = {};
 
 card_ids = [];
 
+data_loaded = false;
+
 $("#submit-button").click(function(){
+	document.getElementById("header-video").pause();
 	var selection = $("#select-quarter").val();
 	process_data(selection);
-	//window.location.search = "start=" + $("#select-quarter").val();
 })
 
 $(document).ready(function(){
@@ -70,68 +72,72 @@ function process_data(selection) {
 		document.getElementsByName('start')[0].value = selection;
 
 	    url = "https://spreadsheets.google.com/feeds/list/1JFFjBvaO_PAs3d0jFWYmgXnh3A00MSeg3G4G1qYC46w/od6/public/values?alt=json"
-		$.getJSON(url, function(json){
-
-			var data = clean_google_sheet_json(json);
-
-			// filters out data points that are older than selected date
-			data = _.filter(data, function(datum) {
-				var timestamp = Date.parse(datum.date);
-				var now = new Date();
-				return timestamp >= Date.parse(selection_to_datestring[selection]) && timestamp <= Date.parse(now);
+		// really only need to load the original data once
+		if (!data_loaded){
+			$.getJSON(url, function(json){
+				data_loaded = true;
+				original_data = clean_google_sheet_json(json);
+				display_cards(original_data, selection);
 			});
-
-
-			var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
-			var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
-			var championships = _.filter(data, function(datum) {return datum.id === "championships"; });
-			var pro_athletes = _.filter(data, function(datum) {return datum.id === "pro-athlete"; });
-			var usc_football_games = _.filter(data, function(datum) {return datum.id === "usc-football"; });
-			var basketball_records = _.filter(data, function(datum) {return datum.id === "basketball"; });
-			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
-			var football_records = _.filter(data, function(datum) {return datum.id === "football"; });
-			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
-			var movies = _.filter(data, function (datum) { return datum.type === "movie"; });
-			var songs = _.filter(data, function(datum) { return datum.type === "song"; });
-			add_study_card(selection);
-			add_construction_card(construction_events);
-			add_cost_card(costs);
-			if (nobels.length > 0)
-				add_nobel_card(nobels);
-			if (championships.length > 0)
-				add_championships_card(championships);
-			if (pro_athletes.length > 0)
-				add_pro_atheletes_card(pro_athletes);
-			if (usc_football_games.length > 0)
-				add_usc_football_games_card(usc_football_games);
-			if (songs.length > 0)
-				add_song_card(songs);
-			add_basketball_records_card(basketball_records);
-			add_football_records_card(football_records);
-			add_ucla_event_cards(events);
-			add_movie_card(movies);
-
-
-
-			// if mobile, cards need to fade in a different order (vertical first)
-			// if on desktop, cards need to fade in horizontally
-			card_ids = _.filter(card_ids, function(card_id) {return card_id;});
-		
-			//console.log(card_ids);
-			if (window.mobilecheck())
-				card_ids = horizontal_to_vertical_order(card_ids);
-			$('.flexslider').flexslider({
-				controlNav: false
-			});			
-			fade_in_cards(card_ids);
-			//console.log(card_ids);
-
-		});
+		} else {
+			display_cards(original_data, selection);
+		}
 	}
 //}); // for document ready
 }; // for processData()
 
 
+function display_cards(original_data, selection) {
+	// filters out data points that are older than selected date
+	data = _.filter(original_data, function(datum) {
+		var timestamp = Date.parse(datum.date);
+		var now = new Date();
+		return timestamp >= Date.parse(selection_to_datestring[selection]) && timestamp <= Date.parse(now);
+	});
+	var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
+	var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
+	var championships = _.filter(data, function(datum) {return datum.id === "championships"; });
+	var pro_athletes = _.filter(data, function(datum) {return datum.id === "pro-athlete"; });
+	var usc_football_games = _.filter(data, function(datum) {return datum.id === "usc-football"; });
+	var basketball_records = _.filter(data, function(datum) {return datum.id === "basketball"; });
+	var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
+	var football_records = _.filter(data, function(datum) {return datum.id === "football"; });
+	var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
+	var movies = _.filter(data, function (datum) { return datum.type === "movie"; });
+	var songs = _.filter(data, function(datum) { return datum.type === "song"; });
+	add_construction_card(construction_events);
+	add_cost_card(costs);
+	if (nobels.length > 0)
+		add_nobel_card(nobels);
+	if (championships.length > 0)
+		add_championships_card(championships);
+	if (pro_athletes.length > 0)
+		add_pro_atheletes_card(pro_athletes);
+	add_study_card(selection);
+	if (usc_football_games.length > 0)
+		add_usc_football_games_card(usc_football_games);
+	if (songs.length > 0)
+		add_song_card(songs);
+	add_basketball_records_card(basketball_records);
+	add_football_records_card(football_records);
+	add_ucla_event_cards(events);
+	add_movie_card(movies);
+
+
+
+	// if mobile, cards need to fade in a different order (vertical first)
+	// if on desktop, cards need to fade in horizontally
+	card_ids = _.filter(card_ids, function(card_id) {return card_id;});
+
+	//console.log(card_ids);
+	if (window.mobilecheck())
+		card_ids = horizontal_to_vertical_order(card_ids);
+	$('.flexslider').flexslider({
+		controlNav: false
+	});			
+	fade_in_cards(card_ids);
+	//console.log(card_ids);
+}
 
 function add_study_card(selection) {
 	var template_data = {
