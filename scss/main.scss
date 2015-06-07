@@ -11,20 +11,23 @@
 }
 
 .dashboard-item {
-	background-color: whitesmoke;
+	background-color: white;
 	height: 100px; 
 	padding: 0px 15px;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid whitesmoke;
 	h1 {
 		font-size: 1em;
 	}
 	overflow: hidden; 
 }
 
-.dashboard-container {
+.dashboard-active {
+	background-color: whitesmoke; 
+}
 
-	overflow: scroll;
+#dashboard-container {
 	width: 100%;
+	border-right: 4px solid whitesmoke;
 }
 
 #container {

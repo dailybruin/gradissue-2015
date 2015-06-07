@@ -6,6 +6,11 @@ Handlebars.registerHelper("formatBodyText", function(t) {
     return (t.length>0?'<p>'+t.replace(/[\r\n]+/,'</p><p>')+'</p>':null);
 });
 
+function changeStory(item) {
+	$('.dashboard-item').removeClass('dashboard-active')
+	$(item).addClass('dashboard-active');
+}
+
 $(document).ready(function() {
 	$('.slick').slick({
 	  centerMode: true,
@@ -35,6 +40,8 @@ $(document).ready(function() {
 
 
 
+
+
 	$("#simple3D").simple3D({
 		moveX:3, // 1 - 5
 		moveY:3, // 1 - 5
@@ -52,6 +59,14 @@ $(document).ready(function() {
       color: 'lightgrey'
   });
 
+	$('#dashboard-content').slimScroll({
+      height: '700px',
+      allowPageScroll: false,
+      distance: '-10px', 
+      alwaysVisible: true,
+      railVisible: false
+  });
+
 
 
 	var masterurl = "https://spreadsheets.google.com/feeds/list/1i5ecrrYy3IYiiabc8Hq_rEfxar2dJlKbox2qgpldcWI/default/public/values?alt=json";
@@ -66,8 +81,16 @@ $(document).ready(function() {
 		var html = dashsidebartemplate({stories: data});
 		var html2 = dashbodytemplate(data[0]);
 		$("#dashboard-container").html(html);
-		$("#dash-content").html(html2);
+		$("#dashboard-content").html(html2);
+
+		var item = $('.dashboard-item')[0]; 
+		changeStory(item);
+
+		$('.dashboard-item').on('click', function() {
+			changeStory(this);
+		});
 	});	
+
 	
 
 
@@ -93,10 +116,6 @@ $(document).ready(function() {
     }
   });
 });
-
-
-
-
 
 
 
