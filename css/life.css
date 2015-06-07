@@ -56,6 +56,8 @@
 
 .card header {
 	height: 40px;
+	background-color: lightgrey;
+	margin-bottom: 1.4em;
 }
 
 .share-button div {
@@ -157,7 +159,7 @@
 }
 
 @media screen and (max-device-width: 800px) {
-	#video-header { background: url('http://dailybruin.com/images/2015/06/life.png') #000 no-repeat center center fixed; }
+	#video-header { background: url('http://dailybruin.com/images/2015/06/life-small.png') #000 no-repeat center center fixed; }
 	#header-video { display: none; }
 }
 
@@ -186,4 +188,8 @@ footer {
 body {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 100;
+}
+
+.category-header {
+	margin: .5em 0px;
 }
