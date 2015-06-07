@@ -254,10 +254,30 @@ function add_card(section_div_id, card_html, card_div_id) {
 
 
 function add_song_card(songs) {
+	var song_array = [];
+	for (var key in songs) {
+		song_array.push(songs[key]['title']);
+	}
+
+	var share_text = "";
+	switch(song_array.length) {
+		case 1: share_text += song_array[0] + " was the song of the summer"; break;
+		case 2: share_text += song_array[0] + " and " + song_array[1] + " were the songs of the summer"; break;
+		case 3: share_text += song_array[0] + ", " + song_array[1] + ", and " + song_array[2] + " were the songs of the summer"; break;
+		case 4: share_text += song_array[0] + ", " + song_array[1] + ", " + song_array[2] + ", and " + song_array[3] + " were the songs of the summer"; break;
+		case 5: share_text += song_array[0] + ", " + song_array[1] + ", " + song_array[2] + ", " + song_array[3] + ", and " + song_array[4] + " were the songs of the summer"; break;
+		default: share_text = "These were the songs of the summer "
+	}
+
+	share_text += " while I was at UCLA."
+
 	var template_data = {
 		'id': 'songs',
 		'title': 'These were the songs of the summer',
 		'rows': _.sortBy(songs, function(song) {return song.category; }),
+		'share_image': songs[0].imageurl,
+		'share_text': share_text,
+		'twitter_share_text': "These were the songs of the summer while I was at UCLA"
 	};
 
 	var card_html = compile_template_to_html("#slideshow-template", template_data);
