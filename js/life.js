@@ -231,7 +231,7 @@ function add_card(section_div_id, card_html, card_div_id) {
 			var TWEET_LENGTH = 140;
 			var URL_LENGHTH = 22;  // Twitter 'shortens' all links with their url shortening service
 
-			var url = "http://dailybruin.com"
+			var url = window.location.href;
 			var twitter_intent = "https://www.twitter.com/intent/tweet?url=";
 			var window_settings = 'width=500,height=320,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=200,top=200';
 			if (el.attr('data-text').length + URL_LENGHTH + " @dailybruin".length < TWEET_LENGTH)
@@ -239,6 +239,14 @@ function add_card(section_div_id, card_html, card_div_id) {
 			else
 				var tweet = el.attr('data-text');
 			window.open(twitter_intent + encodeURIComponent(url) + '&text=' + encodeURIComponent(tweet), "_blank", window_settings);
+	    }
+	    else if (platform === 'gplus') {
+			var url = 'http://daily-bruin.github.io/gradissue-2015/your-life-at-ucla/index.html?start=fall2013'
+			var gplus_share_endpoint = "https://plus.google.com/share?url="
+			var window_settings = 'width=500,height=320,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=200,top=200';
+
+			window.open(gplus_share_endpoint + encodeURIComponent(url), "_blank", window_settings);
+
 	    }
 	});
 }
