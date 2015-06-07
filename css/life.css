@@ -193,3 +193,10 @@ body {
 .category-header {
 	margin: .5em 0px;
 }
+
+/* fixes Firefox bug where table doesn't scale 
+per https://github.com/zurb/foundation/issues/5576 */
+table {
+	table-layout:fixed;
+	width:100%;
+}
