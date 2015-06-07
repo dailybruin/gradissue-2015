@@ -157,12 +157,12 @@ function add_study_card(selection) {
 			var div = document.createElement("div");
 			var pretext = document.createElement("h4");
 			var hours_studied = Math.floor(selection_to_quarters_attended[selection] * num * 10);
-			pretext.innerHTML = "You've studied for about " + hours_studied + " hours or ";
+			pretext.innerHTML = "You've studied for about ";
 			var bignumber = document.createElement("h2");
 			$(bignumber).addClass("big-number");
-			bignumber.innerHTML = (hours_studied / 24).toFixed(2);
+			bignumber.innerHTML = hours_studied;
 			var posttext = document.createElement("h4");
-			posttext.innerHTML = " days at UCLA";
+			posttext.innerHTML = "hours or " + (hours_studied / 24).toFixed(2) + " days at UCLA";
 			$(div).append(pretext);
 			$(div).append(bignumber);
 			$(div).append(posttext);
