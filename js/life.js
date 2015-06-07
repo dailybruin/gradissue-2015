@@ -27,10 +27,17 @@ cards_in_divs = {};
 card_ids = [];
 
 $("#submit-button").click(function(){
+	$("#main-content").addClass("section");
+	$('#fullpage').fullpage({
+		scrollOverflow: true,
+		scrollBar: true,
+		autoScrolling: false,
+		verticalCentered: false
+	});
 	var selection = $("#select-quarter").val();
 	process_data(selection);
 	//window.location.search = "start=" + $("#select-quarter").val();
-	$("html, body").animate({scrollTop: $('#ucla-events').offset().top }, 1500);
+	$("html, body").animate({scrollTop: $('#ucla-events').offset().top }, 2000);
 })
 
 $(document).ready(function(){
