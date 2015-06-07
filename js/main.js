@@ -36,7 +36,18 @@ function switchSection(name) {
 	sectionName = name;
 	section = getSection(name);
 	$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+
+	$("#dashboard-content").html(dashbodytemplate(section[0]));
+	var item = $('.dashboard-item')[0]; 
+	$(item).addClass('dashboard-active');
+
+	$('.dashboard-item').on('click', function() {
+		changeStory(this);
+	});
+
 };
+
+
 
 /*
 $(document).keydown(function(event) {
@@ -135,13 +146,8 @@ $(document).ready(function() {
 			secname = $(this).find("h3").html().toLowerCase();
 			console.log(secname);
 			switchSection(secname);
-			$("#dashboard-content").html(dashbodytemplate(section[0]));
-			var item = $('.dashboard-item')[0]; 
-			$(item).addClass('dashboard-active');
-
-			$('.dashboard-item').on('click', function() {
-				changeStory(this);
-			});
+			$('#sections-container').hide();
+			$('#dashboard').show(); 
 		});
 
 		
