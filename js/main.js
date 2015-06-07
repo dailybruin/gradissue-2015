@@ -1,12 +1,10 @@
 $(document).foundation();
 
 
-function para(t){
-    t = t.trim();
+Handlebars.registerHelper("formatBodyText", function(t) {
+	t = t.trim();
     return (t.length>0?'<p>'+t.replace(/[\r\n]+/,'</p><p>')+'</p>':null);
-}
-
-
+});
 
 $(document).ready(function() {
 	$('.slick').slick({
