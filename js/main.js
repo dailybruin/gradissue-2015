@@ -15,6 +15,11 @@ Handlebars.registerHelper("formatBodyText", function(t) {
 function changeStory(item) {
 	$('.dashboard-item').removeClass('dashboard-active');
 	$(item).addClass('dashboard-active');
+
+	var i = (item.id).replace(/index-/,''); 
+
+	$("#dashboard-content").html(dashbodytemplate(section[i]));
+
 }
 
 function getSection(name) {
@@ -113,10 +118,11 @@ $(document).ready(function() {
 		masterarray = data;
 		switchSection("news");
 		console.log(section);
+
 		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
 
 		var item = $('.dashboard-item')[0]; 
-		changeStory(item);
+		$(item).addClass('dashboard-active');
 
 		$('.dashboard-item').on('click', function() {
 			changeStory(this);
