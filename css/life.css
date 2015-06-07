@@ -149,12 +149,18 @@
 	height: 100%;
 	background-size: 100% 100%;
 	background-color: black; /* in case the video doesn't fit the whole page*/
-	background-image: url('http://dailybruin.com/images/2015/06/life.mov');/* our video */;
+	background-image: url('http://dailybruin.com/images/2015/06/life.png');/* our video */;
 	background-position: center center;
 	background-size: contain;
 	object-fit: cover; /*cover video background */
 	z-index:3;
 }
+
+@media screen and (max-device-width: 800px) {
+	#video-header { background: url('http://dailybruin.com/images/2015/06/life.png') #000 no-repeat center center fixed; }
+	#header-video { display: none; }
+}
+
 /* Layer with position absolute in order to have it over the video
 * --------------------------------------- */
 #video-header .layer{
@@ -175,4 +181,9 @@
 
 footer {
 	display: block;
+}
+
+body {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 100;
 }
