@@ -593,7 +593,9 @@ function add_movie_card(movies) {
 		'title' : "<em>" + movies[0]['title'].replace(/^"(.*)"$/, '$1') + "</em>" + " was the top grossing movie",
 		'imgurl': movies[0].imageurl,
 		'rows' : movies.slice(0,5),
-		'credits' : movies[0]['credits']
+		'credits' : movies[0]['credits'],
+		'share_image': movies[0].imageurl,
+		'share_text': movies[0]['title'].replace(/^"(.*)"$/, '$1') + " was the top grossing movie since I've been at UCLA."
 	}
 	var card_html = compile_template_to_html("#movie-template", template_data);
 	add_card("ucla-events", card_html, "#movies");
