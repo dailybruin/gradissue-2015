@@ -22,16 +22,38 @@ var selection_to_quarters_attended = {
 	'fall2014': 3,
 };
 
-var cards_in_divs = {};
+cards_in_divs = {};
 
 card_ids = [];
 
-$(document).ready(function(){
+$("#submit-button").click(function(){
+	var selection = $("#select-quarter").val();
+	process_data(selection);
+	//window.location.search = "start=" + $("#select-quarter").val();
+})
 
+$(document).ready(function(){
+	$(".category-header").hide();
+	if (window.location.search) {
+		var selection = window.location.search.split('=')[1].slice(0, 8);
+		process_data(selection);
+	}
+});
+
+function clear_divs() {
+	$("#ucla-events-left").empty();
+	$("#ucla-events-mid").empty();
+	$("#ucla-events-right").empty();
+}
+
+//$(document).ready(function(){
+function process_data(selection) {
+	cards_in_divs = {};
+	card_ids = [];
+	clear_divs();
 	// if url has ?start=fall2009, selection will equal fall2009
 	// igonre everything after fall2009 (trailing slashes, extraneous query strings, etc)
-	var selection = window.location.search.split('=')[1].slice(0, 8);
-	$(".category-header").hide();
+	//var selection = window.location.search.split('=')[1].slice(0, 8);
 	// check to see that we have a valid selection
 	if (selection in selection_to_datestring) {
 		$(".category-header").fadeIn(200);
@@ -96,11 +118,10 @@ $(document).ready(function(){
 			fade_in_cards(card_ids);
 			//console.log(card_ids);
 
-
-
 		});
 	}
-});
+//}); // for document ready
+}; // for processData()
 
 
 
@@ -619,8 +640,9 @@ function addCommas(nStr)
 }
 
 function fade_in_cards(card_ids) {
-	console.log(card_ids);
-	$(card_ids.join(", ")).hide();
+	$(".card").hide();
+	//console.log(card_ids);
+	//$(card_ids.join(", ")).hide();
 	for (var i = 0; i < card_ids.length; i++) {
 		$(card_ids[i]).delay(i*500).fadeIn(500);
 	}
