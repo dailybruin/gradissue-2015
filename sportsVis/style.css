@@ -32,7 +32,7 @@ h1
 
 body
 {
-	background-color: black;
+	background-color: gray;
 }
 
 @media only screen and (max-height: 666) !important {

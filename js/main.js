@@ -1,6 +1,13 @@
 $(document).foundation();
 
 
+function para(t){
+    t = t.trim();
+    return (t.length>0?'<p>'+t.replace(/[\r\n]+/,'</p><p>')+'</p>':null);
+}
+
+
+
 $(document).ready(function() {
 	$('.slick').slick({
 	  centerMode: true,
@@ -50,15 +57,18 @@ $(document).ready(function() {
 
 
 	var masterurl = "https://spreadsheets.google.com/feeds/list/1i5ecrrYy3IYiiabc8Hq_rEfxar2dJlKbox2qgpldcWI/default/public/values?alt=json";
-	var entrysource = $("#entry-template").html();
-	var entrytemplate = Handlebars.compile(entrysource);
+	var dsthtml = $("#dash-sidebar-template").html();
+	var dashsidebartemplate = Handlebars.compile(dsthtml);
+	var dbthtml = $("#dash-body-template").html();
+	var dashbodytemplate = Handlebars.compile(dbthtml);
 
 	$.getJSON(masterurl, function(data) {
 		data = clean_google_sheet_json(data);
 		console.log(data);
-		var html = entrytemplate({stories: data});
-		console.log(html);
-		$("#dash-append").append(html);
+		var html = dashsidebartemplate({stories: data});
+		var html2 = dashbodytemplate(data[0]);
+		$("#dash-sidebar-container").html(html);
+		$("#dash-content").html(html2);
 	});	
 	
 
