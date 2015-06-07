@@ -30,7 +30,6 @@ $("#submit-button").click(function(){
 	var selection = $("#select-quarter").val();
 	process_data(selection);
 	//window.location.search = "start=" + $("#select-quarter").val();
-	$("html, body").animate({scrollTop: $('#ucla-events').offset().top }, 2000);
 })
 
 $(document).ready(function(){
@@ -57,6 +56,7 @@ function process_data(selection) {
 		verticalCentered: false,
 		fitToSection: false
 	});
+	$("html, body").animate({scrollTop: $('#ucla-events').offset().top }, 2000);
 	cards_in_divs = {};
 	card_ids = [];
 	clear_divs();
