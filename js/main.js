@@ -13,8 +13,13 @@ Handlebars.registerHelper("formatBodyText", function(t) {
 });
 
 function changeStory(item) {
-	$('.dashboard-item').removeClass('dashboard-active')
+	$('.dashboard-item').removeClass('dashboard-active');
 	$(item).addClass('dashboard-active');
+
+	var i = (item.id).replace(/index-/,''); 
+
+	$("#dashboard-content").html(dashbodytemplate(section[i]));
+
 }
 
 function getSection(name) {
@@ -30,6 +35,24 @@ function getSection(name) {
 function switchSection(name) {
 	sectionName = name;
 	section = getSection(name);
+
+	$("#dashboard-nav li.active").removeClass("active");
+	
+	if (name == "a&amp;e") {
+		$("#dashboard-nav .ae").addClass("active");
+	} else {
+		$("#dashboard-nav ." + name).addClass("active");
+	}
+
+	$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+
+	$("#dashboard-content").html(dashbodytemplate(section[0]));
+	var item = $('.dashboard-item')[0]; 
+	$(item).addClass('dashboard-active');
+
+	$('.dashboard-item').on('click', function() {
+		changeStory(this);
+	});
 };
 
 /*
@@ -74,10 +97,6 @@ $(document).ready(function() {
 	  ]
 	});
 
-
-
-
-
 	$("#simple3D").simple3D({
 		moveX:3, // 1 - 5
 		moveY:3, // 1 - 5
@@ -117,21 +136,26 @@ $(document).ready(function() {
 		masterarray = data;
 		switchSection("news");
 		console.log(section);
-		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
-		$("#dash-content").html(dashbodytemplate(section[0]));
-	});
 
-		console.log(data);
-		var html = dashsidebartemplate({stories: data});
-		var html2 = dashbodytemplate(data[0]);
-		$("#dashboard-container").html(html);
-		$("#dashboard-content").html(html2);
+		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+		$("#dashboard-content").html(dashbodytemplate(section[0]));
 
 		var item = $('.dashboard-item')[0]; 
-		changeStory(item);
+		$(item).addClass('dashboard-active');
 
 		$('.dashboard-item').on('click', function() {
 			changeStory(this);
+		});
+
+
+		$('.item').on('click', function() {
+			secname = $(this).find("h3").html().toLowerCase();
+			switchSection(secname);
+		});
+
+		$("#dashboard-nav li").on('click', function() {
+			secname = $(this).find("a").html().toLowerCase();
+			switchSection(secname);
 		});
 	});	
 
