@@ -35,7 +35,24 @@ function getSection(name) {
 function switchSection(name) {
 	sectionName = name;
 	section = getSection(name);
+
+	$("#dashboard-nav li.active").removeClass("active");
+	
+	if (name == "a&amp;e") {
+		$("#dashboard-nav .ae").addClass("active");
+	} else {
+		$("#dashboard-nav ." + name).addClass("active");
+	}
+
 	$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+
+	$("#dashboard-content").html(dashbodytemplate(section[0]));
+	var item = $('.dashboard-item')[0]; 
+	$(item).addClass('dashboard-active');
+
+	$('.dashboard-item').on('click', function() {
+		changeStory(this);
+	});
 };
 
 /*
@@ -133,18 +150,13 @@ $(document).ready(function() {
 
 		$('.item').on('click', function() {
 			secname = $(this).find("h3").html().toLowerCase();
-			console.log(secname);
 			switchSection(secname);
-			$("#dashboard-content").html(dashbodytemplate(section[0]));
-			var item = $('.dashboard-item')[0]; 
-			$(item).addClass('dashboard-active');
-
-			$('.dashboard-item').on('click', function() {
-				changeStory(this);
-			});
 		});
 
-		
+		$("#dashboard-nav li").on('click', function() {
+			secname = $(this).find("a").html().toLowerCase();
+			switchSection(secname);
+		});
 	});	
 
 
