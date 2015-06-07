@@ -38,7 +38,8 @@ $(document).ready(function(){
 	$(".category-header").hide();
 	if (window.location.search) {
 		var selection = window.location.search.split('=')[1].slice(0, 8);
-		process_data(selection);
+		if (selection in selection_to_datestring) 
+			process_data(selection);
 	}
 });
 

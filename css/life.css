@@ -38,7 +38,12 @@
 }
 
 #page-title {
+	font-family: "Century Gothic";
+	text-transform: uppercase;
 	text-align: center;
+	font-size: 4em;
+	letter-spacing: 4px;
+  	word-spacing: 5px;
 }
 
 #pro_athletes img {
@@ -185,11 +190,6 @@ footer {
 	display: block;
 }
 
-body {
-	font-family: 'Raleway', sans-serif;
-	font-weight: 100;
-}
-
 .category-header {
 	margin: .5em 0px;
 }
@@ -199,4 +199,13 @@ per https://github.com/zurb/foundation/issues/5576 */
 table {
 	table-layout:fixed;
 	width:100%;
+}
+
+#pre-form {
+	font-size: 1.4em;
+	color: black;
+}
+
+#construction .big-number {
+	font-size: 2.5em;
 }
