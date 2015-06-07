@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8" />
         <title>UCLA NCAA Title Data</title>
         <script src='Chart.min.js'></script>
+        <script src="Chart.horizontal.js"></script>
         <script src="stacked.js"></script>
-        <link rel="stylesheet" type="text/css" href="foundation-5.5.2/css/foundation.css">
+        <link rel="stylesheet" type="text/css" href="/../css/foundation.css">
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="jquery.fullPage.css">
         <!--<script type="text/javascript" src="fullPage.js-master/jquery.fullPage.css"></script>-->
@@ -17,26 +19,30 @@
 
     <body>
         <div id="fullpage">
-        <!--
-            <div class="section" id="section1"</div>
-        -->
+        
+            <div class="section" id="section1">
+                <div class="banner">
+                    <h1>Tracking Triumphs</h1>
+                </div>
+            </div>
+        
             <div class = "section" id = "section2">
-                <h1>UCLA NCAA Titles Per Year</h1>
+                <h1>UCLA NCAA titles per year</h1>
                 <center><canvas id="years" width="1200" height="500"></canvas></center>
             </div>
 
             <div class="section" id="section3">
-                <h1>UCLA NCAA Titles Per Sport</h1>
+                <h1>UCLA NCAA titles per sport</h1>
                 <center><canvas id="sports" width="1200" height="500"></canvas></center>
             </div>
 
-            <div class="section">
-                <h1>UCLA NCAA Titles Per Coach</h1>
+            <div class="section" id="section4">
+                <h1>UCLA NCAA titles per coach</h1>
                 <center><canvas id="coaches" width="1200" height="500"></canvas></center>
             </div>
 
-            <div class = "section">
-                <h1>Most NCAA Titles Per School</h1>
+            <div class = "section" id="section5">
+                <h1>NCAA titles per school</h1>
                 <center><canvas id="schools" width="1200" height="500"></canvas></center>
             </div>
         </div>
@@ -45,7 +51,7 @@
 
             $(document).ready(function() {
                 $('#fullpage').fullpage({
-                    responsive: 900
+                    //responsive: 900
                 });
             });
 
@@ -61,7 +67,7 @@
                     {
                             label: 'UCLA NCAA Titles Per Year',
                             fillColor: '#FFFF00',
-                            data: [2, 2, 2, 2, 1, 4, 5, 11, 6, 3, 6, 9, 6, 7, 2, 7, 7, 7, 9, 5, 4, 4]
+                            data: [2, 2, 2, 2, 1, 4, 6, 11, 6, 3, 6, 9, 6, 7, 2, 7, 7, 7, 9, 5, 4, 4]
                     }
 
                 ]
@@ -69,11 +75,16 @@
             // get bar chart canvas
             var years = document.getElementById("years").getContext("2d");
             // draw bar chart
-            new Chart(years).Bar(yearData);
+            new Chart(years).Bar(yearData, {
+                scaleOverride: true,
+                scaleSteps: 4,
+                scaleStepWidth: 3,
+                scaleStartValue: 0 
+            });
 
             var sportData = {
 
-                labels: ["Men's Baseball", "Men's Basketball", "Men's Golf", "Men's Gymnastics", "Men's Soccer", "Men's Swim and Golf", "Men's Tennis", "Men's Track and Field", "Men's Volleyball", "Men's Water Polo", "Women's Golf", "Women's Gymnastics", "Women's Soccer", "Women's Softball", "Women's Tennis", "Women's Track and Field", "Women's Volleyball", "Women's Water Polo"],
+                labels: ["Men's baseball", "Men's basketball", "Men's golf", "Men's gymnastics", "Men's soccer", "Men's swim and dive", "Men's tennis", "Men's track and field", "Men's volleyball", "Men's water polo", "Women's golf", "Women's gymnastics", "Women's soccer", "softball", "Women's tennis", "Women's track and field", "Women's volleyball", "Women's water polo"],
 
                 datasets: [
                     {
@@ -92,41 +103,87 @@
 
                 labels: ["Al Scates", "Adam Krikorian", "John Wooden", "J.D. Morgan", "Glenn Bassett", "Sharron Backus", "Valerie Kondos Field", "Sue Enquist", "Jim Bush", "Guy Baker"],
 
+                sports: ["Al Scates", "Adam Krikorian", "John Wooden", "J.D. Morgan", "Glenn Bassett", "Sharron Backus", "Valerie Kondos Field", "Sue Enquist", "Jim Bush", "Guy Baker"],
+
                 datasets: [
                     {
                             label: 'UCLA NCAA Titles Per Coach',
                             fillColor: '#FFFF00',
-                            data: [19, 10, 10, 8, 7, 7, 6, 6, 5, 4]
+                            data: [19, 10, 10, 7, 7, 7, 6, 6, 5, 4]
                     }
                 ]
             }
             // get bar chart canvas
             var coaches = document.getElementById("coaches").getContext("2d");
             // draw bar chart
-            new Chart(coaches).Bar(coachData);
 
-            
+            var getSport = function(coach) {
+                if (coach === "Al Scates") {
+                    return "Men’s volleyball"
+                }
+                if (coach === "Adam Krikorian") {
+                    return "Men’s and women’s water polo"
+                }
+                if (coach === "John Wooden") {
+                    return "Men’s basketball"
+                }
+                if (coach === "J.D. Morgan") {
+                    return "Men’s tennis"
+                }
+                if (coach === "Glenn Bassett") {
+                    return "Men’s tennis"
+                }
+                if (coach === "Sharron Backus") {
+                    return "Softball"
+                }
+                if (coach === "Valerie Kondos Field") {
+                    return "Women’s gymnastics"
+                }
+                if (coach === "Sue Enquist") {
+                    return "Softball"
+                }
+                if (coach === "Jim Bush") {
+                    return "Men’s track and field"
+                }
+                if (coach === "Guy Baker") {
+                    return "Men’s water polo"
+                }
+            }
+
+            var options = {
+                // String - Template string for single tooltips
+                tooltipTemplate: function(valuesObject) {
+                    console.log(valuesObject);
+                    ret = valuesObject.label + " (" + getSport(valuesObject.label) + ")" + " : "  + valuesObject.value; 
+                    return ret;
+                }
+                // "<%if (label){%><%=label %>: <%}%> <%=  + value %>",
+                // String - Template string for multiple tooltips
+                // multiTooltipTemplate: "<%= value + ' %' %>",
+            };
+
+            new Chart(coaches).Bar(coachData, options);
 
             var schoolData = {
 
-                labels: ["UCLA", "Stanford", "USC", "OSU", "Penn State", "Arkansas", "Texas", "LSU", "UNC", "Michigan"],
+                labels: ["UCLA", "Stanford", "USC", "Oklahoma State", "Penn State", "Arkansas", "Texas", "LSU", "UNC", "Michigan"],
 
                 datasets: [
                     {
-                            label: "Women's Titles",
+                            label: "Womens",
                             fillColor: '#FF0099',
                             data: [39, 45, 16, 0, 10, 1, 23, 25, 29, 2]
                     },
 
                     {
-                        label: "Co-Ed Titles",
+                        label: "Co-Ed",
                         fillColor: '#909090',
                         data: [0, 0, 0, 0, 13, 0, 0, 0, 0, 0]
 
                     },
 
                     {
-                            label: "Men's Titles",
+                            label: "Mens",
                             fillColor: '#0099FF',
                             data: [73, 61, 84, 51, 23, 42, 20, 17, 11, 34]
                     }
@@ -136,9 +193,11 @@
             // get bar chart canvas
             var schools = document.getElementById("schools").getContext("2d");
             // draw bar chart
+
             new Chart(schools).StackedBar(schoolData, {
-                multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"          
-            });
+                    multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"          
+                });
+
         </script>
     </body>
 </html>

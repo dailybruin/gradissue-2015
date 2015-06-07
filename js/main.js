@@ -1,5 +1,51 @@
+var sectionName; var section = []; var masterarray = [];
+
 $(document).foundation();
 
+var dsthtml;
+var dashsidebartemplate;
+var dbthtml;
+var dashbodytemplate;
+
+Handlebars.registerHelper("formatBodyText", function(t) {
+	t = t.trim();
+    return (t.length>0?'<p>'+t.replace(/[\r\n]+/,'</p><p>')+'</p>':null);
+});
+
+function changeStory(item) {
+	$('.dashboard-item').removeClass('dashboard-active')
+	$(item).addClass('dashboard-active');
+}
+
+function getSection(name) {
+	var buffer = [];
+	for (var i = 0; i < masterarray.length; i++) {
+		if (masterarray[i].section == name) {
+			buffer.push(masterarray[i]);
+		};
+	};
+	return buffer;
+};
+
+function switchSection(name) {
+	sectionName = name;
+	section = getSection(name);
+};
+
+/*
+$(document).keydown(function(event) {
+	if (event.which == 78) {
+		switchSection("video");
+		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+		$("#dash-content").html(dashbodytemplate(section[0]));
+	};
+	if (event.which == 80) {
+		switchSection("news");
+		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+		$("#dash-content").html(dashbodytemplate(section[0]));
+	};
+});
+*/
 
 $(document).ready(function() {
 	$('.slick').slick({
@@ -30,6 +76,8 @@ $(document).ready(function() {
 
 
 
+
+
 	$("#simple3D").simple3D({
 		moveX:3, // 1 - 5
 		moveY:3, // 1 - 5
@@ -47,48 +95,77 @@ $(document).ready(function() {
       color: 'lightgrey'
   });
 
+	$('#dashboard-content').slimScroll({
+      height: '700px',
+      allowPageScroll: false,
+      distance: '-10px', 
+      alwaysVisible: true,
+      railVisible: false
+  });
+
+
+
+	dsthtml = $("#dash-sidebar-template").html();
+	dashsidebartemplate = Handlebars.compile(dsthtml);
+	dbthtml = $("#dash-body-template").html();
+	dashbodytemplate = Handlebars.compile(dbthtml);
 
 
 	var masterurl = "https://spreadsheets.google.com/feeds/list/1i5ecrrYy3IYiiabc8Hq_rEfxar2dJlKbox2qgpldcWI/default/public/values?alt=json";
-	var entrysource = $("#entry-template").html();
-	var entrytemplate = Handlebars.compile(entrysource);
-
 	$.getJSON(masterurl, function(data) {
 		data = clean_google_sheet_json(data);
+		masterarray = data;
+		switchSection("news");
+		console.log(section);
+		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
+		$("#dash-content").html(dashbodytemplate(section[0]));
+	});
+
 		console.log(data);
-		var html = entrytemplate({stories: data});
-		console.log(html);
-		$("#dash-append").append(html);
+		var html = dashsidebartemplate({stories: data});
+		var html2 = dashbodytemplate(data[0]);
+		$("#dashboard-container").html(html);
+		$("#dashboard-content").html(html2);
+
+		var item = $('.dashboard-item')[0]; 
+		changeStory(item);
+
+		$('.dashboard-item').on('click', function() {
+			changeStory(this);
+		});
 	});	
+
+
+//	console.log(masterarray);
+//	section = getSection("news", masterarray);
+	$('#fullpage').fullpage({
+		anchors: ['first', 'second', 'third', 'fourth'],
+	  // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
+	  navigation: true,
+	  navigationPosition: 'right',
+	  // navigationTooltips: ['First', 'Second', 'Third', 'Fourth'],
+	  onLeave: function(index, nextIndex, direction){
+
+	    //after leaving section 2
+	    if(index == 1 && direction =='down'){
+	    	$('#banner > h1').velocity({ opacity: 0 }, { display: "none" });
+	    	$("#simple3D").velocity({ opacity: 0 });
+	    }
+
+	    if(index == 2 && direction =='up'){
+	    	$('#banner > h1').velocity({ opacity: 1 }, { display: "block" });
+	    	$('#simple3D').velocity({ opacity: 1 });
+	    }
+
+	  }
+	});
+
+
 	
 
 
-  $('#fullpage').fullpage({
-  	anchors: ['first', 'second', 'third', 'fourth'],
-    // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
-    navigation: true,
-    navigationPosition: 'right',
-    // navigationTooltips: ['First', 'Second', 'Third', 'Fourth'],
-    onLeave: function(index, nextIndex, direction){
-
-      //after leaving section 2
-      if(index == 1 && direction =='down'){
-      	$('#banner > h1').velocity({ opacity: 0 }, { display: "none" });
-      	$("#simple3D").velocity({ opacity: 0 });
-      }
-
-      if(index == 2 && direction =='up'){
-      	$('#banner > h1').velocity({ opacity: 1 }, { display: "block" });
-      	$('#simple3D').velocity({ opacity: 1 });
-      }
-
-    }
-  });
+  
 });
-
-
-
-
 
 
 

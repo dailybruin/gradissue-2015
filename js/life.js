@@ -145,7 +145,8 @@ function add_study_card(selection) {
 			(hours_studied / 24).toFixed(2) + " days."
 			$(text).html(content);
 			$("#study-content").html(text);
-			$(".share-icon-study.share-icon-fb").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.")
+			$(".share-icon-study.share-icon-fb").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.");
+			$(".share-icon-study.share-icon-twitter").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.")
 		}
 	});
 
@@ -187,6 +188,12 @@ function add_card(section_div_id, card_html, card_div_id) {
             }
         });
 
+        $('.share-button:not(.share-button-' + card_div_id.slice(1) + ')').each(function() {
+            if ($(this).hasClass('share_button_active')) {
+                $(this).toggleClass('share_button_active');
+            }
+        });
+
 		$('.module_share-' + card_div_id.slice(1)).slideToggle(200).toggleClass('module_share_active');
 
         $(this).toggleClass('share_button_active');
@@ -205,6 +212,19 @@ function add_card(section_div_id, card_html, card_div_id) {
 	            picture: el.attr('data-image'),
 	            description: el.attr('data-text')
 	        }, function( response ) { } );
+	    }
+	    else if (platform === 'twitter') {
+			var TWEET_LENGTH = 140;
+			var URL_LENGHTH = 22;  // Twitter 'shortens' all links with their url shortening service
+
+			var url = "http://dailybruin.com"
+			var twitter_intent = "https://www.twitter.com/intent/tweet?url=";
+			var window_settings = 'width=500,height=320,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=200,top=200';
+			if (el.attr('data-text').length + URL_LENGHTH + " @dailybruin".length < TWEET_LENGTH)
+				var tweet = el.attr('data-text') + " @dailybruin";
+			else
+				var tweet = el.attr('data-text');
+			window.open(twitter_intent + encodeURIComponent(url) + '&text=' + encodeURIComponent(tweet), "_blank", window_settings);
 	    }
 	});
 }
@@ -608,7 +628,9 @@ function add_movie_card(movies) {
 		'title' : "<em>" + movies[0]['title'].replace(/^"(.*)"$/, '$1') + "</em>" + " was the top grossing movie",
 		'imgurl': movies[0].imageurl,
 		'rows' : movies.slice(0,5),
-		'credits' : movies[0]['credits']
+		'credits' : movies[0]['credits'],
+		'share_image': movies[0].imageurl,
+		'share_text': movies[0]['title'].replace(/^"(.*)"$/, '$1') + " was the top grossing movie since I've been at UCLA."
 	}
 	var card_html = compile_template_to_html("#movie-template", template_data);
 	add_card("ucla-events", card_html, "#movies");

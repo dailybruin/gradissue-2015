@@ -29,23 +29,39 @@
 		<script src="js/vendor/modernizr.js"></script>
 
         <!-- HANDLEBARS SCRIPTS -->
-
-
-
-        <script id="entry-template" type="text/x-handlebars-template">
-            // {{#each stories}}
-            // <div class="row">
-            //     <h1>{{headline}}</h1>
-            //     <div class="small-3 columns">
-            //         <h3>{{byline-name}}</h3>
-            //     </div>
-            //     <div class="small-9 columns">
-            //         <p>{{body-html}}</p>
-            //     </div>
-            // </div>
-            // {{/each}}
+        <script id="dash-sidebar-template" type="text/x-handlebars-template">
+            {{#each stories}}
+                <div class="dashboard-item" id="{{section}}-{{@index}}">
+                    <h1>{{headline}}</h1>
+                    <div class="item-overlay">
+                        <div class="item-description"></div>
+                    </div>
+                </div>
+            {{/each}}
         </script>
 
+        <script id="dash-body-template" type="text/x-handlebars-template">
+            <h1>{{headline}}</h1>
+            <h3>{{byline-name}}</h3>
+            <h4>{{byline-pos}}</h4>
+            {{{formatBodyText body-html}}}
+        </script>
+
+<!--
+        <script id="entry-template" type="text/x-handlebars-template">
+            {{#each stories}}
+            <div class="row">
+                <h1>{{headline}}</h1>
+                <div class="small-3 columns">
+                    <h3>{{byline-name}}</h3>
+                </div>
+                <div class="small-9 columns">
+                    <p>{{body-html}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </script>
+-->
 	</head>
 	
 	<body>
@@ -153,14 +169,13 @@
                     <section class="top-bar-section">
                       <!-- Right Nav Section -->
                       <ul class="right">
-                        <li class="active"><a href="#">Right Button Active</a></li>
-                        <li class="has-dropdown">
-                          <a href="#">Right Button Dropdown</a>
-                          <ul class="dropdown">
-                            <li><a href="#">First link in dropdown</a></li>
-                            <li class="active"><a href="#">Active link in dropdown</a></li>
-                          </ul>
-                        </li>
+                        <li class="active"><a href="#">News</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">A&E</a></li>
+                        <li><a href="#">Opinion</a></li>
+                        <li><a href="#">Video</a></li>
+                        <li><a href="#">Radio</a></li>
+
                       </ul>
 
                       <!-- Left Nav Section -->
@@ -171,62 +186,28 @@
                   </nav>
 
                 <div class="row" style="height: 95%; margin:0;">
-                    <div class="small-12 large-4 columns" style="padding: 0px; margin: 0px;"> 
-                        <div id="dashboard-container">
-                            <div style="width: 100%;">
+                    <div class="small-12 medium-4 columns" style="padding: 0px; margin: 0px;"> 
+                        <div id="dashboard-container" style="width: 100%;">
 
-                                <div class="dashboard-item">
-                                    <h1>yoyoyoyo</h1>
+                            <div class="dashboard-item">
+                                <h1>yoyoyoyo</h1>
 
-                                    <div class="item-overlay">
-                                        <div class="item-description"></div>
-                                    </div>
+                                <div class="item-overlay">
+                                    <div class="item-description"></div>
+                                </div>
+                              </div>
 
 
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>yoyoyo</h1>
-                                </div>
-                                <div class="dashboard-item">
-                                    <h1>asdfasdf</h1>
-                                </div>
-                            </div>
                         </div>
                             
 
                         
                     </div>
                     
-                    <div class="small-10 medium-8 large-8 columns">
-                        
-                        <h1>HISDKL:FJDLS:F</h1>
+                    <div class="small-12 medium-8 large-8 columns">
+                        <div id="dashboard-content">
+
+                        </div>
                     </div>
                     
                 </div>
