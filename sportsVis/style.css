@@ -4,6 +4,32 @@ h1
 	color: white;
 }
 
+.banner {
+	height: 100%;
+	width: 100%;
+	background: url("http://dailybruin.com/images/2015/06/sports-vis-cover.jpg");
+	background-size: auto 100%;
+	background-position-x: 80px;
+}
+
+.banner h1 {
+	text-align: left;
+	padding-left: 10%;
+	
+}
+
+@media only screen and (max-width: 40em) { 
+	.banner {
+		background-position-x: -420px;
+	}
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) { 
+	.banner {
+		background-position-x: -200px;
+	}
+}
+
 body
 {
 	background-color: black;
