@@ -81,6 +81,19 @@
 	background-color: #D8D8D8; 
 }
 
+#dashboard-content {
+	padding: 20px;
+
+	h1 {
+		font-family: 'Source Sans Pro', sans-serif;
+		text-transform: uppercase; 
+	}
+
+	p {
+		font-family: 'Open Sans', sans-serif; 
+	}
+}
+
 #dashboard-container {
 	width: 100%;
 	border-right: 4px solid whitesmoke;

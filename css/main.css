@@ -9471,31 +9471,45 @@ th.hide-for-touch {
 }
 
 /* line 84, ../scss/main.scss */
+#dashboard-content {
+  padding: 20px;
+}
+/* line 87, ../scss/main.scss */
+#dashboard-content h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  text-transform: uppercase;
+}
+/* line 92, ../scss/main.scss */
+#dashboard-content p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* line 97, ../scss/main.scss */
 #dashboard-container {
   width: 100%;
   border-right: 4px solid whitesmoke;
 }
 
-/* line 89, ../scss/main.scss */
+/* line 102, ../scss/main.scss */
 #container {
   min-height: 900px;
   width: 100%;
   position: absolute;
 }
 
-/* line 95, ../scss/main.scss */
+/* line 108, ../scss/main.scss */
 #simple3D {
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 900px;
 }
-/* line 101, ../scss/main.scss */
+/* line 114, ../scss/main.scss */
 #simple3D div {
   min-height: 110%;
   width: 120%;
 }
-/* line 105, ../scss/main.scss */
+/* line 118, ../scss/main.scss */
 #simple3D div.dot {
   background: url(../img/dot2.png);
   -webkit-filter: grayscale(100%);
@@ -9506,14 +9520,14 @@ th.hide-for-touch {
   opacity: 0.2;
 }
 
-/* line 113, ../scss/main.scss */
+/* line 126, ../scss/main.scss */
 section {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
-/* line 120, ../scss/main.scss */
+/* line 133, ../scss/main.scss */
 #banner {
   background: url(../img/banner.jpg);
   background-size: cover;
@@ -9522,7 +9536,7 @@ section {
   position: relative;
   top: 20%;
 }
-/* line 131, ../scss/main.scss */
+/* line 144, ../scss/main.scss */
 #banner h1 {
   z-index: 2;
   font-family: 'Helvetica', serif;
@@ -9537,19 +9551,19 @@ section {
   background: white;
 }
 
-/* line 149, ../scss/main.scss */
+/* line 162, ../scss/main.scss */
 .item {
   overflow: hidden;
   margin-bottom: 10px;
   margin-bottom: 0px;
   height: 175px;
 }
-/* line 154, ../scss/main.scss */
+/* line 167, ../scss/main.scss */
 .item h6 {
   margin-top: 0;
 }
 
-/* line 163, ../scss/main.scss */
+/* line 176, ../scss/main.scss */
 .section-overlay, .item-overlay {
   top: -50%;
   position: relative;
@@ -9561,7 +9575,7 @@ section {
   -o-transform: skew(-25deg);
   transform: skew(-25deg);
 }
-/* line 170, ../scss/main.scss */
+/* line 183, ../scss/main.scss */
 .section-overlay:hover .item-description, .item-overlay:hover .item-description {
   -webkit-transform: translateX(65%);
   -moz-transform: translateX(65%);
@@ -9569,17 +9583,17 @@ section {
   -o-transform: translateX(65%);
   transform: translateX(65%);
 }
-/* line 174, ../scss/main.scss */
+/* line 187, ../scss/main.scss */
 .section-overlay:hover, .item-overlay:hover {
   cursor: pointer;
 }
 
-/* line 181, ../scss/main.scss */
+/* line 194, ../scss/main.scss */
 .item-overlay {
   top: -75%;
 }
 
-/* line 187, ../scss/main.scss */
+/* line 200, ../scss/main.scss */
 .item-description {
   padding: 10px;
   background-color: #4FBDB5;
@@ -9600,13 +9614,13 @@ section {
   -o-transition: transform 350ms ease-in-out;
   transition: transform 350ms ease-in-out;
 }
-/* line 203, ../scss/main.scss */
+/* line 216, ../scss/main.scss */
 .item-description h6 {
   color: black;
   font-family: 'Lora', serif;
 }
 
-/* line 210, ../scss/main.scss */
+/* line 223, ../scss/main.scss */
 .item-name {
   position: absolute;
   pointer-events: none;
@@ -9615,7 +9629,7 @@ section {
   right: 30%;
   background-color: white;
 }
-/* line 220, ../scss/main.scss */
+/* line 233, ../scss/main.scss */
 .item-name h3 {
   padding: 5px 10px;
   color: black;
