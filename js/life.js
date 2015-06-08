@@ -26,17 +26,29 @@ cards_in_divs = {};
 
 card_ids = [];
 
+data_loaded = false;
+
 $("#submit-button").click(function(){
+	document.getElementById("header-video").pause();
 	var selection = $("#select-quarter").val();
 	process_data(selection);
-	//window.location.search = "start=" + $("#select-quarter").val();
 })
 
 $(document).ready(function(){
+	$("#footer").hide();
+	$('#fullpage').fullpage({
+		scrollOverflow: true,
+		scrollBar: true,
+		autoScrolling: false,
+		verticalCentered: false,
+		fitToSection: false
+	});
+
 	$(".category-header").hide();
 	if (window.location.search) {
 		var selection = window.location.search.split('=')[1].slice(0, 8);
-		process_data(selection);
+		if (selection in selection_to_datestring) 
+			process_data(selection);
 	}
 });
 
@@ -48,6 +60,16 @@ function clear_divs() {
 
 //$(document).ready(function(){
 function process_data(selection) {
+	$("#footer").fadeIn();
+	$("#main-content").addClass("section");
+	$('#fullpage').fullpage({
+		scrollOverflow: true,
+		scrollBar: true,
+		autoScrolling: false,
+		verticalCentered: false,
+		fitToSection: false
+	});
+	$("html, body").animate({scrollTop: $('#ucla-events').offset().top }, 2000);
 	cards_in_divs = {};
 	card_ids = [];
 	clear_divs();
@@ -56,80 +78,86 @@ function process_data(selection) {
 	//var selection = window.location.search.split('=')[1].slice(0, 8);
 	// check to see that we have a valid selection
 	if (selection in selection_to_datestring) {
-		$(".category-header").fadeIn(200);
 		
 		// fix selection in dropdown
 		document.getElementsByName('start')[0].value = selection;
 
 	    url = "https://spreadsheets.google.com/feeds/list/1JFFjBvaO_PAs3d0jFWYmgXnh3A00MSeg3G4G1qYC46w/od6/public/values?alt=json"
-		$.getJSON(url, function(json){
-
-			var data = clean_google_sheet_json(json);
-
-			// filters out data points that are older than selected date
-			data = _.filter(data, function(datum) {
-				var timestamp = Date.parse(datum.date);
-				var now = new Date();
-				return timestamp >= Date.parse(selection_to_datestring[selection]) && timestamp <= Date.parse(now);
+		// really only need to load the original data once
+		if (!data_loaded){
+			$.getJSON(url, function(json){
+				data_loaded = true;
+				original_data = clean_google_sheet_json(json);
+				display_cards(original_data, selection);
 			});
-
-
-			var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
-			var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
-			var championships = _.filter(data, function(datum) {return datum.id === "championships"; });
-			var pro_athletes = _.filter(data, function(datum) {return datum.id === "pro-athlete"; });
-			var usc_football_games = _.filter(data, function(datum) {return datum.id === "usc-football"; });
-			var basketball_records = _.filter(data, function(datum) {return datum.id === "basketball"; });
-			var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
-			var football_records = _.filter(data, function(datum) {return datum.id === "football"; });
-			var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
-			var movies = _.filter(data, function (datum) { return datum.type === "movie"; });
-			var songs = _.filter(data, function(datum) { return datum.type === "song"; });
-			add_study_card(selection);
-			add_construction_card(construction_events);
-			add_cost_card(costs);
-			if (nobels.length > 0)
-				add_nobel_card(nobels);
-			if (championships.length > 0)
-				add_championships_card(championships);
-			if (pro_athletes.length > 0)
-				add_pro_atheletes_card(pro_athletes);
-			if (usc_football_games.length > 0)
-				add_usc_football_games_card(usc_football_games);
-			if (songs.length > 0)
-				add_song_card(songs);
-			add_basketball_records_card(basketball_records);
-			add_football_records_card(football_records);
-			add_ucla_event_cards(events);
-			add_movie_card(movies);
-
-
-
-			// if mobile, cards need to fade in a different order (vertical first)
-			// if on desktop, cards need to fade in horizontally
-			card_ids = _.filter(card_ids, function(card_id) {return card_id;});
-		
-			//console.log(card_ids);
-			if (window.mobilecheck())
-				card_ids = horizontal_to_vertical_order(card_ids);
-			$('.flexslider').flexslider({
-				controlNav: false
-			});			
-			fade_in_cards(card_ids);
-			//console.log(card_ids);
-
-		});
+		} else {
+			display_cards(original_data, selection);
+		}
 	}
 //}); // for document ready
 }; // for processData()
 
 
+function display_cards(original_data, selection) {
+	// filters out data points that are older than selected date
+	data = _.filter(original_data, function(datum) {
+		var timestamp = Date.parse(datum.date);
+		var now = new Date();
+		return timestamp >= Date.parse(selection_to_datestring[selection]) && timestamp <= Date.parse(now);
+	});
+	var events = _.filter(data, function(datum) {return datum.type === "event" && datum.category === "ucla-events"} );
+	var nobels = _.filter(data, function(datum) {return datum.id === "nobel"; });
+	var championships = _.filter(data, function(datum) {return datum.id === "championships"; });
+	var pro_athletes = _.filter(data, function(datum) {return datum.id === "pro-athlete"; });
+	var usc_football_games = _.filter(data, function(datum) {return datum.id === "usc-football"; });
+	var basketball_records = _.filter(data, function(datum) {return datum.id === "basketball"; });
+	var construction_events = _.filter(data, function(datum) {return datum.id === "construction"; });
+	var football_records = _.filter(data, function(datum) {return datum.id === "football"; });
+	var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
+	var movies = _.filter(data, function (datum) { return datum.type === "movie"; });
+	var songs = _.filter(data, function(datum) { return datum.type === "song"; });
+    // add_netflix_card(selection);
+	add_cost_card(costs);
+	if (nobels.length > 0)
+		add_nobel_card(nobels);
+	add_construction_card(construction_events);
+	if (championships.length > 0)
+		add_championships_card(championships);
+	if (pro_athletes.length > 0)
+		add_pro_atheletes_card(pro_athletes);
+	add_study_card(selection);
+	if (usc_football_games.length > 0)
+		add_usc_football_games_card(usc_football_games);
+	if (songs.length > 0)
+		add_song_card(songs);
+	add_basketball_records_card(basketball_records);
+	add_football_records_card(football_records);
+	add_movie_card(movies);
+	add_ucla_event_cards(events);
+
+
+
+	// if mobile, cards need to fade in a different order (vertical first)
+	// if on desktop, cards need to fade in horizontally
+	card_ids = _.filter(card_ids, function(card_id) {return card_id;});
+
+	//console.log(card_ids);
+	if (window.mobilecheck())
+		card_ids = horizontal_to_vertical_order(card_ids);
+	$('.flexslider').flexslider({
+		controlNav: false
+	});			
+	fade_in_cards(card_ids);
+	$("#footer").fadeIn();
+	//console.log(card_ids);
+}
 
 function add_study_card(selection) {
 	var template_data = {
 		id: 'study',
-		question: "How many hours a week do you study?",
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
+		question: "About many hours a week do you study?",
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/life/study.jpg',
+		'imgurl': 'http://daily-bruin.github.io/gradissue-2015/img/life/study.jpg',
 		'share_text': "Calculate how many hours you've studied since you've been to UCLA"  // Default share text before they inputted a number
 	}
 	var card_html = compile_template_to_html("#custom-calculator", template_data);
@@ -139,14 +167,59 @@ function add_study_card(selection) {
 		var num = Number.parseFloat($("#study-input").val());
 		if (num) {
 			num = num < 0 ? 0 : num;
-			var text = document.createElement("p");
+			var div = document.createElement("div");
+			var pretext = document.createElement("h4");
 			var hours_studied = Math.floor(selection_to_quarters_attended[selection] * num * 10);
-			var content = "You've studied for about " + hours_studied + " hours at UCLA or " + 
-			(hours_studied / 24).toFixed(2) + " days."
-			$(text).html(content);
-			$("#study-content").html(text);
-			$(".share-icon-study.share-icon-fb").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.");
-			$(".share-icon-study.share-icon-twitter").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA.")
+			pretext.innerHTML = "You've studied for about ";
+			var bignumber = document.createElement("h2");
+			$(bignumber).addClass("big-number");
+			bignumber.innerHTML = hours_studied;
+			var posttext = document.createElement("h4");
+			posttext.innerHTML = "hours or " + (hours_studied / 24).toFixed(2) + " days at UCLA";
+			$(div).append(pretext);
+			$(div).append(bignumber);
+			$(div).append(posttext);
+			$("#study-content").html(div);
+			$(".share-icon-study.share-icon-fb").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA. See how long you've studied at Your Time at UCLA.");
+			$(".share-icon-study.share-icon-twitter").attr("data-text", "I've studied for about " + hours_studied + " hours at UCLA. See how long you've studied at Your Time at UCLA.")
+		}
+	});
+
+}
+
+function add_netflix_card(selection) {
+	var template_data = {
+		id: 'netflix',
+		question: "About many hours of Netflix do you watch per week?",
+		'share_image': 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Netflix_2014_logo.svg/500px-Netflix_2014_logo.svg.png',
+		'imgurl': 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Netflix_2014_logo.svg/500px-Netflix_2014_logo.svg.png',
+		'share_text': "Calculate how many hours you've spent watching Netflix since you've been to UCLA"  // Default share text before they inputted a number
+	}
+	var card_html = compile_template_to_html("#custom-calculator", template_data);
+	add_card("ucla-events", card_html, "#netflix");
+
+	$("#netflix").click(function() {
+		var num = Number.parseFloat($("#netflix-input").val());
+		if (num) {
+			var today = new Date();
+			var start_date = new Date(selection_to_datestring[selection]);
+			var weeks_between = Math.floor((today - start_date) / (1000 * 60 * 60 * 24 * 7));
+			num = num < 0 ? 0 : num;
+			var div = document.createElement("div");
+			var pretext = document.createElement("h4");
+			var hours_watched = Math.floor(num * weeks_between);
+			pretext.innerHTML = "You've watched about ";
+			var bignumber = document.createElement("h2");
+			$(bignumber).addClass("big-number");
+			bignumber.innerHTML = hours_watched;
+			var posttext = document.createElement("h4");
+			posttext.innerHTML = "hours or " + (hours_watched / 24).toFixed(2) + " days at UCLA";
+			$(div).append(pretext);
+			$(div).append(bignumber);
+			$(div).append(posttext);
+			$("#netflix-content").html(div);
+			$(".share-icon-study.share-icon-fb").attr("data-text", "I've watched about " + hours_watched + " hours of Netflix since being at UCLA.");
+			$(".share-icon-study.share-icon-twitter").attr("data-text", "I've watched about " + hours_watched + " hours of Netflix since being at UCLA.")
 		}
 	});
 
@@ -207,7 +280,7 @@ function add_card(section_div_id, card_html, card_div_id) {
 	    if(platform === 'facebook') {
 	        FB.ui({
 	            method: 'feed',
-	            name: 'Your Life At UCLA | Daily Bruin',
+	            name: 'Your Time at UCLA | Daily Bruin',
 	            link: window.location.href,
 	            picture: el.attr('data-image'),
 	            description: el.attr('data-text')
@@ -217,7 +290,7 @@ function add_card(section_div_id, card_html, card_div_id) {
 			var TWEET_LENGTH = 140;
 			var URL_LENGHTH = 22;  // Twitter 'shortens' all links with their url shortening service
 
-			var url = "http://dailybruin.com"
+			var url = window.location.href;
 			var twitter_intent = "https://www.twitter.com/intent/tweet?url=";
 			var window_settings = 'width=500,height=320,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=200,top=200';
 			if (el.attr('data-text').length + URL_LENGHTH + " @dailybruin".length < TWEET_LENGTH)
@@ -226,15 +299,43 @@ function add_card(section_div_id, card_html, card_div_id) {
 				var tweet = el.attr('data-text');
 			window.open(twitter_intent + encodeURIComponent(url) + '&text=' + encodeURIComponent(tweet), "_blank", window_settings);
 	    }
+	    else if (platform === 'gplus') {
+			var url = window.location.href;
+			var gplus_share_endpoint = "https://plus.google.com/share?url=";
+			var window_settings = 'width=500,height=320,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=200,top=200';
+
+			window.open(gplus_share_endpoint + encodeURIComponent(url), "_blank", window_settings);
+
+	    }
 	});
 }
 
 
 function add_song_card(songs) {
+	var song_array = [];
+	for (var key in songs) {
+		song_array.push(songs[key]['title']);
+	}
+
+	var share_text = "";
+	switch(song_array.length) {
+		case 1: share_text += song_array[0] + " was the song of the summer"; break;
+		case 2: share_text += song_array[0] + " and " + song_array[1] + " were the songs of the summer"; break;
+		case 3: share_text += song_array[0] + ", " + song_array[1] + ", and " + song_array[2] + " were the songs of the summer"; break;
+		case 4: share_text += song_array[0] + ", " + song_array[1] + ", " + song_array[2] + ", and " + song_array[3] + " were the songs of the summer"; break;
+		case 5: share_text += song_array[0] + ", " + song_array[1] + ", " + song_array[2] + ", " + song_array[3] + ", and " + song_array[4] + " were the songs of the summer"; break;
+		default: share_text = "These were the songs of the summer "
+	}
+
+	share_text += " while I was at UCLA. Discover what else has happened in Your Time at UCLA."
+
 	var template_data = {
 		'id': 'songs',
 		'title': 'These were the songs of the summer',
 		'rows': _.sortBy(songs, function(song) {return song.category; }),
+		'share_image': songs[0].imageurl,
+		'share_text': share_text,
+		'twitter_share_text': "These were the songs of the summer while I was at UCLA"
 	};
 
 	var card_html = compile_template_to_html("#slideshow-template", template_data);
@@ -267,8 +368,8 @@ function add_construction_card(events) {
 		'pretext' : 'UCLA has spent',
 		'singlestat' : "$" + addCommas(sum(chart_data)),
 		'posttext' : 'on finished construction and renovation projects.',
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
-		'share_text': "UCLA spent " + "$" + addCommas(sum(chart_data)) + " on finished construction and renovation projects since I've been here."
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/life/chart.png',
+		'share_text': "UCLA spent " + "$" + addCommas(sum(chart_data)) + " on finished construction and renovation projects since I've been here. Discover what else has happened in Your Time at UCLA."
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -337,8 +438,8 @@ function add_cost_card(costs) {
 		'singlestat' :  (in_state_diff*100-100).toFixed(2) + "%",
 		'toggle': true,
 		'canvasheight': 'height="300px"',
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
-		'share_text': "Cost of tution increased by " + "$" + (in_state_diff*100-100).toFixed(2) + "%" + " at UCLA since I've been here"
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/life/chart.png',
+		'share_text': "Cost of tution increased by " + "$" + (in_state_diff*100-100).toFixed(2) + "%" + " at UCLA since I've been here. Discover what else has changed in Your Time at UCLA."
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -416,7 +517,7 @@ function add_nobel_card(nobels) {
 		'posttext': nobels.length === 1 ? 'Nobel Prize' : 'Nobel Prizes',
 		'rows': nobels,
 		'share_image': 'http://dailybruin.com/images/2015/05/nobel.png',
-		'share_text': 'UCLA Faculty and Alumni have won ' +  nobels.length + (nobels.length === 1 ? ' Nobel Prize' : ' Nobel Prizes') + " since I've been here."
+		'share_text': 'UCLA Faculty and Alumni have won ' +  nobels.length + (nobels.length === 1 ? ' Nobel Prize' : ' Nobel Prizes') + " since I've been here. Discover what else has happened in Your Time at UCLA."
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//console.log(card_html);
@@ -436,7 +537,7 @@ function add_championships_card(championships) {
 		'posttext': championships.length === 1 ? 'NCAA Championship' : 'NCAA Championships',
 		'rows': championships,
 		'share_image': 'http://dailybruin.com/images/2014/10/trophy-376x640.png',
-		'share_text': 'UCLA has won ' +  championships.length + (championships.length === 1 ? ' NCAA Championship' : ' NCAA Championships') + " since I've been here."
+		'share_text': 'UCLA has won ' +  championships.length + (championships.length === 1 ? ' NCAA Championship' : ' NCAA Championships') + " since I've been here. Discover what else has happened in UCLA sports in Your Time at UCLA."
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	//$("#ucla-events-left").append(card_html);
@@ -454,8 +555,8 @@ function add_pro_atheletes_card(pro_athletes) {
 		'singlestat': pro_athletes.length,
 		'posttext': 'UCLA athletes who have gone pro.',
 		'rows': pro_athletes,
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
-		'share_text': "There have been at least " + pro_athletes.length + " UCLA athletes who have gone pro since I've been here."
+		'share_image': 'http://dailybruin.com/images/49829_web.sp.6.11.russellwestbrook.picao.jpg',
+		'share_text': "There have been at least " + pro_athletes.length + " UCLA athletes who have gone pro since I've been here. Discover what else has happened in UCLA sports in Your Time at UCLA."
 	}
 	var card_html = compile_template_to_html("#single-number-template-wrap", data);
 	add_card("ucla-events", card_html, "#pro_athletes");
@@ -472,7 +573,7 @@ function add_usc_football_games_card(usc_football_games) {
 		'rows': usc_football_games,
 		'imageurl' : 'http://dailybruin.com/images/2013/11/80851f22-b618-4a8c-affc-2944b29dfd531-640x427.jpg',
 		'share_image': 'http://dailybruin.com/images/2013/11/80851f22-b618-4a8c-affc-2944b29dfd531-640x427.jpg',
-		'share_text': 'UCLA beat USC ' + usc_football_games.length + (usc_football_games.length === 1 ? ' time in football.' : " times in football") + " since I've been here."
+		'share_text': 'UCLA beat USC ' + usc_football_games.length + (usc_football_games.length === 1 ? ' time in football.' : " times in football") + " since I've been here. Discover what else has happened in UCLA sports in Your Time at UCLA."
 	}
 	var card_html = compile_template_to_html("#single-number-template", data);
 	add_card("ucla-events", card_html, "#usc_football_games");
@@ -505,8 +606,10 @@ function add_basketball_records_card(basketball_records) {
 		'singlestat' :  total_wins_num + "-" + total_losses_num,
 		'posttext': "in men's basketball.",
 		'canvasheight': 'height="300px"',
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
-		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in men's basketball at UCLA since I've been here"
+		'share_image': 'http://dailybruin.com/images/2015/04/web.sp_.4.10.mbb_.KM_-640x475.jpg',
+		'imgurl': 'http://dailybruin.com/images/2015/04/web.sp_.4.10.mbb_.KM_-640x475.jpg',
+		'imgcredits': '(Daily Bruin file photo)',
+		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in men's basketball since I've been here. Discover what else has happened in UCLA sports in Your Time at UCLA."
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -569,8 +672,10 @@ function add_football_records_card(football_records) {
 		'singlestat' :  total_wins_num + "-" + total_losses_num,
 		'posttext': "in men's football.",
 		'canvasheight': 'height="300px"',
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
-		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in football at UCLA since I've been here"
+		'share_image': 'http://dailybruin.com/images/2014/12/web.picB_.AYu_-640x426.jpg',
+		'imgurl': 'http://dailybruin.com/images/2014/12/web.picB_.AYu_-640x426.jpg',
+		'imgcredits': '(Daily Bruin file photo)',
+		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in football at UCLA since I've been here. Discover what else has happened in UCLA sports in Your Time at UCLA."
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -630,7 +735,7 @@ function add_movie_card(movies) {
 		'rows' : movies.slice(0,5),
 		'credits' : movies[0]['credits'],
 		'share_image': movies[0].imageurl,
-		'share_text': movies[0]['title'].replace(/^"(.*)"$/, '$1') + " was the top grossing movie since I've been at UCLA."
+		'share_text': movies[0]['title'].replace(/^"(.*)"$/, '$1') + " was the top grossing movie since I've been at UCLA. Discover what else has happened in Your Time at UCLA."
 	}
 	var card_html = compile_template_to_html("#movie-template", template_data);
 	add_card("ucla-events", card_html, "#movies");
@@ -662,12 +767,15 @@ function addCommas(nStr)
 }
 
 function fade_in_cards(card_ids) {
+	$(".category-header").fadeIn(200);
 	$(".card").hide();
+	setTimeout(function(){
+		for (var i = 0; i < card_ids.length; i++) {
+			$(card_ids[i]).delay(i*500).fadeIn(500);
+		}
+	}, 1500);
 	//console.log(card_ids);
 	//$(card_ids.join(", ")).hide();
-	for (var i = 0; i < card_ids.length; i++) {
-		$(card_ids[i]).delay(i*500).fadeIn(500);
-	}
 }
 
 function get_card_ids_by_column(main_div_id) {

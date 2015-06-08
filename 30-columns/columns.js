@@ -20,10 +20,11 @@ $(document).ready(function(){
             
             if (location.hash == "") {
                 $('.article').hide();
+                $('#Chancellor').show();
                 $('#descriptor').show();
             } else {
-                $('#descriptor').hide();
                 $('.article').hide();
+                  $('#descriptor').show();
                 $(location.hash).show();
             }
         });

@@ -1,7 +1,45 @@
-header{
-  background-image: url(image/bunny2.jpg);
+#overlay img{
+  width:100%;
+  height:auto;
+
+}
+#overlay{
+  margin-top:20px;
+  margin-bottom: 17px;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+html {
+    background-image: url("./image/bg.png");
+}
+#descriptor p {
+  margin-top: 15px;
 }
 
+p{
+  
+}
+#layer {
+  position: absolute;
+  z-index: 4;
+  width: 100%;
+  left: 0;
+  top: 65px;
+  text-align: center;
+  background-color: rgba(0,0,0,0.5);
+  padding:3%;
+}
+.top{
+  top:0px;
+  position: absolute;
+}
+#banner{
+  width:100%;
+  top: 0px;
+  z-index: -10;
+  display: block;
+}
 .right {
   float:right;
 }
@@ -12,10 +50,9 @@ header{
 text-align:center;
 } 
 
-
 ul a {
   position: relative;
-  display: inline-block;
+  display: block;
 }
 
 li{
@@ -47,13 +84,15 @@ height: auto;
   }
   
   .teaser {
-  width: 60%;
+ 
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
   color: white;
   font-size: 1em;
+  text-align: center;
   text-shadow: 0 0 20px black;
   opacity: 0;
   font-family: 'proxima-nova', 'Helvetica', 'Avenir', 'Arial', sans-serif;
@@ -64,11 +103,9 @@ height: auto;
 }
 
 
+
 [class*="block-grid-"]>li{
-  padding-top: 0px;
-  padding-right: 0.5rem;
-  padding-bottom: 1.0rem;
-  padding-left: 0.5rem;
+
 }
 .flex-video{
   margin-left:1%;
@@ -109,7 +146,6 @@ footer {
 
 .mug{
   margin-right:10%;
-
 }
 #profile-wrap{
   width:85%;
@@ -117,8 +153,30 @@ footer {
   margin-left: 5%
 }
 #tagline{
-  text-align: center;
-  padding: 5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+#tagline h4{
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  font-weight: 100;
+  margin: 0px;
+}
+#tagline h1{
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  font-size: 300%;
+  font-weight: 500;
+   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+
+h1{
+   font-family: 'Raleway', sans-serif;
+   font-weight: 100;
+   margin: 0px;
+}
 }
 .blurb{
   padding: 2%;
@@ -137,8 +195,14 @@ footer {
 }
 
 #descriptor{
+  padding-top: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0,0,0, 0.1);
+  border-top: 1px solid rgba(0,0,0, 0.1);
   margin-left: auto;
   margin-right: auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .article {
@@ -146,14 +210,18 @@ footer {
   padding-right: 7%;
 }
 
-#descriptor h1 .article h1 {
-    font-family: 'Roboto Condensed', sans-serif;
+#descriptor h3 {
+    font-weight: 100;
+    font-family: 'Raleway', sans-serif;
     line-height: 1em;
     margin: 10px 0 0 0;
 }
 
 p {
     line-height: 1.4em;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+
 }
 
 .thumb img {

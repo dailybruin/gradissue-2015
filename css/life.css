@@ -31,14 +31,11 @@
 
 .card {
 	position: relative;
+	border: 1px solid rgb(0, 140, 186);
 }
 
 .card:hover {
 	border-color: steelblue;
-}
-
-#page-title {
-	text-align: center;
 }
 
 #pro_athletes img {
@@ -56,6 +53,8 @@
 
 .card header {
 	height: 40px;
+	background-color: rgb(0, 140, 186);
+	margin-bottom: 1.4em;
 }
 
 .share-button div {
@@ -64,11 +63,11 @@
 	float: right;
 	padding-top: 8px;
 	padding-right: 8px;
-	background: url("../img/life/share_icon.png") no-repeat center;
+	background: url("../img/life/share_icon_white.png") no-repeat center;
 }
 
 .share_button_active div {
-	background: url("../img/life/exit_icon.png") no-repeat center;
+	background: url("../img/life/exit_icon_white.png") no-repeat center;
 }
 
 .share-icon {
@@ -136,4 +135,103 @@
 	margin-top: -5px;
 	margin-bottom: 10px;
 	text-align: justify;
+}
+
+/* CSS from https://github.com/alvarotrigo/fullPage.js/blob/master/examples/backgroundVideo.html */
+#header-video{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	top:0;
+	right:0;
+	width: 100%;
+	height: 100%;
+	background-size: 100% 100%;
+	background-color: black; /* in case the video doesn't fit the whole page*/
+	background-image: url('http://dailybruin.com/images/2015/06/life.png');/* our video */;
+	background-position: center center;
+	background-size: contain;
+	object-fit: cover; /*cover video background */
+	z-index:3;
+}
+
+@media screen and (max-device-width: 800px) {
+	#video-header { background: url('http://dailybruin.com/images/2015/06/life-small.png') #000 no-repeat center center fixed; }
+	#header-video { display: none; }
+}
+
+/* Layer with position absolute in order to have it over the video
+* --------------------------------------- */
+#video-header .layer{
+	position: absolute;
+	z-index: 4;
+	width: 100%;
+	left: 0;
+	top: 43%;
+}
+/*solves problem with overflowing video in Mac with Chrome */
+#video-header{
+	overflow: hidden;
+}
+
+#form-selection{
+	background-color: rgba(255,255,255,0.5);
+}
+
+footer {
+	display: block;
+}
+
+.category-header {
+	margin: .5em 0px;
+}
+
+/* fixes Firefox bug where table doesn't scale 
+per https://github.com/zurb/foundation/issues/5576 */
+table {
+	table-layout:fixed;
+	width:100%;
+}
+
+#pre-form {
+	font-size: 1.4em;
+	color: black;
+}
+
+#construction .big-number {
+	font-size: 2.5em;
+}
+
+#page-title, .category-header {
+	font-family: "Century Gothic", sans-serif;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 4em;
+	letter-spacing: 4px;
+  	word-spacing: 5px;
+}
+
+.category-header {
+	font-size: 2.3em;
+}
+
+.image-wrapper {
+	background: white;
+	padding: .7em .7em .5em .7em;
+	border: 1px solid #ddd;
+	margin-bottom: 1em;
+}
+
+.photo-credits, #footer {
+	font-style: italic;
+	float: right;
+	font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+	font-size: .7em;
+	display: block;
+	margin-top: .2em;
+}
+
+#footer {
+	border-top: 1px solid lightgrey;
+	text-align: center;
 }
