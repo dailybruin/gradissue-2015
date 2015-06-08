@@ -22,6 +22,10 @@ function back() {
 }
 
 function changeStory(item) {
+	var prev = $('.dashboard-active');
+	prev.find(">:nth-child(2)").css('width','100%');
+	prev.find(">:nth-child(1)").css('width','0%');
+
 	$('.dashboard-item').removeClass('dashboard-active');
 	$(item).addClass('dashboard-active');
 
