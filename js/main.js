@@ -22,20 +22,24 @@ function back() {
 }
 
 function changeStory(item) {
-	$('.dashboard-item').removeClass('dashboard-active');
-	$(item).addClass('dashboard-active');
+	var name = $(item).find("h4").text();
+	if (name == "LA Summer Preview 2015") {
+		window.open("http://graphics.dailybriun.com/gradissue-2015/summer-la/index.html");
+	} else {
+		$('.dashboard-item').removeClass('dashboard-active');
+		$(item).addClass('dashboard-active');
 
-	var i = (item.id).replace(/index-/,''); 
+		var i = (item.id).replace(/index-/,''); 
 
-	$("#dashboard-content").html(dashbodytemplate(section[i]));
+		$("#dashboard-content").html(dashbodytemplate(section[i]));
 
-	var currentwidth = $(window).width();
+		var currentwidth = $(window).width();
 
-	if (currentwidth < 641) {
-		$('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
-		$('#dashboard-container').parent().hide();
-	}
-
+		if (currentwidth < 641) {
+			$('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
+			$('#dashboard-container').parent().hide();
+		}
+	};
 }
 
 function getSection(name) {
@@ -57,7 +61,7 @@ function switchSection(name) {
 	section = getSection(name);
 
 	$(".right li.active").removeClass("active");
-	
+
 	if (name == "a&amp;e") {
 		$(".right .ae").addClass("active");
 	} else {
@@ -94,20 +98,17 @@ function switchSection(name) {
 
 
 
-/*
-$(document).keydown(function(event) {
-	if (event.which == 78) {
-		switchSection("video");
-		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
-		$("#dash-content").html(dashbodytemplate(section[0]));
-	};
-	if (event.which == 80) {
-		switchSection("news");
-		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
-		$("#dash-content").html(dashbodytemplate(section[0]));
-	};
+Handlebars.registerHelper("debug", function(optionalValue) {
+  console.log("Current Context");
+  console.log("====================");
+  console.log(this);
+ 
+  if (optionalValue) {
+    console.log("Value");
+    console.log("====================");
+    console.log(optionalValue);
+  }
 });
-*/
 
 $(document).ready(function() {
 
@@ -148,6 +149,7 @@ $(document).ready(function() {
 		reverseY: true
 	});
 
+	var winheight = $(window).height().toString() + 'px';
 	var scrollheight = ($(window).height() - 45).toString() + 'px';
 
 	$('#dashboard-container').slimScroll({
@@ -166,6 +168,18 @@ $(document).ready(function() {
       railVisible: false
   	});
 
+
+	if ($(window).width() < 641) {
+			$('#sections-container').slimScroll({
+		      height: winheight,
+		      allowPageScroll: false,
+		      distance: '-10px', 
+		      alwaysVisible: true,
+		      railVisible: false
+		  	});
+
+		};
+  	
 
 	dsthtml = $("#dash-sidebar-template").html();
 	dashsidebartemplate = Handlebars.compile(dsthtml);
@@ -196,21 +210,30 @@ $(document).ready(function() {
 
 		$('.item').on('click', function() {
 			secname = $(this).find("h3").html().toLowerCase();
-			switchSection(secname);
 
-			$('#sections-container').hide();
-			$('#dashboard').show(); 
+			if (secname == 'opinion') {
+				window.open("http://graphics.dailybriun.com/gradissue-2015/30-columns/index.html");
+			} else {
+				switchSection(secname);
 
-			$.fn.fullpage.setMouseWheelScrolling(false);
-    		$.fn.fullpage.setAllowScrolling(false);
-    		$.fn.fullpage.setKeyboardScrolling(false);
-    		$('#fp-nav').hide();
+				$('#sections-container').hide();
+				$('#dashboard').show(); 
+
+				$.fn.fullpage.setMouseWheelScrolling(false);
+	    		$.fn.fullpage.setAllowScrolling(false);
+	    		$.fn.fullpage.setKeyboardScrolling(false);
+	    		$('#fp-nav').hide();
+    		};
 
 		});
 
 		$(".right li").on('click', function() {
 			secname = $(this).find("a").html().toLowerCase();
-			switchSection(secname);
+			if (secname == 'opinion') {
+				window.open("http://graphics.dailybriun.com/gradissue-2015/30-columns/index.html");
+			} else {
+				switchSection(secname);
+			}
 		});
 
 
