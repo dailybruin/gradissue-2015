@@ -124,22 +124,23 @@ $(document).ready(function() {
 		reverseY: true
 	});
 
+	var scrollheight = ($(window).height() - 45).toString() + 'px';
+
 	$('#dashboard-container').slimScroll({
-      height: '700px',
+      height: scrollheight,
       allowPageScroll: false,
       distance: '10px', 
       railOpacity: '0.1',
       color: 'lightgrey'
-  });
+  	});
 
 	$('#dashboard-content').slimScroll({
-      height: '700px',
+      height: scrollheight,
       allowPageScroll: false,
       distance: '-10px', 
       alwaysVisible: true,
       railVisible: false
-  });
-
+  	});
 
 
 	dsthtml = $("#dash-sidebar-template").html();
