@@ -1,7 +1,5 @@
 var sectionName; var section = []; var masterarray = [];
 
-$(document).foundation();
-
 var dsthtml;
 var dashsidebartemplate;
 var dbthtml;
@@ -30,6 +28,13 @@ function changeStory(item) {
 	var i = (item.id).replace(/index-/,''); 
 
 	$("#dashboard-content").html(dashbodytemplate(section[i]));
+
+	var currentwidth = $(window).width();
+
+	if (currentwidth < 641) {
+		$('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
+		$('#dashboard-container').parent().hide();
+	}
 
 }
 
@@ -89,6 +94,9 @@ $(document).keydown(function(event) {
 */
 
 $(document).ready(function() {
+
+	$(document).foundation();
+
 	$('.slick').slick({
 	  centerMode: true,
 	  centerPadding: '60px',
@@ -148,6 +156,9 @@ $(document).ready(function() {
 	dbthtml = $("#dash-body-template").html();
 	dashbodytemplate = Handlebars.compile(dbthtml);
 
+	$(".toggle-topbar a").on('click', function() {
+		$('#dashboard-container').parent().show();
+	});
 
 	var masterurl = "https://spreadsheets.google.com/feeds/list/1i5ecrrYy3IYiiabc8Hq_rEfxar2dJlKbox2qgpldcWI/default/public/values?alt=json";
 	$.getJSON(masterurl, function(data) {
@@ -185,6 +196,8 @@ $(document).ready(function() {
 			secname = $(this).find("a").html().toLowerCase();
 			switchSection(secname);
 		});
+
+
 
 		// $('.back').on('click', function() {
 		// 	$('#dashboard').hide(); 
