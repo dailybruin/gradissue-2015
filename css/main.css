@@ -9564,7 +9564,7 @@ section {
   color: black;
   line-height: 75px;
   bottom: 50%;
-  position: relative;
+  position: absolute;
   left: -8%;
   padding: 20px;
   background: white;
