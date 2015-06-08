@@ -65,9 +65,10 @@
 	background-color: $smoke;
 	height: 100px; 
 	padding: 0px 15px;
-	border-bottom: 1px solid whitesmoke;
-	h1 {
+	border-bottom: 1px solid #D8D8D8;
+	h4 {
 		font-size: 1em;
+		font-family: 'Source Sans Pro', sans-serif;
 	}
 	overflow: hidden; 
 }
@@ -87,6 +88,8 @@
 	h1 {
 		font-family: 'Source Sans Pro', sans-serif;
 		text-transform: uppercase; 
+		line-height: 50px;
+		font-weight: 500;
 	}
 
 	p {
@@ -96,7 +99,7 @@
 
 #dashboard-container {
 	width: 100%;
-	border-right: 4px solid whitesmoke;
+	border-right: 1px solid #D8D8D8;
 }
 
 #container {
@@ -170,6 +173,15 @@ section {
 	height: 175px;
 }
 
+.item-left {
+	width: 50px;
+	background-color: black;
+}
+
+.item-right {
+	width: 50px;
+
+}
 
 
 
@@ -200,7 +212,6 @@ section {
 .item-description {
 	padding: 10px;
 
-	// background-color: rgba(255, 255, 255, 0.8);
 	background-color: $primary-color;
   z-index: 1;
   position: absolute;

@@ -9,9 +9,10 @@
     
         <!-- custom CSS -->
         <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/slick.css" />
+        <link rel="stylesheet" href="css/slick-theme.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css"/>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Sans+Pro:300,500' rel='stylesheet' type='text/css'>
 
     <!-- JS -->
     <script src="js/vendor/jquery.js"></script>
@@ -32,10 +33,10 @@
         <script id="dash-sidebar-template" type="text/x-handlebars-template">
             {{#each stories}}
                 <div class="dashboard-item" id="index-{{@index}}">
-                    <h1>{{headline}}</h1>
-                    <div class="item-overlay">
-                        <div class="item-description"></div>
-                    </div>
+                  <span class="item-left"></span>
+                  <span class="item-right">
+                    <h4>{{headline}}</h4>
+                  </span>
                 </div>
             {{/each}}
         </script>
@@ -93,8 +94,10 @@
             <div class="section" id="highlights-page">
                 <div class="row">
                     <div class="slick">
-                      <div>your content</div>
-                      <div>your content</div>
+                      <div><img src="http://www.engraversnetwork.com/files/placeholder.jpg"></div>
+                      <div><img src="http://www.engraversnetwork.com/files/placeholder.jpg"></div>
+                      <div><img src="http://www.engraversnetwork.com/files/placeholder.jpg"></div>
+
                       <div>your content</div>
                       <div>your content</div>
                       <div>your content</div>
@@ -187,7 +190,8 @@
                       </nav>
 
                     <div class="row fullWidth" style="height: 95%; margin:0;">
-                        <div class="small-12 medium-4 columns" style="padding: 0px; margin: 0px;"> 
+
+                        <div class="small-12 medium-3 columns" style="padding: 0px; margin: 0px;"> 
                             <div id="dashboard-container" style="width: 100%;">
 
                                 <!-- <div class="dashboard-item">
@@ -204,7 +208,7 @@
                             
                         </div>
                         
-                        <div class="small-12 medium-8 large-8 columns">
+                        <div class="small-12 medium-9 columns">
                             <div id="dashboard-content">
 
                             </div>
