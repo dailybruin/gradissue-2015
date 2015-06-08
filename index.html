@@ -42,8 +42,9 @@
 
         <script id="dash-body-template" type="text/x-handlebars-template">
             <h1>{{headline}}</h1>
-            <h3>{{byline-name}}</h3>
-            <h4>{{byline-pos}}</h4>
+            <p class="byline"><a href="{{byline-link}}">{{byline-name}}</a></p>
+            <img class="featphoto" src="{{feat-photo}}"/>
+            <p class="caption">{{feat-caption}}</p>
             {{{formatBodyText body-html}}}
         </script>
 

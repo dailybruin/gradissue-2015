@@ -9,12 +9,18 @@ var dashbodytemplate;
 
 Handlebars.registerHelper("formatBodyText", function(t) {
 	t = t.trim();
-    return (t.length>0?'<p>'+t.replace(/[\r\n]+/,'</p><p>')+'</p>':null);
+	var re = new RegExp('[\r\n]+', 'g');
+    return (t.length>0?'<p>'+t.replace(re,'</p><p>')+'</p>':null);
 });
 
 function back() {
 	$('#dashboard').hide(); 
 	$('#sections-container').show();
+
+	$.fn.fullpage.setMouseWheelScrolling(true);
+    $.fn.fullpage.setAllowScrolling(true);
+    $.fn.fullpage.setKeyboardScrolling(true);
+    $('#fp-nav').show();
 }
 
 function changeStory(item) {
@@ -39,6 +45,10 @@ function getSection(name) {
 
 function switchSection(name) {
 	sectionName = name;
+	if (name == 'a&amp;e') {
+		name = 'ae';
+	}
+	
 	section = getSection(name);
 
 	$(".right li.active").removeClass("active");
@@ -162,6 +172,11 @@ $(document).ready(function() {
 
 			$('#sections-container').hide();
 			$('#dashboard').show(); 
+
+			$.fn.fullpage.setMouseWheelScrolling(false);
+    		$.fn.fullpage.setAllowScrolling(false);
+    		$.fn.fullpage.setKeyboardScrolling(false);
+    		$('#fp-nav').hide();
 
 		});
 
