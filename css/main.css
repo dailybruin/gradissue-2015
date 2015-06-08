@@ -9526,29 +9526,6 @@ th.hide-for-touch {
   position: absolute;
 }
 
-/* line 135, ../scss/main.scss */
-#simple3D {
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 900px;
-}
-/* line 141, ../scss/main.scss */
-#simple3D div {
-  min-height: 110%;
-  width: 120%;
-}
-/* line 145, ../scss/main.scss */
-#simple3D div.dot {
-  background: url(../img/dot2.png);
-  -webkit-filter: grayscale(100%);
-  -moz-filter: grayscale(100%);
-  -ms-filter: grayscale(100%);
-  -o-filter: grayscale(100%);
-  filter: grayscale(100%);
-  opacity: 0.2;
-}
-
 /* line 153, ../scss/main.scss */
 section {
   height: 100%;
@@ -9573,7 +9550,7 @@ section {
   font-size: 4rem;
   color: black;
   line-height: 75px;
-  bottom: 10%;
+  bottom: 50%;
   position: absolute;
   left: -8%;
   padding: 20px;
@@ -9671,6 +9648,7 @@ section {
 .item-description {
   padding: 10px;
   background-color: #4FBDB5;
+  opacity: 0.6;
   z-index: 1;
   position: absolute;
   top: 0;
@@ -9688,13 +9666,13 @@ section {
   -o-transition: transform 350ms ease-in-out;
   transition: transform 350ms ease-in-out;
 }
-/* line 271, ../scss/main.scss */
+/* line 272, ../scss/main.scss */
 .item-description h6 {
   color: black;
   font-family: 'Lora', serif;
 }
 
-/* line 278, ../scss/main.scss */
+/* line 279, ../scss/main.scss */
 .item-name {
   position: absolute;
   pointer-events: none;
@@ -9703,7 +9681,7 @@ section {
   right: 30%;
   background-color: white;
 }
-/* line 288, ../scss/main.scss */
+/* line 289, ../scss/main.scss */
 .item-name h3 {
   padding: 5px 10px;
   color: black;

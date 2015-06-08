@@ -19,7 +19,7 @@
     <script src="js/foundation.min.js"></script>
     <script src="js/foundation/foundation.topbar.js"></script>
     <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
-        <script type="text/javascript" src="js/vendor/jquery.simple3D.min.js"></script>
+        <!-- deleted simple3D --> 
         <script type="text/javascript" src="js/vendor/jquery.slimscroll.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
     
@@ -46,8 +46,14 @@
             <h1>{{headline}}</h1>
             <hr>
             <p class="byline"><a href="{{byline-link}}">{{byline-name}}</a></p>
-            <img class="featphoto" src="{{feat-photo}}"/>
-            <p class="caption" style="font-size: 12px; margin-top: 5px;"><i>{{feat-caption}}</i></p>
+            {{#if feat-video}}
+              <div class="flex-video">
+                <iframe width="100%" src="http://www.youtube.com/embed/{{feat-video}}" frameborder="0" allowfullscreen></iframe>
+              </div>
+            {{else}}
+              <img class="featphoto" src="{{feat-photo}}"/>
+              <p class="caption" style="font-size: 12px; margin-top: 5px;"><i>{{feat-caption}}</i></p>
+            {{/if}}
             {{{formatBodyText body-html}}}
         </script>
 
@@ -75,12 +81,11 @@
 
             <div class="section" id="title-page">
                 <section>
-                    <div id="container">
+                    <!-- <div id="container">
                         <div id="simple3D">
                             <div class="dot"></div>
-                            <!-- <div class="star"></div> -->
                         </div>  
-                    </div>
+                    </div> -->
                     
                     <div class="row" id="banner">
                         <h1>The View<br>from Above</h1>
@@ -108,7 +113,7 @@
 
             <div class="section" id="sections-page">
                 <div class="row" id ="sections-container">
-                    <div class="small-12 medium-4 large-4 columns item" style="background: black; background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
+                    <div class="small-12 medium-4 large-4 columns item" style="background: url('http://dailybruin.com/images/2015/06/web.ns_.06.08.shopu_.MH_.jpg'); background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
                       <div class="item-overlay">
                         <div class="item-description">
 
@@ -118,7 +123,7 @@
                         <h3>News</h3>
                       </div>
                     </div>
-                    <div class="small-12 medium-4 large-4 columns item" style="background: black; background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
+                    <div class="small-12 medium-4 large-4 columns item" style="background: url('http://dailybruin.com/images/2015/06/web.sp_.6.9.clubsoccer.OE_.jpg'); background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
                       <div class="item-overlay">
                         <div class="item-description"></div>
                       </div>
@@ -126,7 +131,7 @@
                         <h3>Sports</h3>
                       </div>
                     </div>
-                    <div class="small-12 medium-4 large-4 columns item" style="background: black; background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
+                    <div class="small-12 medium-4 large-4 columns item" style="background: url('http://dailybruin.com/images/2015/06/web.ae_.06.08.indiacarney.OE_.jpg'); background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
                       <div class="item-overlay">
                         <div class="item-description"></div>
                       </div>
@@ -142,7 +147,7 @@
                         <h3>Opinion</h3>
                       </div>
                     </div>
-                    <div class="small-12 medium-4 large-4 columns item" style="background: black; background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
+                    <div class="small-12 medium-4 large-4 columns item" style="background: url('http://dailybruin.com/images/2015/06/Evan-1.jpg'); background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
                       <div class="item-overlay">
                         <div class="item-description"></div>
                       </div>
@@ -150,7 +155,7 @@
                         <h3>Video</h3>
                       </div>
                     </div>
-                    <div class="small-12 medium-4 large-4 columns item" style="background: black; background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
+                    <div class="small-12 medium-4 large-4 columns item" style="background: url('http://dailybruin.com/images/2015/06/web.radio_.startup.KR_.jpg'); background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
                       <div class="item-overlay">
                         <div class="item-description"></div>
                       </div>
