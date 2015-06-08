@@ -2,18 +2,18 @@ html {
     background-image: url("./image/bg.png");
 }
 #descriptor p {
-  font-size: 120%;
+  margin-top: 5px;
 }
 
 p{
-  font-family: 'Raleway', sans-serif;
+  
 }
 #layer {
   position: absolute;
   z-index: 4;
   width: 100%;
   left: 0;
-  top: 18%;
+  top: 65px;
   text-align: center;
   background-color: rgba(255,255,255,0.3);
   padding:3%;
@@ -92,10 +92,7 @@ height: auto;
 
 
 [class*="block-grid-"]>li{
-  padding-top: 0px;
-  padding-right: 0.5rem;
-  padding-bottom: 1.0rem;
-  padding-left: 0.5rem;
+
 }
 .flex-video{
   margin-left:1%;
@@ -147,9 +144,26 @@ footer {
   margin-bottom: 2%;
 }
 
-#tagline h1,h5{
-
+#tagline h5{
+  font-family: 'Raleway', sans-serif;
   color: white;
+  font-weight: 100;
+  margin: 0px;
+}
+#tagline h1{
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  font-size: 300%;
+  font-weight: 500;
+   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+
+h1{
+   font-family: 'Raleway', sans-serif;
+   font-weight: 100;
+   margin: 0px;
+}
 }
 .blurb{
   padding: 2%;
@@ -168,6 +182,7 @@ footer {
 }
 
 #descriptor{
+
   margin-left: auto;
   margin-right: auto;
 }
@@ -178,13 +193,15 @@ footer {
 }
 
 #descriptor h1 .article h1 {
-    font-family: 'Roboto Condensed', sans-serif;
     line-height: 1em;
     margin: 10px 0 0 0;
 }
 
 p {
     line-height: 1.4em;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+
 }
 
 .thumb img {
