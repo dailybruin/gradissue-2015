@@ -35,6 +35,7 @@ $("#submit-button").click(function(){
 })
 
 $(document).ready(function(){
+	$("#footer").hide();
 	$('#fullpage').fullpage({
 		scrollOverflow: true,
 		scrollBar: true,
