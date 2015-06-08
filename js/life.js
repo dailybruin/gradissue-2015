@@ -280,7 +280,7 @@ function add_card(section_div_id, card_html, card_div_id) {
 	    if(platform === 'facebook') {
 	        FB.ui({
 	            method: 'feed',
-	            name: 'Your Life At UCLA | Daily Bruin',
+	            name: 'Your Time at UCLA | Daily Bruin',
 	            link: window.location.href,
 	            picture: el.attr('data-image'),
 	            description: el.attr('data-text')
@@ -300,8 +300,8 @@ function add_card(section_div_id, card_html, card_div_id) {
 			window.open(twitter_intent + encodeURIComponent(url) + '&text=' + encodeURIComponent(tweet), "_blank", window_settings);
 	    }
 	    else if (platform === 'gplus') {
-			var url = 'http://daily-bruin.github.io/gradissue-2015/your-life-at-ucla/index.html?start=fall2013'
-			var gplus_share_endpoint = "https://plus.google.com/share?url="
+			var url = window.location.href;
+			var gplus_share_endpoint = "https://plus.google.com/share?url=";
 			var window_settings = 'width=500,height=320,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=0,left=200,top=200';
 
 			window.open(gplus_share_endpoint + encodeURIComponent(url), "_blank", window_settings);
