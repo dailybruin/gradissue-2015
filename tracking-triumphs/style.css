@@ -1,5 +1,6 @@
 h1
 {
+	font-family: Lato;
 	text-align: center;
 	color: white;
 }
@@ -14,13 +15,21 @@ h1
 
 .banner h1 {
 	text-align: left;
-	padding-left: 10%;
+	padding-left: 7%;
+	padding-top: 38%;
+	font-size: 3.8rem;
 	
 }
 
 @media only screen and (max-width: 40em) { 
 	.banner {
 		background-position-x: -420px;
+	}
+	
+	.banner h1 {
+		padding-top: 2%;
+		font-size: 3rem;
+		text-align: center;
 	}
 }
 
