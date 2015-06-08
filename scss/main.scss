@@ -64,13 +64,19 @@
 .dashboard-item {
 	background-color: $smoke;
 	height: 100px; 
-	padding: 0px 15px;
+	// padding: 0px 15px;
 	border-bottom: 1px solid #D8D8D8;
 	h4 {
 		font-size: 1em;
 		font-family: 'Source Sans Pro', sans-serif;
 	}
 	overflow: hidden; 
+	z-index: 100;
+	position: relative;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .row.fullWidth {
@@ -79,7 +85,13 @@
 }
 
 .dashboard-active {
-	background-color: #D8D8D8; 
+	background-color: #D8D8D8;
+	.item-right {
+		width: 90%;
+	} 
+	.item-left {
+		width: 10%; 
+	}
 }
 
 #dashboard-content {
@@ -171,16 +183,23 @@ section {
 		margin-top: 0;
 	}
 	height: 175px;
+
 }
 
 .item-left {
-	width: 50px;
-	background-color: black;
+	height: 175px;
+	width: 0%;
+	float: left;
+	background-color: $primary-color;
+	@include vendorize(transition, width 350ms ease-in-out);
 }
 
 .item-right {
-	width: 50px;
-
+	padding: 8px; 
+	height: 175px; 
+	float: right;
+	width: 100%;
+	@include vendorize(transition, width 350ms ease-in-out);
 }
 
 

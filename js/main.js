@@ -74,6 +74,22 @@ function switchSection(name) {
 		changeStory(this);
 	});
 
+	$('.dashboard-item').mouseover(function() {
+
+		if (! $(this).hasClass('dashboard-active')) {
+			$(this).find(">:nth-child(2)").css('width','90%');
+			$(this).find(">:nth-child(1)").css('width','10%');
+		}
+	});
+	$('.dashboard-item').mouseout(function() {
+		if (! $(this).hasClass('dashboard-active')) {
+
+			$(this).find(">:nth-child(2)").css('width','100%');
+			$(this).find(">:nth-child(1)").css('width','0%');
+		}
+	});
+
+
 };
 
 
@@ -230,6 +246,7 @@ $(document).ready(function() {
 
 	  }
 	});
+
 
 
 	

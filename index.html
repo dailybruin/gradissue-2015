@@ -34,10 +34,10 @@
         <script id="dash-sidebar-template" type="text/x-handlebars-template">
             {{#each stories}}
                 <div class="dashboard-item" id="index-{{@index}}">
-                  <span class="item-left"></span>
-                  <span class="item-right">
+                  <div class="item-left"><i class="fa fa-angle-right"></i></div>
+                  <div class="item-right">
                     <h4>{{headline}}</h4>
-                  </span>
+                  </div>
                 </div>
             {{/each}}
         </script>
