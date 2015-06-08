@@ -101,7 +101,7 @@
             </div>
 
             <div class="section" id="sections-page">
-                <div class="row">
+                <div class="row" id ="sections-container">
                     <div class="small-12 medium-4 large-4 columns item" style="background: black; background-size: cover; overflow:hidden;" data-reveal-id="modal-solo-3">
                       <div class="item-overlay">
                         <div class="item-description">
@@ -153,75 +153,75 @@
                       </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="section">
+                  <div id="dashboard" style="display:none;">
 
-                  <nav class="top-bar" data-topbar role="navigation">
-                    <ul class="title-area">
-                      <li class="name">
-                        <h1><a href="#">My Site</a></h1>
-                      </li>
-                       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-                      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-                    </ul>
+                      <nav class="top-bar" data-topbar role="navigation">
+                        <ul class="title-area">
+                          <li class="name">
+                            <!-- <h1><a href="http://google.com"><i class="fa fa-chevron-left"></i> Back</a></h1> -->
+                          </li>
+                           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+                        </ul>
 
-                    <section class="top-bar-section" id="dashboard-nav">
-                      <!-- Right Nav Section -->
-                      <ul class="right">
-                        <li class="news active"><a href="#">News</a></li>
-                        <li class="sports"><a href="#">Sports</a></li>
-                        <li class="ae"><a href="#">A&amp;E</a></li>
-                        <li class="opinion"><a href="#">Opinion</a></li>
-                        <li class="video"><a href="#">Video</a></li>
-                        <li class="radio"><a href="#">Radio</a></li>
+                        <section class="top-bar-section">
+                          <!-- Right Nav Section -->
+                          <ul class="right"> 
+                            <li class="news active"><a href="#">News</a></li>
+                            <li class="sports"><a href="#">Sports</a></li>
+                            <li class="ae"><a href="#">A&amp;E</a></li>
+                            <li class="opinion"><a href="#">Opinion</a></li>
+                            <li class="video"><a href="#">Video</a></li>
+                            <li class="radio"><a href="#">Radio</a></li>
 
-                      </ul>
+                          </ul>
 
-                      <!-- Left Nav Section -->
-                      <ul class="left">
-                        <li><a href="#">Left Nav Button</a></li>
-                      </ul>
-                    </section>
-                  </nav>
+                          <!-- Left Nav Section -->
+                          <ul class="left">
+                            <li><a onclick="return back()"><i class="fa fa-chevron-left"></i> Daily Bruin Grad Issue</a></li>
+                          </ul>
+                        </section>
+                      </nav>
 
-                <div class="row" style="height: 95%; margin:0;">
-                    <div class="small-12 medium-4 columns" style="padding: 0px; margin: 0px;"> 
-                        <div id="dashboard-container" style="width: 100%;">
+                    <div class="row" style="height: 95%; margin:0;">
+                        <div class="small-12 medium-4 columns" style="padding: 0px; margin: 0px;"> 
+                            <div id="dashboard-container" style="width: 100%;">
 
-                            <div class="dashboard-item">
-                                <h1>yoyoyoyo</h1>
+                                <!-- <div class="dashboard-item">
+                                  <h1>yoyoyoyo</h1>
 
-                                <div class="item-overlay">
-                                    <div class="item-description"></div>
-                                </div>
-                              </div>
+                                  <div class="item-overlay">
+                                      <div class="item-description"></div>
+                                  </div>
+                                </div> -->
 
 
-                        </div>
+                            </div>
+                                
+
                             
+                        </div>
+                        
+                        <div class="small-12 medium-8 large-8 columns">
+                            <div id="dashboard-content">
 
+                            </div>
+                        </div>
                         
                     </div>
                     
-                    <div class="small-12 medium-8 large-8 columns">
-                        <div id="dashboard-content">
 
-                        </div>
-                    </div>
                     
-                </div>
-                
 
                 
+                <!-- <div class="section" id="dashboard">
+                    <div id="dash-append">
 
-            
-            <!-- <div class="section" id="dashboard">
-                <div id="dash-append">
+                    </div>
+                </div> -->
 
                 </div>
-            </div> -->
-
             </div>
             
         </div>
