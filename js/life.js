@@ -121,8 +121,8 @@ function display_cards(original_data, selection) {
 		add_song_card(songs);
 	add_basketball_records_card(basketball_records);
 	add_football_records_card(football_records);
-	add_ucla_event_cards(events);
 	add_movie_card(movies);
+	add_ucla_event_cards(events);
 
 
 
