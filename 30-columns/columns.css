@@ -1,8 +1,14 @@
+#overlay{
+  margin-bottom: 20px;
+  max-width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+}
 html {
     background-image: url("./image/bg.png");
 }
 #descriptor p {
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 p{
@@ -144,7 +150,7 @@ footer {
   margin-bottom: 2%;
 }
 
-#tagline h5{
+#tagline h4{
   font-family: 'Raleway', sans-serif;
   color: white;
   font-weight: 100;
@@ -182,9 +188,14 @@ h1{
 }
 
 #descriptor{
-
+  padding-top: 15px;
+  padding-bottom: 5px;
+    border-bottom: 1px solid rgba(0,0,0, 0.1);
+    border-top: 1px solid rgba(0,0,0, 0.1);
   margin-left: auto;
   margin-right: auto;
+   margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 .article {
@@ -192,8 +203,11 @@ h1{
   padding-right: 7%;
 }
 
-#descriptor h1 .article h1 {
+#descriptor h3 {
+    font-weight: 100;
+    font-family: 'Raleway', sans-serif;
     line-height: 1em;
+
     margin: 10px 0 0 0;
 }
 
