@@ -25,7 +25,7 @@ function changeStory(item) {
 
 	var name = $(item).find("h4").text();
 	if (name == "LA Summer Preview 2015") {
-		window.open("http://graphics.dailybriun.com/gradissue-2015/summer-la/index.html");
+		window.open("http://graphics.dailybruin.com/gradissue-2015/summer-la/");
 	} else {
 		var prev = $('.dashboard-active');
 		prev.find(">:nth-child(2)").css('width','100%');
