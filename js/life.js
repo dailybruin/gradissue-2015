@@ -156,8 +156,8 @@ function add_study_card(selection) {
 	var template_data = {
 		id: 'study',
 		question: "About many hours a week do you study?",
-		'share_image': 'http://pixabay.com/static/uploads/photo/2014/11/03/17/58/read-515531_640.jpg',
-		'imgurl': 'http://pixabay.com/static/uploads/photo/2014/11/03/17/58/read-515531_640.jpg',
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/life/study.jpg',
+		'imgurl': 'http://daily-bruin.github.io/gradissue-2015/img/life/study.jpg',
 		'share_text': "Calculate how many hours you've studied since you've been to UCLA"  // Default share text before they inputted a number
 	}
 	var card_html = compile_template_to_html("#custom-calculator", template_data);
