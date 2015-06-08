@@ -121,6 +121,7 @@ $(document).ready(function() {
 
 	$('.slick').slick({
 	  centerMode: true,
+	  arrows: true, 
 	  centerPadding: '60px',
 	  slidesToShow: 3,
 	  responsive: [

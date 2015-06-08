@@ -164,6 +164,16 @@
 
 // }
 
+.slick-prev:before, .slick-next:before { 
+  color:black !important;
+}
+
+.slick-container {
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+}
+
 section {
 	height: 100%;
 	width: 100%;

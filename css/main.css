@@ -9540,13 +9540,25 @@ th.hide-for-touch {
 }
 
 /* line 167, ../scss/main.scss */
+.slick-prev:before, .slick-next:before {
+  color: black !important;
+}
+
+/* line 171, ../scss/main.scss */
+.slick-container {
+  margin: auto;
+  padding: 20px;
+  width: 90%;
+}
+
+/* line 177, ../scss/main.scss */
 section {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
-/* line 174, ../scss/main.scss */
+/* line 184, ../scss/main.scss */
 #banner {
   background: url(../img/banner.jpg);
   background-size: cover;
@@ -9555,7 +9567,7 @@ section {
   position: relative;
   top: 20%;
 }
-/* line 185, ../scss/main.scss */
+/* line 195, ../scss/main.scss */
 #banner #title h1 {
   z-index: 2;
   font-family: 'Helvetica', serif;
@@ -9570,19 +9582,19 @@ section {
   background: white;
 }
 
-/* line 203, ../scss/main.scss */
+/* line 213, ../scss/main.scss */
 .item {
   overflow: hidden;
   margin-bottom: 10px;
   margin-bottom: 0px;
   height: 175px;
 }
-/* line 208, ../scss/main.scss */
+/* line 218, ../scss/main.scss */
 .item h6 {
   margin-top: 0;
 }
 
-/* line 215, ../scss/main.scss */
+/* line 225, ../scss/main.scss */
 .item-left {
   height: 100px;
   text-align: center;
@@ -9595,7 +9607,7 @@ section {
   -o-transition: width 350ms ease-in-out;
   transition: width 350ms ease-in-out;
 }
-/* line 224, ../scss/main.scss */
+/* line 234, ../scss/main.scss */
 .item-left i {
   opacity: 0;
   position: relative;
@@ -9614,7 +9626,7 @@ section {
   font-size: 2em;
 }
 
-/* line 236, ../scss/main.scss */
+/* line 246, ../scss/main.scss */
 .item-right {
   padding: 8px;
   height: 100px;
@@ -9627,7 +9639,7 @@ section {
   transition: width 350ms ease-in-out;
 }
 
-/* line 246, ../scss/main.scss */
+/* line 256, ../scss/main.scss */
 .section-overlay, .item-overlay {
   top: -50%;
   position: relative;
@@ -9639,7 +9651,7 @@ section {
   -o-transform: skew(-25deg);
   transform: skew(-25deg);
 }
-/* line 253, ../scss/main.scss */
+/* line 263, ../scss/main.scss */
 .section-overlay:hover .item-description, .item-overlay:hover .item-description {
   -webkit-transform: translateX(65%);
   -moz-transform: translateX(65%);
@@ -9647,17 +9659,17 @@ section {
   -o-transform: translateX(65%);
   transform: translateX(65%);
 }
-/* line 257, ../scss/main.scss */
+/* line 267, ../scss/main.scss */
 .section-overlay:hover, .item-overlay:hover {
   cursor: pointer;
 }
 
-/* line 264, ../scss/main.scss */
+/* line 274, ../scss/main.scss */
 .item-overlay {
   top: -75%;
 }
 
-/* line 270, ../scss/main.scss */
+/* line 280, ../scss/main.scss */
 .item-description {
   padding: 10px;
   background-color: #4FBDB5;
@@ -9679,13 +9691,13 @@ section {
   -o-transition: transform 350ms ease-in-out;
   transition: transform 350ms ease-in-out;
 }
-/* line 286, ../scss/main.scss */
+/* line 296, ../scss/main.scss */
 .item-description h6 {
   color: black;
   font-family: 'Lora', serif;
 }
 
-/* line 293, ../scss/main.scss */
+/* line 303, ../scss/main.scss */
 .item-name {
   position: absolute;
   pointer-events: none;
@@ -9694,7 +9706,7 @@ section {
   right: 30%;
   background-color: white;
 }
-/* line 303, ../scss/main.scss */
+/* line 313, ../scss/main.scss */
 .item-name h3 {
   padding: 5px 10px;
   color: black;
