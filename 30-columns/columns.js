@@ -26,6 +26,10 @@ $(document).ready(function(){
                 $('.article').hide();
                   $('#descriptor').show();
                 $(location.hash).show();
+                $("meta[property='og:image']").remove();
+                var profile_img = $(location.hash + " .profile").attr("src");
+                var metatag = "<meta property='og:image' content='" + profile_img + "'>";
+                $("head").append(metatag);
             }
         });
 
