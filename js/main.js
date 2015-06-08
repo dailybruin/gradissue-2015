@@ -217,7 +217,7 @@ $(document).ready(function() {
 			secname = $(this).find("h3").html().toLowerCase();
 
 			if (secname == 'opinion') {
-				window.open("http://graphics.dailybriun.com/gradissue-2015/30-columns/index.html");
+				window.open("http://graphics.dailybruin.com/gradissue-2015/30-columns/index.html");
 			} else {
 				switchSection(secname);
 
@@ -235,7 +235,7 @@ $(document).ready(function() {
 		$(".right li").on('click', function() {
 			secname = $(this).find("a").html().toLowerCase();
 			if (secname == 'opinion') {
-				window.open("http://graphics.dailybriun.com/gradissue-2015/30-columns/index.html");
+				window.open("http://graphics.dailybruin.com/gradissue-2015/30-columns/index.html");
 			} else {
 				switchSection(secname);
 			}
