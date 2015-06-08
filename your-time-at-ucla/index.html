@@ -10,8 +10,8 @@
         <!-- Open Graph -->
         <meta property="og:title" content="Your Time at UCLA | Daily Bruin" />
         <meta property="og:site_name" content="Daily Bruin Graduation Issue 2015" />
-        <meta property="og:url" content="Canonical URL of this page, excluding session and user-identifying variables." />
-        <meta property="og:image" content="http://dailybruin.com/images/2015/05/your-life-at-ucla.png" />
+        <meta property="og:url" content="http://graphics.dailybruin.com/grad2015/your-time-at-ucla" />
+        <meta property="og:image" content="http://dailybruin.com/images/2015/06/life1-300x249.png" />
 
         <!-- fonts -->
         <!--
@@ -242,6 +242,9 @@
             </div>
             </header>
           <div>
+          <% if (data.imgurl) { %>
+            <img src="<%= data.imgurl %>" />
+          <% } %>
           <form action="javascript:void(0);">
             <h4><%= data.question %></h4>
             <div class="row">
@@ -326,7 +329,7 @@
         </div>
         <div class="row">
         <div class="large-12 centered columns" id="footer">
-          Page developed by <a href="mailto: szou@media.ucla.edu">Simon Zou</a> and <a href="mailto:agnuyen@media.ucla.edu">Arvin Nguyen</a>. Header video by <a href="mailto:byang@media.ucla.edu">Barry Yang</a> and <a href="mailto:jcarastotomas@media.ucla.edu">Justine Sto Thomas</a>. Design help from <a href="mailto:jcarastotomas@media.ucla.edu">Justine Sto Thomas</a>, <a href="mailto:cposo@media.ucla.edu">Collette Del Poso</a>, and <a href="mailto:ngill@media.ucla.edu">Noor Gill</a>.<br /> Inspired by BBC's <a href="bbc.com/earth/story/20141016-your-life-on-earth">Your Life on Earth</a>. Data and sources <a href="https://docs.google.com/spreadsheets/d/1JFFjBvaO_PAs3d0jFWYmgXnh3A00MSeg3G4G1qYC46w/pubhtml?gid=0&single=true">here</a>. Data current as of June 2015. &copy; Daily Bruin 2015.
+          Page developed by <a href="mailto: szou@media.ucla.edu">Simon Zou</a> and <a href="mailto:agnuyen@media.ucla.edu">Arvin Nguyen</a>. Title video by <a href="mailto:byang@media.ucla.edu">Barry Yang</a> and <a href="mailto:jcarastotomas@media.ucla.edu">Justine Sto Thomas</a>. Design help from <a href="mailto:jcarastotomas@media.ucla.edu">Justine Sto Thomas</a>, <a href="mailto:cposo@media.ucla.edu">Collette Del Poso</a>, and <a href="mailto:ngill@media.ucla.edu">Noor Gill</a>.<br /> Inspired by BBC's <a href="bbc.com/earth/story/20141016-your-life-on-earth">Your Life on Earth</a>. Data and sources <a href="https://docs.google.com/spreadsheets/d/1JFFjBvaO_PAs3d0jFWYmgXnh3A00MSeg3G4G1qYC46w/pubhtml?gid=0&single=true">here</a>. Data current as of June 2015. &copy; Daily Bruin 2015.
         </div>
         </div>
       </div>
