@@ -51,6 +51,7 @@ function clear_divs() {
 
 //$(document).ready(function(){
 function process_data(selection) {
+	$("#footer").fadeIn();
 	$("#main-content").addClass("section");
 	$('#fullpage').fullpage({
 		scrollOverflow: true,
@@ -106,10 +107,10 @@ function display_cards(original_data, selection) {
 	var costs = _.filter(data, function(datum) {return datum.id === "cost-in-state" || datum.id === "cost-out-of-state";});
 	var movies = _.filter(data, function (datum) { return datum.type === "movie"; });
 	var songs = _.filter(data, function(datum) { return datum.type === "song"; });
-	add_construction_card(construction_events);
 	add_cost_card(costs);
 	if (nobels.length > 0)
 		add_nobel_card(nobels);
+	add_construction_card(construction_events);
 	if (championships.length > 0)
 		add_championships_card(championships);
 	if (pro_athletes.length > 0)
@@ -137,6 +138,7 @@ function display_cards(original_data, selection) {
 		controlNav: false
 	});			
 	fade_in_cards(card_ids);
+	$("#footer").fadeIn();
 	//console.log(card_ids);
 }
 

@@ -222,7 +222,7 @@ table {
 	margin-bottom: 1em;
 }
 
-.photo-credits {
+.photo-credits, #footer {
 	font-style: italic;
 	float: right;
 	font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
@@ -231,5 +231,7 @@ table {
 	margin-top: .2em;
 }
 
-.image-wrapper img {
+#footer {
+	border-top: 1px solid lightgrey;
+	text-align: center;
 }
