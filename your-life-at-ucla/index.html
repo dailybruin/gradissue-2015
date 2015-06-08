@@ -52,11 +52,13 @@
                 </div>
               </header>
               <h4 class="event-card-title"><%= data.title %></h4>
-              <img src="<%= data.imageurl %>" />
-              <p class="event-card-description">
-                <span class="event-card-credits">(<%= data.credits %> / </span>
-                <span class="event-card-date"><%= data.description %>)</span>
-              </p>
+              <div class="image-wrapper">
+                <a target="_blank" href="<%= data.reference %>"><img src="<%= data.imageurl %>" /></a>
+                <p><span class="event-card-description photo-credits">
+                  <span class="event-card-credits">(<%= data.credits %> / </span>
+                  <span class="event-card-date"><%= data.description %>)</span>
+                </span></p>
+              </div>
           </div>
         </script>
 
@@ -145,6 +147,13 @@
                 </div>
                 </form>
             <% } %>
+
+            <% if (data.imgurl) { %>
+              <div class="image-wrapper">
+                <img src="<%= data.imgurl %>" />
+                <p><span class="photo-credits"><%= data.imgcredits %></span></p>
+              </div>
+            <% } %>
             <div class="canvas-wrapper">
               <canvas <%= data.canvasheight %> id="<%= data.id %>-chart"></canvas>
             </div>
@@ -166,8 +175,10 @@
               </div>
             </header>
           <h4 class="movie-card-title"><%= data.title %></h4>
-          <img src="<%= data.imgurl %>" />
-          <p><span class="movie-card-description right"><%= data.credits %></span></p>
+          <div class="image-wrapper">
+            <img src="<%= data.imgurl %>" />
+            <p><span class="movie-card-description right photo-credits"><%= data.credits %></span></p>
+          </div>
           <div>
           <table>
             <caption>Top 5 Grossing Movies</caption>
@@ -208,7 +219,7 @@
             <% _.each(data.rows, function(song) { %>
               <li>
               <img src="<%= song.imageurl %>" />
-              <span><%= song.credits %> (<%= song.category %>)</span>
+              <span class="photo-credits"><%= song.credits %> (<%= song.category %>)</span>
               </li>
             <% }); %>
             </ul>
@@ -280,7 +291,7 @@
           </video>
           <div class="layer">
           <div id="form-selection">
-            <h1 id="page-title">Your Life At UCLA</h1>
+            <h1 id="page-title">Your Time At UCLA</h1>
             <form method="GET">
               <div class="row">
                 <div class="small-4 large-3 large-offset-2 columns">

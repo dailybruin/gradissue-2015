@@ -203,7 +203,7 @@ table {
 }
 
 #page-title, .category-header {
-	font-family: "Century Gothic";
+	font-family: "Century Gothic", sans-serif;
 	text-transform: uppercase;
 	text-align: center;
 	font-size: 4em;
@@ -213,4 +213,23 @@ table {
 
 .category-header {
 	font-size: 2.3em;
+}
+
+.image-wrapper {
+	background: white;
+	padding: .7em .7em .5em .7em;
+	border: 1px solid #ddd;
+	margin-bottom: 1em;
+}
+
+.photo-credits {
+	font-style: italic;
+	float: right;
+	font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+	font-size: .7em;
+	display: block;
+	margin-top: .2em;
+}
+
+.image-wrapper img {
 }

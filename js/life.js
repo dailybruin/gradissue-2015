@@ -555,8 +555,10 @@ function add_basketball_records_card(basketball_records) {
 		'singlestat' :  total_wins_num + "-" + total_losses_num,
 		'posttext': "in men's basketball.",
 		'canvasheight': 'height="300px"',
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
-		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in men's basketball at UCLA since I've been here"
+		'share_image': 'http://dailybruin.com/images/2015/04/web.sp_.4.10.mbb_.KM_-640x475.jpg',
+		'imgurl': 'http://dailybruin.com/images/2015/04/web.sp_.4.10.mbb_.KM_-640x475.jpg',
+		'imgcredits': '(Daily Bruin file photo)',
+		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in men's basketball since I've been here"
 	}
 
 	var card_html = compile_template_to_html("#chart-template", template_data);
@@ -619,7 +621,9 @@ function add_football_records_card(football_records) {
 		'singlestat' :  total_wins_num + "-" + total_losses_num,
 		'posttext': "in men's football.",
 		'canvasheight': 'height="300px"',
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/icon.png',
+		'share_image': 'http://dailybruin.com/images/2014/12/web.picB_.AYu_-640x426.jpg',
+		'imgurl': 'http://dailybruin.com/images/2014/12/web.picB_.AYu_-640x426.jpg',
+		'imgcredits': '(Daily Bruin file photo)',
 		'share_text': "UCLA had a record of " + total_wins_num + "-" + total_losses_num + " in football at UCLA since I've been here"
 	}
 
