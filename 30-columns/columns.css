@@ -52,7 +52,7 @@ text-align:center;
 
 ul a {
   position: relative;
-  display: inline-block;
+  display: block;
 }
 
 li{
