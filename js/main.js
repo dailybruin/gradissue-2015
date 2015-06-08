@@ -12,6 +12,11 @@ Handlebars.registerHelper("formatBodyText", function(t) {
     return (t.length>0?'<p>'+t.replace(/[\r\n]+/,'</p><p>')+'</p>':null);
 });
 
+function back() {
+	$('#dashboard').hide(); 
+	$('#sections-container').show();
+}
+
 function changeStory(item) {
 	$('.dashboard-item').removeClass('dashboard-active');
 	$(item).addClass('dashboard-active');
@@ -35,6 +40,15 @@ function getSection(name) {
 function switchSection(name) {
 	sectionName = name;
 	section = getSection(name);
+
+	$(".right li.active").removeClass("active");
+	
+	if (name == "a&amp;e") {
+		$(".right .ae").addClass("active");
+	} else {
+		$(".right ." + name).addClass("active");
+	}
+
 	$("#dashboard-container").html(dashsidebartemplate({stories: section}));
 
 	$("#dashboard-content").html(dashbodytemplate(section[0]));
@@ -144,20 +158,30 @@ $(document).ready(function() {
 
 		$('.item').on('click', function() {
 			secname = $(this).find("h3").html().toLowerCase();
-			console.log(secname);
 			switchSection(secname);
+
 			$('#sections-container').hide();
 			$('#dashboard').show(); 
+
 		});
 
-		
+		$(".right li").on('click', function() {
+			secname = $(this).find("a").html().toLowerCase();
+			switchSection(secname);
+		});
+
+		// $('.back').on('click', function() {
+		// 	$('#dashboard').hide(); 
+		// 	$('sections-container').show();
+
+		// });
 	});	
 
 
 //	console.log(masterarray);
 //	section = getSection("news", masterarray);
 	$('#fullpage').fullpage({
-		anchors: ['first', 'second', 'third', 'fourth'],
+		anchors: ['first', 'second', 'third'],
 	  // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
 	  navigation: true,
 	  navigationPosition: 'right',

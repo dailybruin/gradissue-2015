@@ -10,6 +10,16 @@
 	}
 }
 
+.top-bar {
+	background-color: #454545;
+	z-index: 100;
+
+}
+
+.top-bar-section ul li a {
+	background-color: #454545;
+}
+
 .dashboard-item {
 	background-color: white;
 	height: 100px; 
