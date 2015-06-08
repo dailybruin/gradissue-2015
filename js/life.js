@@ -368,7 +368,7 @@ function add_construction_card(events) {
 		'pretext' : 'UCLA has spent',
 		'singlestat' : "$" + addCommas(sum(chart_data)),
 		'posttext' : 'on finished construction and renovation projects.',
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/chart.png',
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/life/chart.png',
 		'share_text': "UCLA spent " + "$" + addCommas(sum(chart_data)) + " on finished construction and renovation projects since I've been here. Discover what else has happened in Your Time at UCLA."
 	}
 
@@ -438,7 +438,7 @@ function add_cost_card(costs) {
 		'singlestat' :  (in_state_diff*100-100).toFixed(2) + "%",
 		'toggle': true,
 		'canvasheight': 'height="300px"',
-		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/chart.png',
+		'share_image': 'http://daily-bruin.github.io/gradissue-2015/img/life/chart.png',
 		'share_text': "Cost of tution increased by " + "$" + (in_state_diff*100-100).toFixed(2) + "%" + " at UCLA since I've been here. Discover what else has changed in Your Time at UCLA."
 	}
 
