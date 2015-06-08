@@ -20,7 +20,7 @@ $(document).ready(function(){
             
             if (location.hash == "") {
                 $('.article').hide();
-                $('#Chancellor').show();
+                $('#Andrew').show();
                 $('#descriptor').show();
             } else {
                 $('.article').hide();
