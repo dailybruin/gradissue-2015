@@ -255,7 +255,7 @@ $(document).ready(function() {
 //	console.log(masterarray);
 //	section = getSection("news", masterarray);
 	$('#fullpage').fullpage({
-		anchors: ['first', 'second', 'third'],
+		anchors: ['title', 'features', 'stories'],
 	  // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
 	  navigation: true,
 	  navigationPosition: 'right',
