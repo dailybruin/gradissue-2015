@@ -9442,7 +9442,7 @@ th.hide-for-touch {
 /* line 9, ../scss/main.scss */
 .slick div {
   background-color: black;
-  height: 300px;
+  height: 500px;
   border: 2px solid white;
   text-align: center;
 }

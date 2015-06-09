@@ -32,7 +32,7 @@ function changeStory(item) {
 
 	var name = $(item).find("h4").text();
 	if (name == "LA Summer Preview 2015") {
-		window.open("http://graphics.dailybruin.com/gradissue-2015/summer-la/");
+		window.open("summer-la/");
 	} else {
 		var prev = $('.dashboard-active');
 		prev.find(">:nth-child(2)").css('width','100%');
@@ -130,7 +130,7 @@ $(document).ready(function() {
 	  centerMode: true,
 	  arrows: true, 
 	  centerPadding: '60px',
-	  slidesToShow: 3,
+	  slidesToShow: 1,
 	  responsive: [
 	    {
 	      breakpoint: 768,
@@ -138,7 +138,7 @@ $(document).ready(function() {
 	        arrows: false,
 	        centerMode: true,
 	        centerPadding: '40px',
-	        slidesToShow: 3
+	        slidesToShow: 1
 	      }
 	    },
 	    {
@@ -225,7 +225,7 @@ $(document).ready(function() {
 			secname = $(this).find("h3").html().toLowerCase();
 
 			if (secname == 'opinion') {
-				window.open("http://graphics.dailybruin.com/gradissue-2015/30-columns/index.html");
+				window.open("30-columns/index.html");
 			} else {
 				switchSection(secname);
 
@@ -249,7 +249,7 @@ $(document).ready(function() {
 		$(".right li").on('click', function() {
 			secname = $(this).find("a").html().toLowerCase();
 			if (secname == 'opinion') {
-				window.open("http://graphics.dailybruin.com/gradissue-2015/30-columns/index.html");
+				window.open("30-columns/index.html");
 			} else {
 				switchSection(secname);
 			}
