@@ -13,7 +13,14 @@ Handlebars.registerHelper("formatBodyText", function(t) {
 
 function back() {
 	$('#dashboard').hide(); 
-	$('#sections-container').show();
+	
+	var currentwidth = $(window).width();
+	if (currentwidth < 641) {
+		$('#sections-container').parent().show();
+	} else {
+		$('#sections-container').show();
+	}
+	$('#credit').show();
 
 	$.fn.fullpage.setMouseWheelScrolling(true);
     $.fn.fullpage.setAllowScrolling(true);
@@ -25,7 +32,7 @@ function changeStory(item) {
 
 	var name = $(item).find("h4").text();
 	if (name == "LA Summer Preview 2015") {
-		window.open("http://graphics.dailybruin.com/gradissue-2015/summer-la/");
+		window.open("summer-la/");
 	} else {
 		var prev = $('.dashboard-active');
 		prev.find(">:nth-child(2)").css('width','100%');
@@ -123,7 +130,7 @@ $(document).ready(function() {
 	  centerMode: true,
 	  arrows: true, 
 	  centerPadding: '60px',
-	  slidesToShow: 3,
+	  slidesToShow: 1,
 	  responsive: [
 	    {
 	      breakpoint: 768,
@@ -131,7 +138,7 @@ $(document).ready(function() {
 	        arrows: false,
 	        centerMode: true,
 	        centerPadding: '40px',
-	        slidesToShow: 3
+	        slidesToShow: 1
 	      }
 	    },
 	    {
@@ -218,11 +225,17 @@ $(document).ready(function() {
 			secname = $(this).find("h3").html().toLowerCase();
 
 			if (secname == 'opinion') {
-				window.open("http://graphics.dailybruin.com/gradissue-2015/30-columns/index.html");
+				window.open("30-columns/index.html");
 			} else {
 				switchSection(secname);
 
-				$('#sections-container').hide();
+				var currentwidth = $(window).width();
+				if (currentwidth < 641) {
+					$('#sections-container').parent().hide();
+				} else {
+					$('#sections-container').hide();
+				}
+				$('#credit').hide();
 				$('#dashboard').show(); 
 
 				$.fn.fullpage.setMouseWheelScrolling(false);
@@ -236,7 +249,7 @@ $(document).ready(function() {
 		$(".right li").on('click', function() {
 			secname = $(this).find("a").html().toLowerCase();
 			if (secname == 'opinion') {
-				window.open("http://graphics.dailybruin.com/gradissue-2015/30-columns/index.html");
+				window.open("30-columns/index.html");
 			} else {
 				switchSection(secname);
 			}
@@ -255,7 +268,7 @@ $(document).ready(function() {
 //	console.log(masterarray);
 //	section = getSection("news", masterarray);
 	$('#fullpage').fullpage({
-		anchors: ['title', 'features', 'stories'],
+		//anchors: ['title', 'features', 'stories'],
 	  // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
 	  navigation: true,
 	  navigationPosition: 'right',
