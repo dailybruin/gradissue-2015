@@ -26,6 +26,7 @@ $(document).ready(function(){
                 $('.article').hide();
                   $('#descriptor').show();
                 $(location.hash).show();
+                $("audio")[0].pause();
             }
         });
 
