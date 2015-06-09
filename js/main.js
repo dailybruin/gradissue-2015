@@ -1,7 +1,5 @@
 var sectionName; var section = []; var masterarray = [];
 
-$(document).foundation();
-
 var dsthtml;
 var dashsidebartemplate;
 var dbthtml;
@@ -24,13 +22,29 @@ function back() {
 }
 
 function changeStory(item) {
-	$('.dashboard-item').removeClass('dashboard-active');
-	$(item).addClass('dashboard-active');
 
-	var i = (item.id).replace(/index-/,''); 
+	var name = $(item).find("h4").text();
+	if (name == "LA Summer Preview 2015") {
+		window.open("http://graphics.dailybruin.com/gradissue-2015/summer-la/");
+	} else {
+		var prev = $('.dashboard-active');
+		prev.find(">:nth-child(2)").css('width','100%');
+		prev.find(">:nth-child(1)").css('width','0%');
 
-	$("#dashboard-content").html(dashbodytemplate(section[i]));
+		$('.dashboard-item').removeClass('dashboard-active');
+		$(item).addClass('dashboard-active');
 
+		var i = (item.id).replace(/index-/,''); 
+
+		$("#dashboard-content").html(dashbodytemplate(section[i]));
+
+		var currentwidth = $(window).width();
+
+		if (currentwidth < 641) {
+			$('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
+			$('#dashboard-container').parent().hide();
+		}
+	};
 }
 
 function getSection(name) {
@@ -52,7 +66,7 @@ function switchSection(name) {
 	section = getSection(name);
 
 	$(".right li.active").removeClass("active");
-	
+
 	if (name == "a&amp;e") {
 		$(".right .ae").addClass("active");
 	} else {
@@ -69,28 +83,45 @@ function switchSection(name) {
 		changeStory(this);
 	});
 
+	$('.dashboard-item').mouseover(function() {
+
+		if (! $(this).hasClass('dashboard-active')) {
+			$(this).find(">:nth-child(2)").css('width','90%');
+			$(this).find(">:nth-child(1)").css('width','10%');
+		}
+	});
+	$('.dashboard-item').mouseout(function() {
+		if (! $(this).hasClass('dashboard-active')) {
+
+			$(this).find(">:nth-child(2)").css('width','100%');
+			$(this).find(">:nth-child(1)").css('width','0%');
+		}
+	});
+
+
 };
 
 
 
-/*
-$(document).keydown(function(event) {
-	if (event.which == 78) {
-		switchSection("video");
-		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
-		$("#dash-content").html(dashbodytemplate(section[0]));
-	};
-	if (event.which == 80) {
-		switchSection("news");
-		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
-		$("#dash-content").html(dashbodytemplate(section[0]));
-	};
+Handlebars.registerHelper("debug", function(optionalValue) {
+  console.log("Current Context");
+  console.log("====================");
+  console.log(this);
+ 
+  if (optionalValue) {
+    console.log("Value");
+    console.log("====================");
+    console.log(optionalValue);
+  }
 });
-*/
 
 $(document).ready(function() {
+
+	$(document).foundation();
+
 	$('.slick').slick({
 	  centerMode: true,
+	  arrows: true, 
 	  centerPadding: '60px',
 	  slidesToShow: 3,
 	  responsive: [
@@ -115,21 +146,22 @@ $(document).ready(function() {
 	  ]
 	});
 
-	$("#simple3D").simple3D({
-		moveX:3, // 1 - 5
-		moveY:3, // 1 - 5
-		bgImage:true, // use background image mode
-		targetAll:true,
-		reverseX: true,
-		reverseY: true
-	});
+	// $("#simple3D").simple3D({
+	// 	moveX:3, // 1 - 5
+	// 	moveY:3, // 1 - 5
+	// 	bgImage:true, // use background image mode
+	// 	targetAll:true,
+	// 	reverseX: true,
+	// 	reverseY: true
+	// });
 
+	var winheight = $(window).height().toString() + 'px';
 	var scrollheight = ($(window).height() - 45).toString() + 'px';
 
 	$('#dashboard-container').slimScroll({
       height: scrollheight,
       allowPageScroll: false,
-      distance: '10px', 
+      distance: '-10px', 
       railOpacity: '0.1',
       color: 'lightgrey'
   	});
@@ -143,11 +175,26 @@ $(document).ready(function() {
   	});
 
 
+	if ($(window).width() < 641) {
+			$('#sections-container').slimScroll({
+		      height: winheight,
+		      allowPageScroll: false,
+		      distance: '-10px', 
+		      alwaysVisible: true,
+		      railVisible: false
+		  	});
+
+		};
+  	
+
 	dsthtml = $("#dash-sidebar-template").html();
 	dashsidebartemplate = Handlebars.compile(dsthtml);
 	dbthtml = $("#dash-body-template").html();
 	dashbodytemplate = Handlebars.compile(dbthtml);
 
+	$(".toggle-topbar a").on('click', function() {
+		$('#dashboard-container').parent().show();
+	});
 
 	var masterurl = "https://spreadsheets.google.com/feeds/list/1i5ecrrYy3IYiiabc8Hq_rEfxar2dJlKbox2qgpldcWI/default/public/values?alt=json";
 	$.getJSON(masterurl, function(data) {
@@ -169,22 +216,33 @@ $(document).ready(function() {
 
 		$('.item').on('click', function() {
 			secname = $(this).find("h3").html().toLowerCase();
-			switchSection(secname);
 
-			$('#sections-container').hide();
-			$('#dashboard').show(); 
+			if (secname == 'opinion') {
+				window.open("http://graphics.dailybruin.com/gradissue-2015/30-columns/index.html");
+			} else {
+				switchSection(secname);
 
-			$.fn.fullpage.setMouseWheelScrolling(false);
-    		$.fn.fullpage.setAllowScrolling(false);
-    		$.fn.fullpage.setKeyboardScrolling(false);
-    		$('#fp-nav').hide();
+				$('#sections-container').hide();
+				$('#dashboard').show(); 
+
+				$.fn.fullpage.setMouseWheelScrolling(false);
+	    		$.fn.fullpage.setAllowScrolling(false);
+	    		$.fn.fullpage.setKeyboardScrolling(false);
+	    		$('#fp-nav').hide();
+    		};
 
 		});
 
 		$(".right li").on('click', function() {
 			secname = $(this).find("a").html().toLowerCase();
-			switchSection(secname);
+			if (secname == 'opinion') {
+				window.open("http://graphics.dailybruin.com/gradissue-2015/30-columns/index.html");
+			} else {
+				switchSection(secname);
+			}
 		});
+
+
 
 		// $('.back').on('click', function() {
 		// 	$('#dashboard').hide(); 
@@ -197,7 +255,7 @@ $(document).ready(function() {
 //	console.log(masterarray);
 //	section = getSection("news", masterarray);
 	$('#fullpage').fullpage({
-		anchors: ['first', 'second', 'third'],
+		anchors: ['title', 'features', 'stories'],
 	  // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
 	  navigation: true,
 	  navigationPosition: 'right',
@@ -207,16 +265,17 @@ $(document).ready(function() {
 	    //after leaving section 2
 	    if(index == 1 && direction =='down'){
 	    	$('#banner > h1').velocity({ opacity: 0 }, { display: "none" });
-	    	$("#simple3D").velocity({ opacity: 0 });
+	    	// $("#simple3D").velocity({ opacity: 0 });
 	    }
 
 	    if(index == 2 && direction =='up'){
 	    	$('#banner > h1').velocity({ opacity: 1 }, { display: "block" });
-	    	$('#simple3D').velocity({ opacity: 1 });
+	    	// $('#simple3D').velocity({ opacity: 1 });
 	    }
 
 	  }
 	});
+
 
 
 	
