@@ -13,7 +13,14 @@ Handlebars.registerHelper("formatBodyText", function(t) {
 
 function back() {
 	$('#dashboard').hide(); 
-	$('#sections-container').show();
+	
+	var currentwidth = $(window).width();
+	if (currentwidth < 641) {
+		$('#sections-container').parent().show();
+	} else {
+		$('#sections-container').show();
+	}
+	
 
 	$.fn.fullpage.setMouseWheelScrolling(true);
     $.fn.fullpage.setAllowScrolling(true);
@@ -222,7 +229,12 @@ $(document).ready(function() {
 			} else {
 				switchSection(secname);
 
-				$('#sections-container').hide();
+				var currentwidth = $(window).width();
+				if (currentwidth < 641) {
+					$('#sections-container').parent().hide();
+				} else {
+					$('#sections-container').hide();
+				}
 				$('#dashboard').show(); 
 
 				$.fn.fullpage.setMouseWheelScrolling(false);
@@ -255,7 +267,7 @@ $(document).ready(function() {
 //	console.log(masterarray);
 //	section = getSection("news", masterarray);
 	$('#fullpage').fullpage({
-		anchors: ['title', 'features', 'stories'],
+		//anchors: ['title', 'features', 'stories'],
 	  // sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
 	  navigation: true,
 	  navigationPosition: 'right',
