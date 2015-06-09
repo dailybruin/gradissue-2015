@@ -1,4 +1,15 @@
 
+
+.back{
+  float: left;
+  top: 0px;
+  position: absolute;
+}
+
+.back h5{
+  color: white;
+}
+
 #overlay img{
   width:100%;
   height:auto;
@@ -11,7 +22,7 @@
   margin-right: auto;
   margin-left: auto;
 }
-html {
+body {
     background-image: url("./image/bg.png");
 }
 #descriptor p {
@@ -32,6 +43,7 @@ p{
   padding:3%;
 }
 .top{
+  right: 0px;
   top:0px;
   position: absolute;
 }
