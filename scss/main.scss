@@ -1,46 +1,8 @@
 @import "settings";
 @import "foundation";
-
-// Or selectively include components
-// @import
-//   "foundation/components/accordion",
-//   "foundation/components/alert-boxes",
-//   "foundation/components/block-grid",
-//   "foundation/components/breadcrumbs",
-//   "foundation/components/button-groups",
-//   "foundation/components/buttons",
-//   "foundation/components/clearing",
-//   "foundation/components/dropdown",
-//   "foundation/components/dropdown-buttons",
-//   "foundation/components/flex-video",
-//   "foundation/components/forms",
-//   "foundation/components/grid",
-//   "foundation/components/inline-lists",
-//   "foundation/components/joyride",
-//   "foundation/components/keystrokes",
-//   "foundation/components/labels",
-//   "foundation/components/magellan",
-//   "foundation/components/orbit",
-//   "foundation/components/pagination",
-//   "foundation/components/panels",
-//   "foundation/components/pricing-tables",
-//   "foundation/components/progress-bars",
-//   "foundation/components/reveal",
-//   "foundation/components/side-nav",
-//   "foundation/components/split-buttons",
-//   "foundation/components/sub-nav",
-//   "foundation/components/switches",
-//   "foundation/components/tables",
-//   "foundation/components/tabs",
-//   "foundation/components/thumbs",
-//   "foundation/components/tooltips",
-//   "foundation/components/top-bar",
-//   "foundation/components/type",
-//   "foundation/components/offcanvas",
-//   "foundation/components/visibility";
-
 @import "compass";
 @import "mixins";
+
 
 .slick {
 
@@ -63,6 +25,16 @@
 
 		}
 	}
+}
+
+#credit {
+  width: 100%;  
+  font-family: raleway;
+  font-size: small;
+  padding-bottom: 5px;
+  bottom: 0px;
+  position: absolute;
+  text-align: center;
 }
 
 // .top-bar {
@@ -180,6 +152,14 @@ section {
 	position: relative;
 }
 
+h1#db-title {
+	position: center;
+	margin: auto;
+	padding: 2rem;
+	font-family: "Raleway";
+    font-weight: 100;
+    text-align: center;
+}
 
 #banner {
 	background:url(../img/banner.jpg);
@@ -190,7 +170,6 @@ section {
 	// @include background-image(linear-gradient(to bottom right, white, #dddddd));
 
 	position: relative;
-	top: 20%;
 
 	#title h1 {
 		z-index: 2;
@@ -204,10 +183,21 @@ section {
 		left: -8%;
 		padding: 20px;
 		background: white;
-
-
 	}
+}
 
+@media #{$small-only} {
+	h1#db-title {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		font-size: 1.5rem;
+	}
+	
+	#banner #title h1 {
+		font-size: 2.2rem;
+	}
 }
 
 .item {

@@ -20,7 +20,7 @@ function back() {
 	} else {
 		$('#sections-container').show();
 	}
-	
+	$('#credit').show();
 
 	$.fn.fullpage.setMouseWheelScrolling(true);
     $.fn.fullpage.setAllowScrolling(true);
@@ -235,6 +235,7 @@ $(document).ready(function() {
 				} else {
 					$('#sections-container').hide();
 				}
+				$('#credit').hide();
 				$('#dashboard').show(); 
 
 				$.fn.fullpage.setMouseWheelScrolling(false);
