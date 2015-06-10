@@ -5,6 +5,14 @@ h1{
 	  border-bottom: 1px solid rgba(0,0,0, 0.1);
     text-align: center;
     font-weight: 100;
+    position: inline-block;
+}
+#wrap{
+  top:0px;
+  display: inline-block;
+}
+body{
+  background-image: url("bg.png")
 }
 a{
   color: #4FBDB5;
@@ -19,6 +27,10 @@ a{
 #back, #main{
   position: absolute;
   font-size: 13px;
+}
+#bach{
+  left:0px;
+  padding: 5px;
 }
 footer{
   color: rgba(0,0,0, 0.7);
