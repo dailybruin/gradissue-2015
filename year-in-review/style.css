@@ -1,9 +1,24 @@
 h1{
-	  font-family: 'Pontano Sans',sans-serif !important;
+	  font-family: 'Pontano Sans',sans-serif;
 	  text-align: center;
 	  padding-bottom: 15px;
 	  border-bottom: 1px solid rgba(0,0,0, 0.1);
-  text-align: center;
+    text-align: center;
+    font-weight: 100;
+}
+a{
+  color: #4FBDB5;
+  text-decoration: none;
+
+}
+#main{
+  right: 0px;
+  position: inline-block;
+  padding: 5px;
+}
+#back, #main{
+  position: absolute;
+  font-size: 13px;
 }
 footer{
   color: rgba(0,0,0, 0.7);
