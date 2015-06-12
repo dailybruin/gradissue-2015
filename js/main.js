@@ -208,7 +208,6 @@ $(document).ready(function() {
 		data = clean_google_sheet_json(data);
 		masterarray = data;
 		switchSection("news");
-		console.log(section);
 
 		$("#dashboard-container").html(dashsidebartemplate({stories: section}));
 		$("#dashboard-content").html(dashbodytemplate(section[0]));
